@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXUS — BESTIÁRIO</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Georgia, serif;
+            color: #eee;
+            min-height: 100vh;
+            background: #09050d;
+            overflow-x: hidden;
+        }
+
+        /* =========================
+           FUNDO
+        ========================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(
+                    rgba(5, 2, 8, 0.72),
+                    rgba(5, 2, 8, 0.88)
+                ),
+                url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ddfe6d6c-9f0f-4447-a495-b7c385c54cfd/dfd60g3-5c93400f-e663-4949-a048-946a899db365.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9kZGZlNmQ2Yy05ZjBmLTQ0NDctYTQ5NS1iN2MzODVjNTRjZmQvZGZkNjBnMy01YzkzNDAwZi1lNjYzLTQ5NDktYTA0OC05NDZhODk5ZGIzNjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PYgtMYVVu--6jj1Oh4IOkYLGU6XH1MHzDdk1SpSkwds");
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(
+                    circle at center,
+                    transparent 20%,
+                    rgba(0, 0, 0, 0.55) 100%
+                );
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* =========================
+           CABEÇALHO
+        ========================= */
+
+        header {
+            text-align: center;
+            padding: 65px 20px 35px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #bda8c9;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-size: clamp(38px, 8vw, 76px);
+            letter-spacing: 8px;
+            font-weight: normal;
+            text-shadow:
+                0 0 10px rgba(180, 100, 220, 0.7),
+                0 0 30px rgba(120, 50, 160, 0.4);
+        }
+
+        .line {
+            width: 180px;
+            height: 1px;
+            background: #9c68b8;
+            margin: 20px auto;
+            box-shadow: 0 0 12px #9c68b8;
+        }
+
+        /* =========================
+           CONTEÚDO
+        ========================= */
+
+        main {
+            width: min(1100px, 92%);
+            margin: auto;
+            padding-bottom: 80px;
+        }
+
+        /* =========================
+           PESQUISA
+        ========================= */
+
+        .search-box {
+            margin: 20px auto 25px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 17px 20px;
+            background: rgba(12, 7, 18, 0.82);
+            border: 1px solid rgba(160, 100, 190, 0.5);
+            border-radius: 8px;
+            color: white;
+            font-family: Georgia, serif;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #b978d4;
+            box-shadow: 0 0 18px rgba(180, 90, 220, 0.25);
+        }
+
+        /* =========================
+           FILTROS
+        ========================= */
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 35px;
+        }
+
+        .filter {
+            padding: 10px 18px;
+            border: 1px solid rgba(170, 120, 190, 0.4);
+            background: rgba(12, 7, 18, 0.72);
+            color: #d7cbdc;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: Georgia, serif;
+            transition: 0.25s;
+        }
+
+        .filter:hover,
+        .filter.active {
+            background: rgba(130, 70, 160, 0.35);
+            border-color: #b978d4;
+            color: white;
+            box-shadow: 0 0 14px rgba(180, 90, 220, 0.2);
+        }
+
+        /* =========================
+           GRADE DE MONSTROS
+        ========================= */
+
+        #monsterGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .monster-card {
+            background: rgba(10, 6, 15, 0.82);
+            border: 1px solid rgba(150, 100, 175, 0.35);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.3s;
+            backdrop-filter: blur(4px);
+        }
+
+        .monster-card:hover {
+            transform: translateY(-5px);
+            border-color: #a96bc2;
+            box-shadow: 0 10px 30px rgba(120, 50, 150, 0.25);
+        }
+
+        .monster-image {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            display: block;
+            filter: brightness(0.75);
+        }
+
+        .monster-info {
+            padding: 18px;
+        }
+
+        .monster-name {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .monster-level {
+            color: #aaa;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .danger {
+            display: inline-block;
+            padding: 5px 9px;
+            border-radius: 4px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .baixo {
+            background: rgba(70, 150, 90, 0.2);
+            color: #8bd49b;
+        }
+
+        .moderado {
+            background: rgba(180, 160, 50, 0.2);
+            color: #e0d27b;
+        }
+
+        .alto {
+            background: rgba(200, 120, 40, 0.2);
+            color: #e5a461;
+        }
+
+        .extremo {
+            background: rgba(190, 45, 55, 0.2);
+            color: #e77b82;
+        }
+
+        .desconhecido {
+            background: rgba(130, 70, 180, 0.25);
+            color: #c99be8;
+        }
+
+        /* =========================
+           SEM RESULTADOS
+        ========================= */
+
+        #noResults {
+            text-align: center;
+            color: #aaa;
+            padding: 60px 20px;
+            display: none;
+        }
+
+        /* =========================
+           RESPONSIVO
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding-top: 45px;
+            }
+
+            h1 {
+                letter-spacing: 4px;
+            }
+
+            .filters {
+                gap: 6px;
+            }
+
+            .filter {
+                padding: 9px 12px;
+                font-size: 12px;
+            }
+
+            #monsterGrid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="subtitle">
+        Registro de Entidades
+    </div>
+
+    <h1>NEXUS</h1>
+
+    <div class="line"></div>
+
+    <p>BESTIÁRIO</p>
+
+</header>
+
+
+<main>
+
+    <div class="search-box">
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Pesquisar criatura..."
+        >
+    </div>
+
+
+    <div class="filters">
+
+        <button class="filter active" data-filter="todos">
+            TODOS
+        </button>
+
+        <button class="filter" data-filter="baixo">
+            BAIXO
+        </button>
+
+        <button class="filter" data-filter="moderado">
+            MODERADO
+        </button>
+
+        <button class="filter" data-filter="alto">
+            ALTO
+        </button>
+
+        <button class="filter" data-filter="extremo">
+            EXTREMO
+        </button>
+
+        <button class="filter" data-filter="desconhecido">
+            ???
+        </button>
+
+    </div>
+
+
+    <div id="monsterGrid"></div>
+
+    <div id="noResults">
+        Nenhuma entidade encontrada.
+    </div>
+
+</main>
+
+
+<script>
+
+    /*
+    ========================================
+        MONSTROS TEMPORÁRIOS
+    ========================================
+    */
+
+    const monsters = [
+
+        {
+            nome: "Lobisomem",
+            level: 5,
+            perigo: "alto",
+            imagem: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=900&q=80"
+        },
+
+        {
+            nome: "Criatura do Abismo",
+            level: 8,
+            perigo: "extremo",
+            imagem: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80"
+        },
+
+        {
+            nome: "Predador",
+            level: 3,
+            perigo: "moderado",
+            imagem: "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=80"
+        },
+
+        {
+            nome: "Entidade ???",
+            level: 10,
+            perigo: "desconhecido",
+            imagem: "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=900&q=80"
+        }
+
+    ];
+
+
+    let filtroAtual = "todos";
+
+
+    const grid = document.getElementById("monsterGrid");
+    const searchInput = document.getElementById("searchInput");
+    const noResults = document.getElementById("noResults");
+
+
+    function mostrarMonstros() {
+
+        const pesquisa = searchInput.value
+            .toLowerCase()
+            .trim();
+
+
+        const filtrados = monsters.filter(monstro => {
+
+            const correspondePesquisa =
+                monstro.nome
+                    .toLowerCase()
+                    .includes(pesquisa);
+
+
+            const correspondeFiltro =
+                filtroAtual === "todos" ||
+                monstro.perigo === filtroAtual;
+
+
+            return correspondePesquisa && correspondeFiltro;
+
+        });
+
+
+        grid.innerHTML = "";
+
+
+        filtrados.forEach(monstro => {
+
+            const card = document.createElement("div");
+
+            card.className = "monster-card";
+
+            card.innerHTML = `
+
+                <img
+                    class="monster-image"
+                    src="${monstro.imagem}"
+                    alt="${monstro.nome}"
+                >
+
+                <div class="monster-info">
+
+                    <div class="monster-name">
+                        ${monstro.nome}
+                    </div>
+
+                    <div class="monster-level">
+                        LEVEL ${monstro.level}
+                    </div>
+
+                    <span class="danger ${monstro.perigo}">
+                        ${monstro.perigo === "desconhecido"
+                            ? "???"
+                            : monstro.perigo}
+                    </span>
+
+                </div>
+
+            `;
+
+
+            grid.appendChild(card);
+
+        });
+
+
+        noResults.style.display =
+            filtrados.length === 0
+                ? "block"
+                : "none";
+
+    }
+
+
+    /*
+    ========================================
+        FILTROS
+    ========================================
+    */
+
+    document.querySelectorAll(".filter")
+        .forEach(botao => {
+
+            botao.addEventListener("click", () => {
+
+                document
+                    .querySelectorAll(".filter")
+                    .forEach(b => b.classList.remove("active"));
+
+
+                botao.classList.add("active");
+
+
+                filtroAtual =
+                    botao.dataset.filter;
+
+
+                mostrarMonstros();
+
+            });
+
+        });
+
+
+    /*
+    ========================================
+        PESQUISA
+    ========================================
+    */
+
+    searchInput.addEventListener(
+        "input",
+        mostrarMonstros
+    );
+
+
+    /*
+    ========================================
+        INICIALIZAÇÃO
+    ========================================
+    */
+
+    mostrarMonstros();
+
+</script>
+
+</body>
+  </html>
