@@ -1,11 +1,16 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>NEXUS — BESTIÁRIO</title>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -13,47 +18,78 @@
 }
 
 :root {
+
     --purple: #a96bc2;
     --purple-light: #d39bea;
-    --dark: rgba(8, 4, 12, .88);
-    --border: rgba(181, 112, 210, .38);
+
+    --dark: rgba(8,4,12,.90);
+
+    --border: rgba(181,112,210,.38);
+
 }
 
+
+/* =========================
+   BASE
+========================= */
+
 body {
+
     min-height: 100vh;
+
     color: #eee;
+
     font-family: Georgia, serif;
+
     background: #08050b;
+
     overflow-x: hidden;
+
 }
+
 
 /* =========================
    FUNDO
 ========================= */
 
 body::before {
+
     content: "";
+
     position: fixed;
+
     inset: 0;
+
     z-index: -2;
 
     background-image:
+
         linear-gradient(
-            rgba(5, 2, 8, .68),
-            rgba(5, 2, 8, .88)
+            rgba(5,2,8,.68),
+            rgba(5,2,8,.88)
         ),
-        url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ddfe6d6c-9f0f-4447-a495-b7c385c54cfd/dfd60g3-5c93400f-e663-4949-a048-946a899db365.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9kZGZlNmQ2Yy05ZjBmLTQ0NDctYTQ5NS1iN2MzODVjNTRjZmQvZGZkNjBnMy01YzkzNDAwZi1lNjYzLTQ5NDktYTA0OC05NDZhODk5ZGIzNjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PYgtMYVVu--6jj1Oh4IOkYLGU6XH1MHzDdk1SpSkwds");
+
+        url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ddfe6d6c-9f0f-4447-a495-b7c385c54cfd/dfd60g3-5c93400f-e663-4949-a048-946a899db365.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwib2JqIjpbW3sicGF0aCI6Ii9mL2RkZmU2ZDZjLTlmMGYtNDQ0Ny1hNDk1LWI3YzM4NWM1NGNmZC9kZmQ2MGczLTVjOTM0MDBmLWU2NjMtNDk0OS1hMDQ4LTk0NmE4OTlkYjM2NS5naWYifV0sXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQifX0.PYgtMYVVu--6jj1Oh4IOkYLGU6XH1MHzDdk1SpSkwds");
 
     background-size: cover;
+
     background-position: center;
+
     background-attachment: fixed;
+
 }
 
+
 body::after {
+
     content: "";
+
     position: fixed;
+
     inset: 0;
+
     z-index: -1;
+
     pointer-events: none;
 
     background:
@@ -62,260 +98,421 @@ body::after {
             transparent 15%,
             rgba(0,0,0,.58) 100%
         );
+
 }
+
 
 /* =========================
    CABEÇALHO
 ========================= */
 
 header {
+
     text-align: center;
+
     padding: 55px 20px 30px;
+
 }
 
 .subtitle {
+
     color: #c7b3cf;
+
     font-size: 12px;
+
     letter-spacing: 5px;
+
     text-transform: uppercase;
+
     margin-bottom: 12px;
+
 }
 
 .logo {
-    font-size: clamp(42px, 9vw, 76px);
+
+    font-size: clamp(42px,9vw,76px);
+
     letter-spacing: 8px;
+
     font-weight: normal;
+
     text-shadow:
         0 0 10px rgba(180,100,220,.7),
         0 0 35px rgba(120,50,160,.45);
+
 }
 
 .header-line {
+
     width: 180px;
+
     height: 1px;
+
     margin: 18px auto;
+
     background: var(--purple);
+
     box-shadow: 0 0 12px var(--purple);
+
 }
 
 .header-title {
+
     letter-spacing: 4px;
+
     font-size: 15px;
+
 }
+
 
 /* =========================
    CONTEÚDO
 ========================= */
 
 main {
-    width: min(1100px, 92%);
+
+    width: min(1100px,92%);
+
     margin: auto;
+
     padding-bottom: 80px;
+
 }
 
+
 /* =========================
-   BARRA SUPERIOR
+   BARRA
 ========================= */
 
 .toolbar {
+
     display: flex;
+
     gap: 12px;
+
     margin-bottom: 20px;
+
 }
 
 .search {
+
     flex: 1;
+
 }
 
 .search input {
+
     width: 100%;
+
     height: 48px;
+
     padding: 0 17px;
 
     background: rgba(8,4,12,.84);
+
     border: 1px solid var(--border);
+
     border-radius: 7px;
 
     color: white;
-    font-family: Georgia, serif;
+
+    font-family: Georgia,serif;
+
     font-size: 15px;
+
     outline: none;
+
 }
 
 .search input:focus {
+
     border-color: var(--purple-light);
+
     box-shadow: 0 0 18px rgba(180,90,220,.2);
+
 }
 
+
+/* =========================
+   BOTÕES
+========================= */
+
 .btn {
+
     border: 1px solid var(--border);
+
     background: rgba(20,9,27,.9);
+
     color: #eee;
+
     padding: 0 20px;
+
     border-radius: 7px;
+
     cursor: pointer;
-    font-family: Georgia, serif;
+
+    font-family: Georgia,serif;
+
     transition: .25s;
+
 }
 
 .btn:hover {
+
     border-color: var(--purple-light);
+
     background: rgba(125,60,155,.3);
+
     box-shadow: 0 0 15px rgba(180,90,220,.2);
+
 }
 
 .btn-primary {
+
     background: rgba(125,60,155,.35);
+
     border-color: var(--purple);
+
 }
+
 
 /* =========================
    FILTROS
 ========================= */
 
 .filters {
+
     display: flex;
+
     flex-wrap: wrap;
+
     gap: 8px;
+
     justify-content: center;
+
     margin-bottom: 30px;
+
 }
 
 .filter {
+
     padding: 9px 16px;
+
     border: 1px solid var(--border);
+
     border-radius: 5px;
+
     background: rgba(8,4,12,.78);
+
     color: #d8ccd9;
+
     cursor: pointer;
-    font-family: Georgia, serif;
+
+    font-family: Georgia,serif;
+
 }
 
 .filter:hover,
 .filter.active {
+
     color: white;
+
     border-color: var(--purple-light);
+
     background: rgba(130,70,160,.35);
+
 }
+
 
 /* =========================
    CARDS
 ========================= */
 
 #monsterGrid {
+
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(245px,1fr));
+
     gap: 20px;
+
 }
 
 .monster-card {
+
     position: relative;
+
     overflow: hidden;
 
     background: rgba(9,5,14,.9);
+
     border: 1px solid var(--border);
+
     border-radius: 9px;
 
     cursor: pointer;
+
     transition: .3s;
+
 }
 
 .monster-card:hover {
+
     transform: translateY(-5px);
+
     border-color: var(--purple-light);
-    box-shadow: 0 12px 30px rgba(120,50,150,.25);
+
+    box-shadow:
+        0 12px 30px rgba(120,50,150,.25);
+
 }
 
 .monster-image {
+
     width: 100%;
+
     height: 190px;
+
     object-fit: cover;
+
     display: block;
+
     filter: brightness(.72);
+
 }
 
 .monster-info {
+
     padding: 17px;
+
 }
 
 .monster-name {
+
     font-size: 21px;
+
     margin-bottom: 7px;
+
 }
 
 .monster-meta {
+
     color: #aaa;
+
     font-size: 13px;
+
     margin-bottom: 12px;
+
 }
 
 .danger {
+
     display: inline-block;
+
     padding: 5px 9px;
+
     border-radius: 4px;
+
     font-size: 10px;
+
     letter-spacing: 1px;
+
     text-transform: uppercase;
+
 }
 
 .baixo {
+
     background: rgba(70,150,90,.18);
+
     color: #8bd49b;
+
 }
 
 .moderado {
+
     background: rgba(180,160,50,.18);
+
     color: #e0d27b;
+
 }
 
 .alto {
+
     background: rgba(200,120,40,.18);
+
     color: #e5a461;
+
 }
 
 .extremo {
+
     background: rgba(190,45,55,.18);
+
     color: #e77b82;
+
 }
 
 .desconhecido {
+
     background: rgba(130,70,180,.23);
+
     color: #c99be8;
+
 }
 
 .empty {
+
     grid-column: 1/-1;
+
     text-align: center;
+
     padding: 70px 20px;
+
     color: #aaa;
+
 }
+
 
 /* =========================
    MODAIS
 ========================= */
 
 .modal {
+
     position: fixed;
+
     inset: 0;
+
     z-index: 20;
 
     display: none;
+
     align-items: center;
+
     justify-content: center;
 
     padding: 20px;
 
     background: rgba(0,0,0,.78);
+
     backdrop-filter: blur(5px);
+
 }
 
 .modal.show {
+
     display: flex;
+
 }
 
 .modal-box {
-    width: min(850px, 100%);
+
+    width: min(850px,100%);
+
     max-height: 92vh;
+
     overflow-y: auto;
 
     padding: 28px;
@@ -327,348 +524,730 @@ main {
         );
 
     border: 1px solid var(--border);
+
     border-radius: 10px;
 
-    box-shadow: 0 20px 60px rgba(0,0,0,.65);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.65);
+
 }
 
 .modal-header {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
+
     margin-bottom: 25px;
+
 }
 
 .modal-header h2 {
+
     font-weight: normal;
+
     letter-spacing: 2px;
+
 }
 
 .close {
+
     width: 35px;
+
     height: 35px;
 
     border: 1px solid var(--border);
+
     background: transparent;
+
     color: white;
 
     cursor: pointer;
+
     border-radius: 5px;
+
 }
+
 
 /* =========================
    FORMULÁRIO
 ========================= */
 
 .form-section {
+
     margin-bottom: 28px;
+
 }
 
 .section-title {
+
     color: var(--purple-light);
+
     letter-spacing: 2px;
+
     font-size: 13px;
+
     margin-bottom: 15px;
+
     padding-bottom: 8px;
-    border-bottom: 1px solid rgba(170,100,200,.25);
+
+    border-bottom:
+        1px solid rgba(170,100,200,.25);
+
 }
 
 .form-grid {
+
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+
+    grid-template-columns:
+        repeat(2,1fr);
+
     gap: 14px;
+
 }
 
 .field {
+
     display: flex;
+
     flex-direction: column;
+
     gap: 7px;
+
 }
 
 .field.full {
+
     grid-column: 1/-1;
+
 }
 
 .field label {
+
     color: #b9adb9;
+
     font-size: 12px;
+
 }
 
 .field input,
 .field textarea,
 .field select {
+
     width: 100%;
+
     padding: 11px;
 
     background: rgba(4,2,7,.9);
-    border: 1px solid rgba(170,100,200,.3);
+
+    border:
+        1px solid rgba(170,100,200,.3);
+
     border-radius: 5px;
 
     color: white;
-    font-family: Georgia, serif;
+
+    font-family: Georgia,serif;
+
     outline: none;
+
 }
 
 .field textarea {
+
     min-height: 100px;
+
     resize: vertical;
+
 }
 
 .field input:focus,
 .field textarea:focus,
 .field select:focus {
+
     border-color: var(--purple-light);
+
 }
+
 
 /* =========================
    IMAGEM
 ========================= */
 
 .image-preview {
+
     width: 180px;
+
     height: 180px;
+
     margin: 0 auto 15px;
 
-    border: 1px solid var(--border);
+    border:
+        1px solid var(--border);
+
     border-radius: 7px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     overflow: hidden;
+
     background: rgba(0,0,0,.35);
+
     color: #777;
+
 }
 
 .image-preview img {
+
     width: 100%;
+
     height: 100%;
+
     object-fit: cover;
+
 }
+
+
+/* =========================
+   VIDA / RESISTÊNCIA
+========================= */
+
+.status-box {
+
+    padding: 18px;
+
+    margin-bottom: 14px;
+
+    border: 1px solid rgba(170,100,200,.25);
+
+    border-radius: 8px;
+
+    background: rgba(4,2,7,.55);
+
+    transition: .3s;
+
+}
+
+.status-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 10px;
+
+}
+
+.status-name {
+
+    letter-spacing: 2px;
+
+    font-size: 13px;
+
+}
+
+.status-number {
+
+    font-size: 23px;
+
+}
+
+.status-number input {
+
+    width: 75px;
+
+    background: transparent;
+
+    border: none;
+
+    border-bottom: 1px solid rgba(255,255,255,.25);
+
+    color: inherit;
+
+    text-align: center;
+
+    font-family: Georgia,serif;
+
+    font-size: 22px;
+
+    outline: none;
+
+}
+
+.status-number input:focus {
+
+    border-color: var(--purple-light);
+
+}
+
+.status-text {
+
+    font-size: 12px;
+
+    color: #aaa;
+
+    font-style: italic;
+
+    margin-top: 9px;
+
+}
+
+.status-bar {
+
+    height: 7px;
+
+    background: rgba(255,255,255,.08);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+.status-fill {
+
+    height: 100%;
+
+    width: 100%;
+
+    transition:
+        width .3s,
+        background .3s;
+
+    box-shadow: 0 0 12px currentColor;
+
+}
+
 
 /* =========================
    ATRIBUTOS
 ========================= */
 
-.points-info {
-    text-align: center;
-    margin-bottom: 15px;
-    color: #bbb;
-}
-
-.points-info strong {
-    color: var(--purple-light);
-    font-size: 20px;
-}
-
 .attributes {
+
     display: grid;
+
     gap: 12px;
+
 }
 
 .attribute {
+
     display: grid;
-    grid-template-columns: 1fr auto auto;
+
+    grid-template-columns:
+        1fr auto auto auto;
+
     gap: 10px;
+
     align-items: center;
 
     padding: 12px;
 
     background: rgba(4,2,7,.55);
-    border: 1px solid rgba(170,100,200,.2);
+
+    border:
+        1px solid rgba(170,100,200,.2);
+
     border-radius: 5px;
+
 }
 
 .attribute-name {
+
     letter-spacing: 1px;
+
 }
 
 .attribute-value {
+
     min-width: 35px;
+
     text-align: center;
+
     font-size: 18px;
+
     color: var(--purple-light);
+
 }
 
 .attr-btn {
+
     width: 30px;
+
     height: 30px;
 
-    border: 1px solid var(--border);
-    background: rgba(130,70,160,.2);
+    border:
+        1px solid var(--border);
+
+    background:
+        rgba(130,70,160,.2);
+
     color: white;
 
     border-radius: 4px;
+
     cursor: pointer;
+
 }
 
 .attr-btn:hover {
-    background: rgba(160,80,190,.4);
+
+    background:
+        rgba(160,80,190,.4);
+
 }
+
 
 /* =========================
    LISTAS
 ========================= */
 
 .list-editor {
+
     display: grid;
+
     gap: 10px;
+
 }
 
 .list-row {
+
     display: grid;
+
     grid-template-columns: 1fr auto;
+
     gap: 8px;
+
 }
 
 .list-row input {
+
     padding: 10px;
+
     background: rgba(4,2,7,.9);
-    border: 1px solid rgba(170,100,200,.3);
+
+    border:
+        1px solid rgba(170,100,200,.3);
+
     color: white;
+
     border-radius: 5px;
-    font-family: Georgia, serif;
+
+    font-family: Georgia,serif;
+
 }
 
 .remove-item {
+
     width: 40px;
-    border: 1px solid rgba(190,70,80,.4);
-    background: rgba(130,30,40,.2);
+
+    border:
+        1px solid rgba(190,70,80,.4);
+
+    background:
+        rgba(130,30,40,.2);
+
     color: #e99;
+
     border-radius: 5px;
+
     cursor: pointer;
+
 }
 
 .add-item {
+
     width: fit-content;
+
     padding: 8px 13px;
-    border: 1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     background: transparent;
+
     color: #ccc;
+
     border-radius: 5px;
+
     cursor: pointer;
+
 }
+
 
 /* =========================
    AÇÕES
 ========================= */
 
 .modal-actions {
+
     display: flex;
+
     justify-content: flex-end;
+
     gap: 10px;
+
     margin-top: 25px;
+
 }
 
 .delete-btn {
+
     margin-right: auto;
-    border: 1px solid rgba(190,70,80,.5);
-    background: rgba(130,30,40,.2);
+
+    border:
+        1px solid rgba(190,70,80,.5);
+
+    background:
+        rgba(130,30,40,.2);
+
     color: #e99;
+
 }
+
 
 /* =========================
    FICHA
 ========================= */
 
 .sheet-image {
+
     width: 100%;
+
     max-height: 350px;
+
     object-fit: cover;
+
     border-radius: 7px;
-    border: 1px solid var(--border);
+
+    border:
+        1px solid var(--border);
+
     margin-bottom: 20px;
+
 }
 
 .sheet-title {
+
     font-size: 35px;
+
     font-weight: normal;
+
     margin-bottom: 5px;
+
 }
 
 .sheet-danger {
+
     margin-bottom: 25px;
+
 }
 
 .info-grid {
+
     display: grid;
-    grid-template-columns: repeat(2,1fr);
+
+    grid-template-columns:
+        repeat(2,1fr);
+
     gap: 12px;
+
 }
 
 .info-box {
+
     padding: 14px;
-    background: rgba(4,2,7,.5);
-    border: 1px solid rgba(170,100,200,.2);
+
+    background:
+        rgba(4,2,7,.5);
+
+    border:
+        1px solid rgba(170,100,200,.2);
+
     border-radius: 5px;
+
 }
 
 .info-box small {
+
     display: block;
+
     color: #999;
+
     margin-bottom: 5px;
+
 }
 
 .info-box strong {
+
     font-size: 18px;
+
     font-weight: normal;
+
 }
 
+
+/* =========================
+   STATUS NA FICHA
+========================= */
+
+.sheet-status {
+
+    margin-top: 18px;
+
+}
+
+.sheet-status-title {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 7px;
+
+    letter-spacing: 1px;
+
+}
+
+.sheet-status-number {
+
+    font-size: 18px;
+
+}
+
+.sheet-status-bar {
+
+    height: 8px;
+
+    background: rgba(255,255,255,.08);
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+}
+
+.sheet-status-fill {
+
+    height: 100%;
+
+    transition: .3s;
+
+}
+
+
+/* =========================
+   SEÇÕES DA FICHA
+========================= */
+
 .sheet-section {
+
     margin-top: 28px;
+
 }
 
 .sheet-section h3 {
+
     color: var(--purple-light);
+
     letter-spacing: 2px;
+
     font-size: 13px;
+
     padding-bottom: 8px;
-    border-bottom: 1px solid rgba(170,100,200,.25);
+
+    border-bottom:
+        1px solid rgba(170,100,200,.25);
+
     margin-bottom: 13px;
+
 }
 
 .sheet-section p {
+
     color: #ccc;
+
     line-height: 1.7;
+
     white-space: pre-wrap;
+
 }
 
 .attribute-bars {
+
     display: grid;
+
     gap: 10px;
+
 }
 
 .bar-row {
+
     display: grid;
-    grid-template-columns: 130px 1fr 40px;
+
+    grid-template-columns:
+        130px 1fr 40px;
+
     gap: 10px;
+
     align-items: center;
+
 }
 
 .bar {
+
     height: 7px;
-    background: rgba(255,255,255,.08);
+
+    background:
+        rgba(255,255,255,.08);
+
     border-radius: 10px;
+
     overflow: hidden;
+
 }
 
 .bar-fill {
+
     height: 100%;
+
     background: var(--purple);
-    box-shadow: 0 0 10px rgba(180,90,220,.5);
+
+    box-shadow:
+        0 0 10px rgba(180,90,220,.5);
+
 }
 
 .list-view {
+
     display: grid;
+
     gap: 9px;
+
 }
 
 .list-view div {
+
     padding: 11px;
-    background: rgba(4,2,7,.45);
-    border-left: 2px solid var(--purple);
+
+    background:
+        rgba(4,2,7,.45);
+
+    border-left:
+        2px solid var(--purple);
+
 }
+
 
 /* =========================
    RESPONSIVO
@@ -677,355 +1256,734 @@ main {
 @media(max-width:650px) {
 
     .toolbar {
+
         flex-direction: column;
+
     }
 
     .btn {
+
         height: 45px;
+
     }
 
     .form-grid,
     .info-grid {
+
         grid-template-columns: 1fr;
+
     }
 
     .modal-box {
+
         padding: 20px;
+
     }
 
     .sheet-title {
+
         font-size: 27px;
+
     }
 
     .bar-row {
-        grid-template-columns: 90px 1fr 30px;
+
+        grid-template-columns:
+            90px 1fr 30px;
+
         font-size: 12px;
+
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-    <div class="subtitle">Registro de Entidades</div>
-    <div class="logo">NEXUS</div>
+
+    <div class="subtitle">
+        Registro de Entidades
+    </div>
+
+    <div class="logo">
+        NEXUS
+    </div>
+
     <div class="header-line"></div>
-    <div class="header-title">BESTIÁRIO</div>
+
+    <div class="header-title">
+        BESTIÁRIO
+    </div>
+
 </header>
+
 
 <main>
 
-    <div class="toolbar">
 
-        <div class="search">
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="Pesquisar criatura..."
-            >
-        </div>
+<div class="toolbar">
 
-        <button class="btn btn-primary" onclick="abrirEditor()">
-            + NOVA ENTIDADE
-        </button>
+    <div class="search">
+
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Pesquisar criatura..."
+        >
 
     </div>
 
-    <div class="filters">
 
-        <button class="filter active" data-filter="todos">
-            TODOS
-        </button>
+    <button
+        class="btn btn-primary"
+        onclick="abrirEditor()"
+    >
+        + NOVA ENTIDADE
+    </button>
 
-        <button class="filter" data-filter="baixo">
-            BAIXO
-        </button>
+</div>
 
-        <button class="filter" data-filter="moderado">
-            MODERADO
-        </button>
 
-        <button class="filter" data-filter="alto">
-            ALTO
-        </button>
+<div class="filters">
 
-        <button class="filter" data-filter="extremo">
-            EXTREMO
-        </button>
+    <button
+        class="filter active"
+        data-filter="todos"
+    >
+        TODOS
+    </button>
 
-        <button class="filter" data-filter="desconhecido">
-            ???
-        </button>
+    <button
+        class="filter"
+        data-filter="baixo"
+    >
+        BAIXO
+    </button>
 
-    </div>
+    <button
+        class="filter"
+        data-filter="moderado"
+    >
+        MODERADO
+    </button>
 
-    <div id="monsterGrid"></div>
+    <button
+        class="filter"
+        data-filter="alto"
+    >
+        ALTO
+    </button>
+
+    <button
+        class="filter"
+        data-filter="extremo"
+    >
+        EXTREMO
+    </button>
+
+    <button
+        class="filter"
+        data-filter="desconhecido"
+    >
+        ???
+    </button>
+
+</div>
+
+
+<div id="monsterGrid"></div>
+
 
 </main>
 
 
 <!-- =========================
-     MODAL EDITOR
+     EDITOR
 ========================= -->
 
-<div class="modal" id="editorModal">
+<div
+    class="modal"
+    id="editorModal"
+>
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <div class="modal-header">
-            <h2 id="editorTitle">NOVA ENTIDADE</h2>
 
-            <button class="close" onclick="fecharEditor()">
-                ×
-            </button>
-        </div>
+<div class="modal-header">
 
+    <h2 id="editorTitle">
+        NOVA ENTIDADE
+    </h2>
 
-        <div class="form-section">
+    <button
+        class="close"
+        onclick="fecharEditor()"
+    >
+        ×
+    </button>
 
-            <div class="section-title">
-                IDENTIFICAÇÃO
-            </div>
+</div>
 
-            <div class="image-preview" id="imagePreview">
-                Sem imagem
-            </div>
 
-            <div class="form-grid">
+<!-- IDENTIFICAÇÃO -->
 
-                <div class="field full">
-                    <label>URL da imagem</label>
-                    <input
-                        id="image"
-                        type="text"
-                        placeholder="Cole o link da imagem"
-                        oninput="previewImage()"
-                    >
-                </div>
+<div class="form-section">
 
-                <div class="field">
-                    <label>Nome</label>
-                    <input id="name" type="text">
-                </div>
+<div class="section-title">
+    IDENTIFICAÇÃO
+</div>
 
-                <div class="field">
-                    <label>Origem</label>
-                    <input
-                        id="origin"
-                        type="text"
-                        placeholder="Ex.: Humano transformado"
-                    >
-                </div>
 
-                <div class="field">
-                    <label>Peso (kg)</label>
-                    <input id="weight" type="number">
-                </div>
+<div
+    class="image-preview"
+    id="imagePreview"
+>
+    Sem imagem
+</div>
 
-                <div class="field">
-                    <label>Altura (m)</label>
-                    <input id="height" type="number" step="0.01">
-                </div>
 
-                <div class="field">
-                    <label>Level</label>
-                    <input id="level" type="number" min="0">
-                </div>
+<div class="field full">
 
-                <div class="field">
-                    <label>Vida</label>
-                    <input id="health" type="number" min="0">
-                </div>
+<label>
+    Imagem da criatura
+</label>
 
-                <div class="field">
-                    <label>Nível de ameaça</label>
+<input
+    id="imageFile"
+    type="file"
+    accept="image/*"
+    onchange="carregarImagem(event)"
+>
 
-                    <select id="danger">
+</div>
 
-                        <option value="baixo">
-                            Baixo
-                        </option>
 
-                        <option value="moderado">
-                            Moderado
-                        </option>
+<div class="form-grid">
 
-                        <option value="alto">
-                            Alto
-                        </option>
 
-                        <option value="extremo">
-                            Extremo
-                        </option>
+<div class="field">
 
-                        <option value="desconhecido">
-                            ???
-                        </option>
+<label>Nome</label>
 
-                    </select>
+<input
+    id="name"
+    type="text"
+>
 
-                </div>
+</div>
 
-            </div>
 
-        </div>
+<div class="field">
 
+<label>Origem</label>
 
-        <div class="form-section">
+<input
+    id="origin"
+    type="text"
+    placeholder="Ex.: Humano transformado"
+>
 
-            <div class="section-title">
-                ATRIBUTOS
-            </div>
+</div>
 
-            <div class="points-info">
-                Pontos disponíveis:
-                <strong id="pointsLeft">30</strong>
-            </div>
 
-            <div class="attributes">
+<div class="field">
 
-                <div class="attribute">
-                    <span class="attribute-name">FORÇA</span>
-                    <button class="attr-btn" onclick="alterarAtributo('strength',-1)">−</button>
-                    <span class="attribute-value" id="strengthValue">0</span>
-                    <button class="attr-btn" onclick="alterarAtributo('strength',1)">+</button>
-                </div>
+<label>Peso (kg)</label>
 
-                <div class="attribute">
-                    <span class="attribute-name">DESTREZA</span>
-                    <button class="attr-btn" onclick="alterarAtributo('dexterity',-1)">−</button>
-                    <span class="attribute-value" id="dexterityValue">0</span>
-                    <button class="attr-btn" onclick="alterarAtributo('dexterity',1)">+</button>
-                </div>
+<input
+    id="weight"
+    type="number"
+>
 
-                <div class="attribute">
-                    <span class="attribute-name">VIGOR</span>
-                    <button class="attr-btn" onclick="alterarAtributo('vigor',-1)">−</button>
-                    <span class="attribute-value" id="vigorValue">0</span>
-                    <button class="attr-btn" onclick="alterarAtributo('vigor',1)">+</button>
-                </div>
+</div>
 
-                <div class="attribute">
-                    <span class="attribute-name">INTELIGÊNCIA</span>
-                    <button class="attr-btn" onclick="alterarAtributo('intelligence',-1)">−</button>
-                    <span class="attribute-value" id="intelligenceValue">0</span>
-                    <button class="attr-btn" onclick="alterarAtributo('intelligence',1)">+</button>
-                </div>
 
-            </div>
+<div class="field">
 
-        </div>
+<label>Altura (m)</label>
 
+<input
+    id="height"
+    type="number"
+    step="0.01"
+>
 
-        <div class="form-section">
+</div>
 
-            <div class="section-title">
-                FRAQUEZAS
-            </div>
 
-            <div class="list-editor" id="weaknessesList"></div>
+<div class="field">
 
-            <button class="add-item" onclick="adicionarItem('weaknesses')">
-                + Adicionar fraqueza
-            </button>
+<label>Level</label>
 
-        </div>
+<input
+    id="level"
+    type="number"
+    min="0"
+>
 
+</div>
 
-        <div class="form-section">
 
-            <div class="section-title">
-                HABILIDADES
-            </div>
+<div class="field">
 
-            <div class="list-editor" id="abilitiesList"></div>
+<label>Nível de ameaça</label>
 
-            <button class="add-item" onclick="adicionarItem('abilities')">
-                + Adicionar habilidade
-            </button>
+<select id="danger">
 
-        </div>
+<option value="baixo">
+    Baixo
+</option>
 
+<option value="moderado">
+    Moderado
+</option>
 
-        <div class="form-section">
+<option value="alto">
+    Alto
+</option>
 
-            <div class="section-title">
-                ATAQUES
-            </div>
+<option value="extremo">
+    Extremo
+</option>
 
-            <div class="list-editor" id="attacksList"></div>
+<option value="desconhecido">
+    ???
+</option>
 
-            <button class="add-item" onclick="adicionarItem('attacks')">
-                + Adicionar ataque
-            </button>
+</select>
 
-        </div>
+</div>
 
 
-        <div class="form-section">
+</div>
 
-            <div class="section-title">
-                OBSERVAÇÕES DO MESTRE
-            </div>
+</div>
 
-            <div class="field">
-                <textarea
-                    id="notes"
-                    placeholder="Informações secretas sobre a criatura..."
-                ></textarea>
-            </div>
 
-        </div>
+<!-- VIDA -->
 
+<div class="form-section">
 
-        <div class="modal-actions">
+<div class="section-title">
+    CONDIÇÃO
+</div>
 
-            <button
-                class="btn delete-btn"
-                id="deleteButton"
-                onclick="excluirAtual()"
-                style="display:none;"
-            >
-                EXCLUIR
-            </button>
 
-            <button class="btn" onclick="fecharEditor()">
-                CANCELAR
-            </button>
+<div
+    class="status-box"
+    id="healthEditorBox"
+>
 
-            <button class="btn btn-primary" onclick="salvarMonstro()">
-                SALVAR ENTIDADE
-            </button>
+<div class="status-header">
 
-        </div>
+<span class="status-name">
+    VIDA
+</span>
 
-    </div>
+<span
+    class="status-number"
+    id="healthEditorDisplay"
+>
+    <input
+        id="healthCurrent"
+        type="number"
+        min="0"
+        value="100"
+        oninput="atualizarStatusEditor()"
+    >
+
+    /
+
+    <input
+        id="healthMax"
+        type="number"
+        min="1"
+        value="100"
+        oninput="atualizarStatusEditor()"
+    >
+</span>
+
+</div>
+
+
+<div class="status-bar">
+
+<div
+    class="status-fill"
+    id="healthFill"
+></div>
+
+</div>
+
+
+<div
+    class="status-text"
+    id="healthText"
+>
+    A vida da criatura está impecável.
+</div>
+
+</div>
+
+
+<!-- RESISTÊNCIA -->
+
+<div
+    class="status-box"
+    id="resistanceEditorBox"
+>
+
+<div class="status-header">
+
+<span class="status-name">
+    RESISTÊNCIA
+</span>
+
+<span
+    class="status-number"
+    id="resistanceEditorDisplay"
+>
+
+<input
+    id="resistanceCurrent"
+    type="number"
+    min="0"
+    value="100"
+    oninput="atualizarStatusEditor()"
+>
+
+/
+
+<input
+    id="resistanceMax"
+    type="number"
+    min="1"
+    value="100"
+    oninput="atualizarStatusEditor()"
+>
+
+</span>
+
+</div>
+
+
+<div class="status-bar">
+
+<div
+    class="status-fill"
+    id="resistanceFill"
+></div>
+
+</div>
+
+
+<div
+    class="status-text"
+    id="resistanceText"
+>
+    A resistência da criatura está intacta.
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- ATRIBUTOS -->
+
+<div class="form-section">
+
+<div class="section-title">
+    ATRIBUTOS
+</div>
+
+
+<div class="attributes">
+
+
+<div class="attribute">
+
+<span class="attribute-name">
+    FORÇA
+</span>
+
+<button
+    class="attr-btn"
+    onclick="alterarAtributo('strength',-1)"
+>
+    −
+</button>
+
+<span
+    class="attribute-value"
+    id="strengthValue"
+>
+    0
+</span>
+
+<button
+    class="attr-btn"
+    onclick="alterarAtributo('strength',1)"
+>
+    +
+</button>
+
+</div>
+
+
+<div class="attribute">
+
+<span class="attribute-name">
+    DESTREZA
+</span>
+
+<button
+    class="attr-btn"
+    onclick="alterarAtributo('dexterity',-1)"
+>
+    −
+</button>
+
+<span
+    class="attribute-value"
+    id="dexterityValue"
+>
+    0
+</span>
+
+<button
+    class="attr-btn"
+    onclick="alterarAtributo('dexterity',1)"
+>
+    +
+</button>
+
+</div>
+
+
+<div class="attribute">
+
+<span class="attribute-name">
+    VIGOR
+</span>
+
+<button
+    class="attr-btn"
+    onclick="alterarAtributo('vigor',-1)"
+>
+    −
+</button>
+
+<span
+    class="attribute-value"
+    id="vigorValue"
+>
+    0
+    </span>
+
+<button
+    class="attr-btn"
+    onclick="alterarAtributo('vigor',1)"
+>
+    +
+</button>
+
+</div>
+
+
+<div class="attribute">
+
+<span class="attribute-name">
+    INTELIGÊNCIA
+</span>
+
+<button
+    class="attr-btn"
+    onclick="alterarAtributo('intelligence',-1)"
+>
+    −
+</button>
+
+<span
+    class="attribute-value"
+    id="intelligenceValue"
+>
+    0
+</span>
+
+<button
+    class="attr-btn"
+    onclick="alterarAtributo('intelligence',1)"
+>
+    +
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- FRAQUEZAS -->
+
+<div class="form-section">
+
+<div class="section-title">
+    FRAQUEZAS
+</div>
+
+<div
+    class="list-editor"
+    id="weaknessesList"
+></div>
+
+<button
+    class="add-item"
+    onclick="adicionarItem('weaknesses')"
+>
+    + Adicionar fraqueza
+</button>
+
+</div>
+
+
+<!-- HABILIDADES -->
+
+<div class="form-section">
+
+<div class="section-title">
+    HABILIDADES
+</div>
+
+<div
+    class="list-editor"
+    id="abilitiesList"
+></div>
+
+<button
+    class="add-item"
+    onclick="adicionarItem('abilities')"
+>
+    + Adicionar habilidade
+</button>
+
+</div>
+
+
+<!-- ATAQUES -->
+
+<div class="form-section">
+
+<div class="section-title">
+    ATAQUES
+</div>
+
+<div
+    class="list-editor"
+    id="attacksList"
+></div>
+
+<button
+    class="add-item"
+    onclick="adicionarItem('attacks')"
+>
+    + Adicionar ataque
+</button>
+
+</div>
+
+
+<!-- OBSERVAÇÕES -->
+
+<div class="form-section">
+
+<div class="section-title">
+    OBSERVAÇÕES DO MESTRE
+</div>
+
+<div class="field">
+
+<textarea
+    id="notes"
+    placeholder="Informações secretas sobre a criatura..."
+></textarea>
+
+</div>
+
+</div>
+
+
+<!-- AÇÕES -->
+
+<div class="modal-actions">
+
+<button
+    class="btn delete-btn"
+    id="deleteButton"
+    onclick="excluirAtual()"
+    style="display:none;"
+>
+    EXCLUIR
+</button>
+
+<button
+    class="btn"
+    onclick="fecharEditor()"
+>
+    CANCELAR
+</button>
+
+<button
+    class="btn btn-primary"
+    onclick="salvarMonstro()"
+>
+    SALVAR ENTIDADE
+</button>
+
+</div>
+
+</div>
 
 </div>
 
 
 <!-- =========================
-     MODAL FICHA
+     MODAL DA FICHA
 ========================= -->
 
-<div class="modal" id="sheetModal">
+<div
+    class="modal"
+    id="sheetModal"
+>
 
-    <div class="modal-box">
+<div class="modal-box">
 
-        <div class="modal-header">
+<div class="modal-header">
 
-            <h2>REGISTRO DA ENTIDADE</h2>
+<h2>
+    REGISTRO DA ENTIDADE
+</h2>
 
-            <button class="close" onclick="fecharFicha()">
-                ×
-            </button>
+<button
+    class="close"
+    onclick="fecharFicha()"
+>
+    ×
+</button>
 
-        </div>
+</div>
 
-        <div id="sheetContent"></div>
+<div id="sheetContent"></div>
 
-    </div>
+</div>
 
 </div>
 
@@ -1037,25 +1995,48 @@ main {
 ========================================== */
 
 let monsters =
-    JSON.parse(localStorage.getItem("nexus_monsters")) || [];
+    JSON.parse(
+        localStorage.getItem("nexus_monsters")
+    ) || [];
 
 let filtroAtual = "todos";
+
 let editandoId = null;
 
+
+/*
+   Pontos são ILIMITADOS.
+*/
+
 let atributos = {
+
     strength: 0,
+
     dexterity: 0,
+
     vigor: 0,
+
     intelligence: 0
+
 };
+
 
 let listas = {
+
     weaknesses: [],
+
     abilities: [],
+
     attacks: []
+
 };
 
-const TOTAL_POINTS = 30;
+
+/*
+   Imagem carregada do dispositivo.
+*/
+
+let imagemAtual = "";
 
 
 /* ==========================================
@@ -1070,7 +2051,7 @@ const searchInput =
 
 
 /* ==========================================
-   SALVAR LOCALMENTE
+   LOCAL STORAGE
 ========================================== */
 
 function salvarLocal() {
@@ -1084,31 +2065,35 @@ function salvarLocal() {
 
 
 /* ==========================================
-   RENDERIZAR MONSTROS
+   RENDERIZAR
 ========================================== */
 
 function renderizar() {
 
     const pesquisa =
         searchInput.value
-        .toLowerCase()
-        .trim();
+            .toLowerCase()
+            .trim();
+
 
     const encontrados =
         monsters.filter(monstro => {
 
             const nome =
-                (monstro.name || "")
-                .toLowerCase()
-                .includes(pesquisa);
+                String(monstro.name || "")
+                    .toLowerCase()
+                    .includes(pesquisa);
+
 
             const filtro =
                 filtroAtual === "todos" ||
                 monstro.danger === filtroAtual;
 
+
             return nome && filtro;
 
         });
+
 
     grid.innerHTML = "";
 
@@ -1116,12 +2101,17 @@ function renderizar() {
     if (!encontrados.length) {
 
         grid.innerHTML = `
+
             <div class="empty">
+
                 Nenhuma entidade encontrada.
+
             </div>
+
         `;
 
         return;
+
     }
 
 
@@ -1130,27 +2120,45 @@ function renderizar() {
         const card =
             document.createElement("div");
 
-        card.className = "monster-card";
+
+        card.className =
+            "monster-card";
 
 
         const perigoTexto =
             monstro.danger === "desconhecido"
-            ? "???"
-            : monstro.danger;
+                ? "???"
+                : monstro.danger;
+
+
+        const vidaAtual =
+            Number(monstro.healthCurrent ?? 0);
+
+        const vidaMax =
+            Number(monstro.healthMax ?? 100);
 
 
         card.innerHTML = `
 
             ${
                 monstro.image
+
                 ?
-                `<img
-                    class="monster-image"
-                    src="${escapeHTML(monstro.image)}"
-                    alt="${escapeHTML(monstro.name)}"
-                >`
-                :
+
                 `
+
+                <img
+                    class="monster-image"
+                    src="${monstro.image}"
+                    alt="${escapeHTML(monstro.name)}"
+                >
+
+                `
+
+                :
+
+                `
+
                 <div
                     class="monster-image"
                     style="
@@ -1161,24 +2169,41 @@ function renderizar() {
                         color:#777;
                     "
                 >
+
                     SEM IMAGEM
+
                 </div>
+
                 `
             }
+
 
             <div class="monster-info">
 
                 <div class="monster-name">
+
                     ${escapeHTML(monstro.name)}
+
                 </div>
+
 
                 <div class="monster-meta">
+
                     LEVEL ${monstro.level || 0}
-                    • VIDA ${monstro.health || 0}
+
+                    •
+
+                    VIDA ${vidaAtual}/${vidaMax}
+
                 </div>
 
-                <span class="danger ${monstro.danger}">
+
+                <span
+                    class="danger ${monstro.danger}"
+                >
+
                     ${perigoTexto}
+
                 </span>
 
             </div>
@@ -1204,22 +2229,28 @@ function renderizar() {
 function escapeHTML(text) {
 
     return String(text ?? "")
+
         .replace(/&/g, "&amp;")
+
         .replace(/</g, "&lt;")
+
         .replace(/>/g, "&gt;")
+
         .replace(/"/g, "&quot;")
+
         .replace(/'/g, "&#039;");
 
 }
 
 
 /* ==========================================
-   ABRIR EDITOR
+   EDITOR
 ========================================== */
 
 function abrirEditor(id = null) {
 
     editandoId = id;
+
 
     document
         .getElementById("editorModal")
@@ -1230,11 +2261,15 @@ function abrirEditor(id = null) {
 
         document
             .getElementById("editorTitle")
-            .textContent = "NOVA ENTIDADE";
+            .textContent =
+                "NOVA ENTIDADE";
+
 
         document
             .getElementById("deleteButton")
-            .style.display = "none";
+            .style.display =
+                "none";
+
 
         limparFormulario();
 
@@ -1243,18 +2278,26 @@ function abrirEditor(id = null) {
     else {
 
         const monstro =
-            monsters.find(m => m.id === id);
+            monsters.find(
+                m => m.id === id
+            );
+
 
         if (!monstro)
             return;
 
+
         document
             .getElementById("editorTitle")
-            .textContent = "EDITAR ENTIDADE";
+            .textContent =
+                "EDITAR ENTIDADE";
+
 
         document
             .getElementById("deleteButton")
-            .style.display = "block";
+            .style.display =
+                "block";
+
 
         preencherFormulario(monstro);
 
@@ -1278,35 +2321,81 @@ function fecharEditor() {
 
 function limparFormulario() {
 
-    document.getElementById("image").value = "";
+    document.getElementById("imageFile").value = "";
+
     document.getElementById("name").value = "";
+
     document.getElementById("origin").value = "";
+
     document.getElementById("weight").value = "";
+
     document.getElementById("height").value = "";
+
     document.getElementById("level").value = 1;
-    document.getElementById("health").value = 100;
+
     document.getElementById("danger").value = "baixo";
+
     document.getElementById("notes").value = "";
 
 
+    /*
+       VIDA
+    */
+
+    document.getElementById("healthCurrent").value = 100;
+
+    document.getElementById("healthMax").value = 100;
+
+
+    /*
+       RESISTÊNCIA
+    */
+
+    document.getElementById("resistanceCurrent").value = 100;
+
+    document.getElementById("resistanceMax").value = 100;
+
+
+    /*
+       Atributos
+    */
+
     atributos = {
+
         strength: 0,
+
         dexterity: 0,
+
         vigor: 0,
+
         intelligence: 0
+
     };
 
 
     listas = {
+
         weaknesses: [],
+
         abilities: [],
+
         attacks: []
+
     };
 
 
+    imagemAtual = "";
+
+
+    document.getElementById("imagePreview").innerHTML =
+        "Sem imagem";
+
+
     atualizarAtributos();
+
     renderizarListas();
-    previewImage();
+
+    atualizarStatusEditor();
 
 }
 
@@ -1317,47 +2406,81 @@ function limparFormulario() {
 
 function preencherFormulario(m) {
 
-    document.getElementById("image").value =
-        m.image || "";
-
     document.getElementById("name").value =
         m.name || "";
+
 
     document.getElementById("origin").value =
         m.origin || "";
 
+
     document.getElementById("weight").value =
         m.weight || "";
+
 
     document.getElementById("height").value =
         m.height || "";
 
+
     document.getElementById("level").value =
         m.level || 1;
 
-    document.getElementById("health").value =
-        m.health || 100;
 
     document.getElementById("danger").value =
         m.danger || "baixo";
+
 
     document.getElementById("notes").value =
         m.notes || "";
 
 
+    /*
+       Compatibilidade com criaturas
+       antigas que tinham apenas "health".
+    */
+
+    document.getElementById("healthCurrent").value =
+        m.healthCurrent ??
+        m.health ??
+        100;
+
+
+    document.getElementById("healthMax").value =
+        m.healthMax ??
+        100;
+
+
+    document.getElementById("resistanceCurrent").value =
+        m.resistanceCurrent ??
+        100;
+
+
+    document.getElementById("resistanceMax").value =
+        m.resistanceMax ??
+        100;
+
+
     atributos = {
 
         strength:
-            m.attributes?.strength || 0,
+            Number(
+                m.attributes?.strength || 0
+            ),
 
         dexterity:
-            m.attributes?.dexterity || 0,
+            Number(
+                m.attributes?.dexterity || 0
+            ),
 
         vigor:
-            m.attributes?.vigor || 0,
+            Number(
+                m.attributes?.vigor || 0
+            ),
 
         intelligence:
-            m.attributes?.intelligence || 0
+            Number(
+                m.attributes?.intelligence || 0
+            )
 
     };
 
@@ -1376,9 +2499,321 @@ function preencherFormulario(m) {
     };
 
 
+    imagemAtual =
+        m.image || "";
+
+
     atualizarAtributos();
+
     renderizarListas();
-    previewImage();
+
+    atualizarStatusEditor();
+
+
+    if (imagemAtual) {
+
+        document.getElementById(
+            "imagePreview"
+        ).innerHTML = `
+
+            <img
+                src="${imagemAtual}"
+                onerror="
+                    this.parentElement.innerHTML =
+                    'Imagem inválida'
+                "
+            >
+
+        `;
+
+    }
+
+    else {
+
+        document.getElementById(
+            "imagePreview"
+        ).innerHTML =
+            "Sem imagem";
+
+    }
+
+}
+
+
+/* ==========================================
+   IMAGEM DO DISPOSITIVO
+========================================== */
+
+function carregarImagem(event) {
+
+    const arquivo =
+        event.target.files[0];
+
+
+    if (!arquivo)
+        return;
+
+
+    if (!arquivo.type.startsWith("image/")) {
+
+        alert(
+            "Selecione um arquivo de imagem."
+        );
+
+        return;
+
+    }
+
+
+    const leitor =
+        new FileReader();
+
+
+    leitor.onload = function(e) {
+
+        imagemAtual =
+            e.target.result;
+
+
+        document
+            .getElementById("imagePreview")
+            .innerHTML = `
+
+            <img
+                src="${imagemAtual}"
+                alt="Prévia da criatura"
+            >
+
+        `;
+
+    };
+
+
+    leitor.readAsDataURL(arquivo);
+
+}
+
+
+/* ==========================================
+   STATUS
+========================================== */
+
+function obterStatus(percentual, tipo) {
+
+    percentual =
+        Math.max(
+            0,
+            Math.min(
+                100,
+                percentual
+            )
+        );
+
+
+    if (percentual <= 0) {
+
+        return {
+
+            cor: "#050505",
+
+            texto:
+                tipo === "vida"
+                    ? "A criatura está completamente sem vida."
+                    : "A resistência da criatura foi completamente destruída."
+
+        };
+
+    }
+
+
+    if (percentual <= 10) {
+
+        return {
+
+            cor: "#5c0808",
+
+            texto:
+                tipo === "vida"
+                    ? "A criatura está à beira da morte."
+                    : "A resistência da criatura está por um fio."
+
+        };
+
+    }
+
+
+    if (percentual <= 30) {
+
+        return {
+
+            cor: "#e33b3b",
+
+            texto:
+                tipo === "vida"
+                    ? "A criatura está gravemente ferida."
+                    : "A resistência da criatura está muito comprometida."
+
+        };
+
+    }
+
+
+    if (percentual <= 50) {
+
+        return {
+
+            cor: "#e4c52b",
+
+            texto:
+                tipo === "vida"
+                    ? "A criatura está bastante ferida."
+                    : "A resistência da criatura está parcialmente comprometida."
+
+        };
+
+    }
+
+
+    if (percentual <= 70) {
+
+        return {
+
+            cor: "#e5a23a",
+
+            texto:
+                tipo === "vida"
+                    ? "A criatura apresenta ferimentos consideráveis."
+                    : "A resistência da criatura apresenta sinais de desgaste."
+
+        };
+
+    }
+
+
+    return {
+
+        cor: "#8ee69b",
+
+        texto:
+            tipo === "vida"
+                ? "A vida da criatura está impecável."
+                : "A resistência da criatura está intacta."
+
+    };
+
+}
+
+
+/* ==========================================
+   ATUALIZAR STATUS DO EDITOR
+========================================== */
+
+function atualizarStatusEditor() {
+
+    atualizarStatusIndividual(
+        "healthCurrent",
+        "healthMax",
+        "healthFill",
+        "healthText",
+        "healthEditorBox",
+        "vida"
+    );
+
+
+    atualizarStatusIndividual(
+        "resistanceCurrent",
+        "resistanceMax",
+        "resistanceFill",
+        "resistanceText",
+        "resistanceEditorBox",
+        "resistencia"
+    );
+
+}
+
+
+function atualizarStatusIndividual(
+    currentId,
+    maxId,
+    fillId,
+    textId,
+    boxId,
+    tipo
+) {
+
+    const atual =
+        Math.max(
+            0,
+            Number(
+                document.getElementById(currentId).value
+            ) || 0
+        );
+
+
+    const limite =
+        Math.max(
+            1,
+            Number(
+                document.getElementById(maxId).value
+            ) || 1
+        );
+
+
+    if (atual > limite) {
+
+        document.getElementById(currentId).value =
+            limite;
+
+    }
+
+
+    const valorAtual =
+        Math.min(
+            atual,
+            limite
+        );
+
+
+    const percentual =
+        (valorAtual / limite) * 100;
+
+
+    const status =
+        obterStatus(
+            percentual,
+            tipo
+        );
+
+
+    const fill =
+        document.getElementById(fillId);
+
+
+    fill.style.width =
+        percentual + "%";
+
+
+    fill.style.background =
+        status.cor;
+
+
+    fill.style.color =
+        status.cor;
+
+
+    document.getElementById(textId)
+        .textContent =
+        status.texto;
+
+
+    document.getElementById(boxId)
+        .style.borderColor =
+        status.cor;
+
+
+    document.getElementById(currentId)
+        .style.color =
+        status.cor;
 
 }
 
@@ -1387,72 +2822,138 @@ function preencherFormulario(m) {
    ATRIBUTOS
 ========================================== */
 
-function alterarAtributo(nome, quantidade) {
+function alterarAtributo(
+    nome,
+    quantidade
+) {
 
-    const atual =
-        atributos[nome];
-
-    const total =
-        Object.values(atributos)
-        .reduce((a, b) => a + b, 0);
-
-
-    if (quantidade > 0) {
-
-        if (total >= TOTAL_POINTS)
-            return;
-
-        atributos[nome]++;
-
-    }
-
-    else {
-
-        if (atual <= 0)
-            return;
-
-        atributos[nome]--;
-
-    }
+    atributos[nome] =
+        Math.max(
+            0,
+            Number(atributos[nome] || 0)
+                + quantidade
+        );
 
 
     atualizarAtributos();
+
+
+    /*
+       VIGOR aumenta automaticamente
+       o limite de VIDA.
+       
+       +5 de VIDA por ponto de VIGOR.
+    */
+
+    atualizarVidaPorVigor();
 
 }
 
 
 function atualizarAtributos() {
 
-    document
-        .getElementById("strengthValue")
-        .textContent =
+    document.getElementById(
+        "strengthValue"
+    ).textContent =
         atributos.strength;
 
-    document
-        .getElementById("dexterityValue")
-        .textContent =
+
+    document.getElementById(
+        "dexterityValue"
+    ).textContent =
         atributos.dexterity;
 
-    document
-        .getElementById("vigorValue")
-        .textContent =
+
+    document.getElementById(
+        "vigorValue"
+    ).textContent =
         atributos.vigor;
 
-    document
-        .getElementById("intelligenceValue")
-        .textContent =
+
+    document.getElementById(
+        "intelligenceValue"
+    ).textContent =
         atributos.intelligence;
 
-
-    const total =
-        Object.values(atributos)
-        .reduce((a, b) => a + b, 0);
+}
 
 
-    document
-        .getElementById("pointsLeft")
-        .textContent =
-        TOTAL_POINTS - total;
+/* ==========================================
+   VIGOR → VIDA
+========================================== */
+
+function atualizarVidaPorVigor() {
+
+    const vigor =
+        Number(
+            atributos.vigor || 0
+        );
+
+
+    /*
+       Vida base = 100
+       Cada Vigor = +5 de limite.
+    */
+
+    const novaVidaMax =
+        100 + (vigor * 5);
+
+
+    const campoMax =
+        document.getElementById(
+            "healthMax"
+        );
+
+
+    /*
+       Só altera automaticamente
+       se o limite ainda estiver
+       seguindo a fórmula anterior.
+    */
+
+    const vidaAnterior =
+        Number(
+            campoMax.value
+        ) || 100;
+
+
+    campoMax.value =
+        novaVidaMax;
+
+
+    /*
+       Se a criatura estiver
+       com vida cheia, aumenta
+       a vida atual junto.
+    */
+
+    const campoAtual =
+        document.getElementById(
+            "healthCurrent"
+        );
+
+
+    const vidaAtual =
+        Number(
+            campoAtual.value
+        ) || 0;
+
+
+    const limiteAnterior =
+        vidaAnterior;
+
+
+    if (
+        vidaAtual >= limiteAnterior
+    ) {
+
+        campoAtual.value =
+            novaVidaMax;
+
+    }
+
+
+    atualizarStatusEditor();
 
 }
 
@@ -1470,18 +2971,29 @@ function adicionarItem(tipo) {
 }
 
 
-function removerItem(tipo, index) {
+function removerItem(
+    tipo,
+    index
+) {
 
-    listas[tipo].splice(index, 1);
+    listas[tipo].splice(
+        index,
+        1
+    );
 
     renderizarListas();
 
 }
 
 
-function atualizarItem(tipo, index, value) {
+function atualizarItem(
+    tipo,
+    index,
+    value
+) {
 
-    listas[tipo][index] = value;
+    listas[tipo][index] =
+        value;
 
 }
 
@@ -1493,10 +3005,12 @@ function renderizarListas() {
         "weaknesses"
     );
 
+
     renderLista(
         "abilitiesList",
         "abilities"
     );
+
 
     renderLista(
         "attacksList",
@@ -1506,108 +3020,89 @@ function renderizarListas() {
 }
 
 
-function renderLista(elementId, tipo) {
+function renderLista(
+    elementId,
+    tipo
+) {
 
     const container =
-        document.getElementById(elementId);
+        document.getElementById(
+            elementId
+        );
+
 
     container.innerHTML = "";
 
 
-    listas[tipo].forEach((item, index) => {
+    listas[tipo]
+        .forEach(
+            (item,index) => {
 
-        const row =
-            document.createElement("div");
-
-        row.className = "list-row";
-
-
-        row.innerHTML = `
-
-            <input
-                type="text"
-                value="${escapeHTML(item)}"
-                placeholder="Digite aqui..."
-            >
-
-            <button
-                class="remove-item"
-                type="button"
-            >
-                ×
-            </button>
-
-        `;
+                const row =
+                    document.createElement(
+                        "div"
+                    );
 
 
-        const input =
-            row.querySelector("input");
+                row.className =
+                    "list-row";
 
 
-        input.oninput = () => {
+                row.innerHTML = `
 
-            atualizarItem(
-                tipo,
-                index,
-                input.value
-            );
+                    <input
+                        type="text"
+                        value="${escapeHTML(item)}"
+                        placeholder="Digite aqui..."
+                    >
 
-        };
+                    <button
+                        class="remove-item"
+                        type="button"
+                    >
+                        ×
+                    </button>
 
-
-        row
-            .querySelector(".remove-item")
-            .onclick = () =>
-                removerItem(tipo, index);
-
-
-        container.appendChild(row);
-
-    });
-
-}
+                `;
 
 
-/* ==========================================
-   PREVISUALIZAÇÃO DA IMAGEM
-========================================== */
-
-function previewImage() {
-
-    const url =
-        document
-            .getElementById("image")
-            .value
-            .trim();
-
-    const preview =
-        document.getElementById("imagePreview");
+                const input =
+                    row.querySelector(
+                        "input"
+                    );
 
 
-    if (!url) {
+                input.oninput = () => {
 
-        preview.innerHTML =
-            "Sem imagem";
+                    atualizarItem(
+                        tipo,
+                        index,
+                        input.value
+                    );
 
-        return;
-
-    }
+                };
 
 
-    preview.innerHTML = `
+                row
+                    .querySelector(
+                        ".remove-item"
+                    )
+                    .onclick = () =>
+                        removerItem(
+                            tipo,
+                            index
+                        );
 
-        <img
-            src="${escapeHTML(url)}"
-            onerror="this.parentElement.innerHTML='Imagem inválida'"
-        >
 
-    `;
+                container.appendChild(row);
+
+            }
+        );
 
 }
 
-
 /* ==========================================
-   SALVAR MONSTRO
+   SALVAR
 ========================================== */
 
 function salvarMonstro() {
@@ -1630,22 +3125,6 @@ function salvarMonstro() {
     }
 
 
-    const total =
-        Object.values(atributos)
-        .reduce((a, b) => a + b, 0);
-
-
-    if (total > TOTAL_POINTS) {
-
-        alert(
-            "Você distribuiu mais pontos do que o permitido."
-        );
-
-        return;
-
-    }
-
-
     const dados = {
 
         id:
@@ -1656,10 +3135,7 @@ function salvarMonstro() {
             nome,
 
         image:
-            document
-                .getElementById("image")
-                .value
-                .trim(),
+            imagemAtual,
 
         origin:
             document
@@ -1684,21 +3160,91 @@ function salvarMonstro() {
                     .value
             ) || 0,
 
-        health:
-            Number(
-                document
-                    .getElementById("health")
-                    .value
-            ) || 0,
+
+        /* =========================
+           VIDA
+        ========================= */
+
+        healthCurrent:
+            Math.max(
+                0,
+                Number(
+                    document
+                        .getElementById("healthCurrent")
+                        .value
+                ) || 0
+            ),
+
+        healthMax:
+            Math.max(
+                1,
+                Number(
+                    document
+                        .getElementById("healthMax")
+                        .value
+                ) || 1
+            ),
+
+
+        /* =========================
+           RESISTÊNCIA
+        ========================= */
+
+        resistanceCurrent:
+            Math.max(
+                0,
+                Number(
+                    document
+                        .getElementById("resistanceCurrent")
+                        .value
+                ) || 0
+            ),
+
+        resistanceMax:
+            Math.max(
+                1,
+                Number(
+                    document
+                        .getElementById("resistanceMax")
+                        .value
+                ) || 1
+            ),
+
 
         danger:
             document
                 .getElementById("danger")
                 .value,
 
+
+        /* =========================
+           ATRIBUTOS
+        ========================= */
+
         attributes: {
-            ...atributos
+
+            strength:
+                Number(
+                    atributos.strength
+                ) || 0,
+
+            dexterity:
+                Number(
+                    atributos.dexterity
+                ) || 0,
+
+            vigor:
+                Number(
+                    atributos.vigor
+                ) || 0,
+
+            intelligence:
+                Number(
+                    atributos.intelligence
+                ) || 0
+
         },
+
 
         weaknesses:
             [...listas.weaknesses],
@@ -1709,13 +3255,19 @@ function salvarMonstro() {
         attacks:
             [...listas.attacks],
 
+
         notes:
             document
                 .getElementById("notes")
                 .value
+                .trim()
 
     };
 
+
+    /* =========================
+       EDITAR
+    ========================= */
 
     if (editandoId) {
 
@@ -1725,14 +3277,25 @@ function salvarMonstro() {
             );
 
 
-        if (index !== -1)
-            monsters[index] = dados;
+        if (index !== -1) {
+
+            monsters[index] =
+                dados;
+
+        }
 
     }
 
+
+    /* =========================
+       NOVA ENTIDADE
+    ========================= */
+
     else {
 
-        monsters.push(dados);
+        monsters.push(
+            dados
+        );
 
     }
 
@@ -1747,7 +3310,7 @@ function salvarMonstro() {
 
 
 /* ==========================================
-   EXCLUIR
+   EXCLUIR ENTIDADE
 ========================================== */
 
 function excluirAtual() {
@@ -1768,7 +3331,7 @@ function excluirAtual() {
 
     const confirmar =
         confirm(
-            `Excluir "${monstro.name}"?`
+            `Tem certeza que deseja excluir "${monstro.name}"?`
         );
 
 
@@ -1778,7 +3341,8 @@ function excluirAtual() {
 
     monsters =
         monsters.filter(
-            m => m.id !== editandoId
+            m =>
+                m.id !== editandoId
         );
 
 
@@ -1799,7 +3363,8 @@ function abrirFicha(id) {
 
     const m =
         monsters.find(
-            monster => monster.id === id
+            monster =>
+                monster.id === id
         );
 
 
@@ -1807,25 +3372,83 @@ function abrirFicha(id) {
         return;
 
 
+    const vidaAtual =
+        Number(
+            m.healthCurrent ?? 0
+        );
+
+
+    const vidaMax =
+        Number(
+            m.healthMax ?? 100
+        );
+
+
+    const resistenciaAtual =
+        Number(
+            m.resistanceCurrent ?? 0
+        );
+
+
+    const resistenciaMax =
+        Number(
+            m.resistanceMax ?? 100
+        );
+
+
+    const vidaPercentual =
+        vidaMax > 0
+            ? (vidaAtual / vidaMax) * 100
+            : 0;
+
+
+    const resistenciaPercentual =
+        resistenciaMax > 0
+            ? (resistenciaAtual / resistenciaMax) * 100
+            : 0;
+
+
+    const vidaStatus =
+        obterStatus(
+            vidaPercentual,
+            "vida"
+        );
+
+
+    const resistenciaStatus =
+        obterStatus(
+            resistenciaPercentual,
+            "resistencia"
+        );
+
+
     const perigoTexto =
         m.danger === "desconhecido"
-        ? "???"
-        : m.danger;
+            ? "???"
+            : m.danger;
 
 
     const attrs = {
 
         "Força":
-            m.attributes?.strength || 0,
+            Number(
+                m.attributes?.strength || 0
+            ),
 
         "Destreza":
-            m.attributes?.dexterity || 0,
+            Number(
+                m.attributes?.dexterity || 0
+            ),
 
         "Vigor":
-            m.attributes?.vigor || 0,
+            Number(
+                m.attributes?.vigor || 0
+            ),
 
         "Inteligência":
-            m.attributes?.intelligence || 0
+            Number(
+                m.attributes?.intelligence || 0
+            )
 
     };
 
@@ -1834,45 +3457,66 @@ function abrirFicha(id) {
         .getElementById("sheetContent")
         .innerHTML = `
 
+
         ${
             m.image
+
             ?
+
             `
             <img
                 class="sheet-image"
-                src="${escapeHTML(m.image)}"
+                src="${m.image}"
                 alt="${escapeHTML(m.name)}"
             >
             `
-            : ""
+
+            :
+
+            ""
         }
 
 
         <div class="sheet-title">
+
             ${escapeHTML(m.name)}
+
         </div>
 
 
         <div class="sheet-danger">
 
-            <span class="danger ${m.danger}">
+            <span
+                class="danger ${m.danger}"
+            >
+
                 ${perigoTexto}
+
             </span>
 
         </div>
 
 
+        <!-- =========================
+             INFORMAÇÕES
+        ========================= -->
+
         <div class="info-grid">
+
 
             <div class="info-box">
 
-                <small>ORIGEM</small>
+                <small>
+                    ORIGEM
+                </small>
 
                 <strong>
+
                     ${escapeHTML(
                         m.origin ||
                         "Não informado"
                     )}
+
                 </strong>
 
             </div>
@@ -1880,10 +3524,14 @@ function abrirFicha(id) {
 
             <div class="info-box">
 
-                <small>LEVEL</small>
+                <small>
+                    LEVEL
+                </small>
 
                 <strong>
+
                     ${m.level || 0}
+
                 </strong>
 
             </div>
@@ -1891,10 +3539,18 @@ function abrirFicha(id) {
 
             <div class="info-box">
 
-                <small>VIDA</small>
+                <small>
+                    PESO
+                </small>
 
                 <strong>
-                    ${m.health || 0}
+
+                    ${
+                        m.weight
+                            ? `${m.weight} kg`
+                            : "—"
+                    }
+
                 </strong>
 
             </div>
@@ -1902,66 +3558,230 @@ function abrirFicha(id) {
 
             <div class="info-box">
 
-                <small>PESO</small>
+                <small>
+                    ALTURA
+                </small>
 
                 <strong>
-                    ${m.weight || "—"} kg
+
+                    ${
+                        m.height
+                            ? `${m.height} m`
+                            : "—"
+                    }
+
                 </strong>
 
             </div>
 
-
-            <div class="info-box">
-
-                <small>ALTURA</small>
-
-                <strong>
-                    ${m.height || "—"} m
-                </strong>
-
-            </div>
 
         </div>
 
 
+        <!-- =========================
+             VIDA
+        ========================= -->
+
         <div class="sheet-section">
 
-            <h3>ATRIBUTOS</h3>
+            <h3>
+                CONDIÇÃO
+            </h3>
 
-            <div class="attribute-bars">
+
+            <div
+                class="sheet-status"
+            >
+
+                <div
+                    class="sheet-status-title"
+                >
+
+                    <span>
+                        VIDA
+                    </span>
+
+                    <span
+                        class="sheet-status-number"
+                        style="color:${vidaStatus.cor}"
+                    >
+
+                        ${vidaAtual}/${vidaMax}
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="sheet-status-bar"
+                >
+
+                    <div
+                        class="sheet-status-fill"
+                        style="
+                            width:${Math.max(
+                                0,
+                                Math.min(
+                                    100,
+                                    vidaPercentual
+                                )
+                            )}%;
+                            background:${vidaStatus.cor};
+                            box-shadow:
+                                0 0 12px ${vidaStatus.cor};
+                        "
+                    ></div>
+
+                </div>
+
+
+                <div
+                    style="
+                        margin-top:8px;
+                        color:${vidaStatus.cor};
+                        font-size:12px;
+                        font-style:italic;
+                    "
+                >
+
+                    ${vidaStatus.texto}
+
+                </div>
+
+            </div>
+
+
+            <!-- RESISTÊNCIA -->
+
+            <div
+                class="sheet-status"
+            >
+
+                <div
+                    class="sheet-status-title"
+                >
+
+                    <span>
+                        RESISTÊNCIA
+                    </span>
+
+                    <span
+                        class="sheet-status-number"
+                        style="color:${resistenciaStatus.cor}"
+                    >
+
+                        ${resistenciaAtual}/${resistenciaMax}
+
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="sheet-status-bar"
+                >
+
+                    <div
+                        class="sheet-status-fill"
+                        style="
+                            width:${Math.max(
+                                0,
+                                Math.min(
+                                    100,
+                                    resistenciaPercentual
+                                )
+                            )}%;
+                            background:${resistenciaStatus.cor};
+                            box-shadow:
+                                0 0 12px ${resistenciaStatus.cor};
+                        "
+                    ></div>
+
+                </div>
+
+
+                <div
+                    style="
+                        margin-top:8px;
+                        color:${resistenciaStatus.cor};
+                        font-size:12px;
+                        font-style:italic;
+                    "
+                >
+
+                    ${resistenciaStatus.texto}
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =========================
+             ATRIBUTOS
+        ========================= -->
+
+        <div class="sheet-section">
+
+            <h3>
+                ATRIBUTOS
+            </h3>
+
+
+            <div
+                class="attribute-bars"
+            >
 
                 ${
                     Object.entries(attrs)
-                    .map(([nome, valor]) => `
+                        .map(
+                            ([nome,valor]) => `
 
-                        <div class="bar-row">
+                            <div
+                                class="bar-row"
+                            >
 
-                            <span>
-                                ${nome}
-                            </span>
+                                <span>
+                                    ${nome}
+                                </span>
 
-                            <div class="bar">
 
                                 <div
-                                    class="bar-fill"
-                                    style="
-                                        width:${Math.min(
-                                            valor / TOTAL_POINTS * 100,
-                                            100
-                                        )}%;
-                                    "
-                                ></div>
+                                    class="bar"
+                                >
+
+                                    <div
+                                        class="bar-fill"
+                                        style="
+                                            width:${Math.min(
+                                                valor / Math.max(
+                                                    1,
+                                                    Math.max(
+                                                        ...Object.values(
+                                                            attrs
+                                                        )
+                                                    )
+                                                ) * 100,
+                                                100
+                                            )}%;
+                                        "
+                                    ></div>
+
+                                </div>
+
+
+                                <strong>
+                                    ${valor}
+                                </strong>
 
                             </div>
 
-                            <strong>
-                                ${valor}
-                            </strong>
-
-                        </div>
-
-                    `)
-                    .join("")
+                        `
+                        )
+                        .join("")
                 }
 
             </div>
@@ -1969,9 +3789,16 @@ function abrirFicha(id) {
         </div>
 
 
+        <!-- =========================
+             FRAQUEZAS
+        ========================= -->
+
         <div class="sheet-section">
 
-            <h3>FRAQUEZAS</h3>
+            <h3>
+                FRAQUEZAS
+            </h3>
+
 
             <div class="list-view">
 
@@ -1987,9 +3814,16 @@ function abrirFicha(id) {
         </div>
 
 
+        <!-- =========================
+             HABILIDADES
+        ========================= -->
+
         <div class="sheet-section">
 
-            <h3>HABILIDADES</h3>
+            <h3>
+                HABILIDADES
+            </h3>
+
 
             <div class="list-view">
 
@@ -2005,9 +3839,16 @@ function abrirFicha(id) {
         </div>
 
 
+        <!-- =========================
+             ATAQUES
+        ========================= -->
+
         <div class="sheet-section">
 
-            <h3>ATAQUES</h3>
+            <h3>
+                ATAQUES
+            </h3>
+
 
             <div class="list-view">
 
@@ -2023,19 +3864,32 @@ function abrirFicha(id) {
         </div>
 
 
+        <!-- =========================
+             OBSERVAÇÕES
+        ========================= -->
+
         <div class="sheet-section">
 
-            <h3>OBSERVAÇÕES DO MESTRE</h3>
+            <h3>
+                OBSERVAÇÕES DO MESTRE
+            </h3>
+
 
             <p>
+
                 ${escapeHTML(
                     m.notes ||
                     "Nenhuma observação registrada."
                 )}
+
             </p>
 
         </div>
 
+
+        <!-- =========================
+             BOTÕES
+        ========================= -->
 
         <div class="modal-actions">
 
@@ -2043,7 +3897,9 @@ function abrirFicha(id) {
                 class="btn"
                 onclick="fecharFicha()"
             >
+
                 FECHAR
+
             </button>
 
 
@@ -2051,10 +3907,12 @@ function abrirFicha(id) {
                 class="btn btn-primary"
                 onclick="
                     fecharFicha();
-                    abrirEditor('${m.id}')
+                    abrirEditor('${m.id}');
                 "
             >
+
                 EDITAR ENTIDADE
+
             </button>
 
         </div>
@@ -2069,14 +3927,25 @@ function abrirFicha(id) {
 }
 
 
-function criarListaFicha(lista, vazio) {
+/* ==========================================
+   CRIAR LISTA DA FICHA
+========================================== */
+
+function criarListaFicha(
+    lista,
+    vazio
+) {
 
     if (
         !lista ||
         !lista.length
     ) {
 
-        return `<div>${vazio}</div>`;
+        return `
+            <div>
+                ${vazio}
+            </div>
+        `;
 
     }
 
@@ -2088,27 +3957,42 @@ function criarListaFicha(lista, vazio) {
         );
 
 
-    if (!itens.length)
-        return `<div>${vazio}</div>`;
+    if (!itens.length) {
+
+        return `
+            <div>
+                ${vazio}
+            </div>
+        `;
+
+    }
 
 
     return itens
         .map(
-            item =>
-                `<div>
+            item => `
+
+                <div>
                     ${escapeHTML(item)}
-                </div>`
+                </div>
+
+            `
         )
         .join("");
 
 }
 
 
+/* ==========================================
+   FECHAR FICHA
+========================================== */
+
 function fecharFicha() {
 
     document
         .getElementById("sheetModal")
-        .classList.remove("show");
+        .classList
+        .remove("show");
 
 }
 
@@ -2119,36 +4003,42 @@ function fecharFicha() {
 
 document
     .querySelectorAll(".filter")
-    .forEach(button => {
+    .forEach(
+        button => {
 
-        button.addEventListener(
-            "click",
-            () => {
+            button.addEventListener(
+                "click",
+                () => {
 
-                document
-                    .querySelectorAll(".filter")
-                    .forEach(
-                        b =>
-                            b.classList
-                                .remove("active")
-                    );
-
-
-                button
-                    .classLassList
-                    .add("active");
-
-
-                filtroAtual =
-                    button.dataset.filter;
+                    document
+                        .querySelectorAll(
+                            ".filter"
+                        )
+                        .forEach(
+                            b =>
+                                b.classList
+                                    .remove(
+                                        "active"
+                                    )
+                        );
 
 
-                renderizar();
+                    button
+                        .classList
+                        .add("active");
 
-            }
-        );
 
-    });
+                    filtroAtual =
+                        button.dataset.filter;
+
+
+                    renderizar();
+
+                }
+            );
+
+        }
+    );
 
 
 /* ==========================================
@@ -2169,11 +4059,10 @@ document
     .getElementById("editorModal")
     .addEventListener(
         "click",
-        e => {
+        function(event) {
 
             if (
-                e.target.id ===
-                "editorModal"
+                event.target === this
             ) {
 
                 fecharEditor();
@@ -2188,11 +4077,10 @@ document
     .getElementById("sheetModal")
     .addEventListener(
         "click",
-        e => {
+        function(event) {
 
             if (
-                e.target.id ===
-                "sheetModal"
+                event.target === this
             ) {
 
                 fecharFicha();
@@ -2209,14 +4097,15 @@ document
 
 document.addEventListener(
     "keydown",
-    e => {
+    event => {
 
-        if (e.key === "Escape") {
+        if (event.key !== "Escape")
+            return;
 
-            fecharEditor();
-            fecharFicha();
 
-        }
+        fecharEditor();
+
+        fecharFicha();
 
     }
 );
