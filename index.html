@@ -1,315 +1,736 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS — BESTIÁRIO</title>
 
-    <title>NEXUS — BESTIÁRIO</title>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+:root {
+    --purple: #a96bc2;
+    --purple-light: #d39bea;
+    --dark: rgba(8, 4, 12, .88);
+    --border: rgba(181, 112, 210, .38);
+}
 
-        body {
-            font-family: Georgia, serif;
-            color: #eee;
-            min-height: 100vh;
-            background: #09050d;
-            overflow-x: hidden;
-        }
+body {
+    min-height: 100vh;
+    color: #eee;
+    font-family: Georgia, serif;
+    background: #08050b;
+    overflow-x: hidden;
+}
 
-        /* =========================
-           FUNDO
-        ========================= */
+/* =========================
+   FUNDO
+========================= */
 
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image:
-                linear-gradient(
-                    rgba(5, 2, 8, 0.72),
-                    rgba(5, 2, 8, 0.88)
-                ),
-                url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ddfe6d6c-9f0f-4447-a495-b7c385c54cfd/dfd60g3-5c93400f-e663-4949-a048-946a899db365.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9kZGZlNmQ2Yy05ZjBmLTQ0NDctYTQ5NS1iN2MzODVjNTRjZmQvZGZkNjBnMy01YzkzNDAwZi1lNjYzLTQ5NDktYTA0OC05NDZhODk5ZGIzNjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PYgtMYVVu--6jj1Oh4IOkYLGU6XH1MHzDdk1SpSkwds");
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+    background-image:
+        linear-gradient(
+            rgba(5, 2, 8, .68),
+            rgba(5, 2, 8, .88)
+        ),
+        url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/ddfe6d6c-9f0f-4447-a495-b7c385c54cfd/dfd60g3-5c93400f-e663-4949-a048-946a899db365.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9kZGZlNmQ2Yy05ZjBmLTQ0NDctYTQ5NS1iN2MzODVjNTRjZmQvZGZkNjBnMy01YzkzNDAwZi1lNjYzLTQ5NDktYTA0OC05NDZhODk5ZGIzNjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.PYgtMYVVu--6jj1Oh4IOkYLGU6XH1MHzDdk1SpSkwds");
 
-            z-index: -2;
-        }
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
 
-        body::after {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background:
-                radial-gradient(
-                    circle at center,
-                    transparent 20%,
-                    rgba(0, 0, 0, 0.55) 100%
-                );
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
 
-            pointer-events: none;
-            z-index: -1;
-        }
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 15%,
+            rgba(0,0,0,.58) 100%
+        );
+}
 
-        /* =========================
-           CABEÇALHO
-        ========================= */
+/* =========================
+   CABEÇALHO
+========================= */
 
-        header {
-            text-align: center;
-            padding: 65px 20px 35px;
-        }
+header {
+    text-align: center;
+    padding: 55px 20px 30px;
+}
 
-        .subtitle {
-            font-size: 13px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            color: #bda8c9;
-            margin-bottom: 12px;
-        }
+.subtitle {
+    color: #c7b3cf;
+    font-size: 12px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
 
-        h1 {
-            font-size: clamp(38px, 8vw, 76px);
-            letter-spacing: 8px;
-            font-weight: normal;
-            text-shadow:
-                0 0 10px rgba(180, 100, 220, 0.7),
-                0 0 30px rgba(120, 50, 160, 0.4);
-        }
+.logo {
+    font-size: clamp(42px, 9vw, 76px);
+    letter-spacing: 8px;
+    font-weight: normal;
+    text-shadow:
+        0 0 10px rgba(180,100,220,.7),
+        0 0 35px rgba(120,50,160,.45);
+}
 
-        .line {
-            width: 180px;
-            height: 1px;
-            background: #9c68b8;
-            margin: 20px auto;
-            box-shadow: 0 0 12px #9c68b8;
-        }
+.header-line {
+    width: 180px;
+    height: 1px;
+    margin: 18px auto;
+    background: var(--purple);
+    box-shadow: 0 0 12px var(--purple);
+}
 
-        /* =========================
-           CONTEÚDO
-        ========================= */
+.header-title {
+    letter-spacing: 4px;
+    font-size: 15px;
+}
 
-        main {
-            width: min(1100px, 92%);
-            margin: auto;
-            padding-bottom: 80px;
-        }
+/* =========================
+   CONTEÚDO
+========================= */
 
-        /* =========================
-           PESQUISA
-        ========================= */
+main {
+    width: min(1100px, 92%);
+    margin: auto;
+    padding-bottom: 80px;
+}
 
-        .search-box {
-            margin: 20px auto 25px;
-        }
+/* =========================
+   BARRA SUPERIOR
+========================= */
 
-        .search-box input {
-            width: 100%;
-            padding: 17px 20px;
-            background: rgba(12, 7, 18, 0.82);
-            border: 1px solid rgba(160, 100, 190, 0.5);
-            border-radius: 8px;
-            color: white;
-            font-family: Georgia, serif;
-            font-size: 16px;
-            outline: none;
-            transition: 0.3s;
-        }
+.toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
 
-        .search-box input:focus {
-            border-color: #b978d4;
-            box-shadow: 0 0 18px rgba(180, 90, 220, 0.25);
-        }
+.search {
+    flex: 1;
+}
 
-        /* =========================
-           FILTROS
-        ========================= */
+.search input {
+    width: 100%;
+    height: 48px;
+    padding: 0 17px;
 
-        .filters {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 9px;
-            margin-bottom: 35px;
-        }
+    background: rgba(8,4,12,.84);
+    border: 1px solid var(--border);
+    border-radius: 7px;
 
-        .filter {
-            padding: 10px 18px;
-            border: 1px solid rgba(170, 120, 190, 0.4);
-            background: rgba(12, 7, 18, 0.72);
-            color: #d7cbdc;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: Georgia, serif;
-            transition: 0.25s;
-        }
+    color: white;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    outline: none;
+}
 
-        .filter:hover,
-        .filter.active {
-            background: rgba(130, 70, 160, 0.35);
-            border-color: #b978d4;
-            color: white;
-            box-shadow: 0 0 14px rgba(180, 90, 220, 0.2);
-        }
+.search input:focus {
+    border-color: var(--purple-light);
+    box-shadow: 0 0 18px rgba(180,90,220,.2);
+}
 
-        /* =========================
-           GRADE DE MONSTROS
-        ========================= */
+.btn {
+    border: 1px solid var(--border);
+    background: rgba(20,9,27,.9);
+    color: #eee;
+    padding: 0 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    transition: .25s;
+}
 
-        #monsterGrid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-        }
+.btn:hover {
+    border-color: var(--purple-light);
+    background: rgba(125,60,155,.3);
+    box-shadow: 0 0 15px rgba(180,90,220,.2);
+}
 
-        .monster-card {
-            background: rgba(10, 6, 15, 0.82);
-            border: 1px solid rgba(150, 100, 175, 0.35);
-            border-radius: 10px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: 0.3s;
-            backdrop-filter: blur(4px);
-        }
+.btn-primary {
+    background: rgba(125,60,155,.35);
+    border-color: var(--purple);
+}
 
-        .monster-card:hover {
-            transform: translateY(-5px);
-            border-color: #a96bc2;
-            box-shadow: 0 10px 30px rgba(120, 50, 150, 0.25);
-        }
+/* =========================
+   FILTROS
+========================= */
 
-        .monster-image {
-            width: 100%;
-            height: 190px;
-            object-fit: cover;
-            display: block;
-            filter: brightness(0.75);
-        }
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
 
-        .monster-info {
-            padding: 18px;
-        }
+.filter {
+    padding: 9px 16px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: rgba(8,4,12,.78);
+    color: #d8ccd9;
+    cursor: pointer;
+    font-family: Georgia, serif;
+}
 
-        .monster-name {
-            font-size: 22px;
-            margin-bottom: 8px;
-        }
+.filter:hover,
+.filter.active {
+    color: white;
+    border-color: var(--purple-light);
+    background: rgba(130,70,160,.35);
+}
 
-        .monster-level {
-            color: #aaa;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
+/* =========================
+   CARDS
+========================= */
 
-        .danger {
-            display: inline-block;
-            padding: 5px 9px;
-            border-radius: 4px;
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
+#monsterGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+    gap: 20px;
+}
 
-        .baixo {
-            background: rgba(70, 150, 90, 0.2);
-            color: #8bd49b;
-        }
+.monster-card {
+    position: relative;
+    overflow: hidden;
 
-        .moderado {
-            background: rgba(180, 160, 50, 0.2);
-            color: #e0d27b;
-        }
+    background: rgba(9,5,14,.9);
+    border: 1px solid var(--border);
+    border-radius: 9px;
 
-        .alto {
-            background: rgba(200, 120, 40, 0.2);
-            color: #e5a461;
-        }
+    cursor: pointer;
+    transition: .3s;
+}
 
-        .extremo {
-            background: rgba(190, 45, 55, 0.2);
-            color: #e77b82;
-        }
+.monster-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--purple-light);
+    box-shadow: 0 12px 30px rgba(120,50,150,.25);
+}
 
-        .desconhecido {
-            background: rgba(130, 70, 180, 0.25);
-            color: #c99be8;
-        }
+.monster-image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(.72);
+}
 
-        /* =========================
-           SEM RESULTADOS
-        ========================= */
+.monster-info {
+    padding: 17px;
+}
 
-        #noResults {
-            text-align: center;
-            color: #aaa;
-            padding: 60px 20px;
-            display: none;
-        }
+.monster-name {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
 
-        /* =========================
-           RESPONSIVO
-        ========================= */
+.monster-meta {
+    color: #aaa;
+    font-size: 13px;
+    margin-bottom: 12px;
+}
 
-        @media (max-width: 600px) {
+.danger {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 4px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
-            header {
-                padding-top: 45px;
-            }
+.baixo {
+    background: rgba(70,150,90,.18);
+    color: #8bd49b;
+}
 
-            h1 {
-                letter-spacing: 4px;
-            }
+.moderado {
+    background: rgba(180,160,50,.18);
+    color: #e0d27b;
+}
 
-            .filters {
-                gap: 6px;
-            }
+.alto {
+    background: rgba(200,120,40,.18);
+    color: #e5a461;
+}
 
-            .filter {
-                padding: 9px 12px;
-                font-size: 12px;
-            }
+.extremo {
+    background: rgba(190,45,55,.18);
+    color: #e77b82;
+}
 
-            #monsterGrid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+.desconhecido {
+    background: rgba(130,70,180,.23);
+    color: #c99be8;
+}
+
+.empty {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 70px 20px;
+    color: #aaa;
+}
+
+/* =========================
+   MODAIS
+========================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(0,0,0,.78);
+    backdrop-filter: blur(5px);
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: min(850px, 100%);
+    max-height: 92vh;
+    overflow-y: auto;
+
+    padding: 28px;
+
+    background:
+        linear-gradient(
+            rgba(15,7,20,.96),
+            rgba(7,4,10,.97)
+        );
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,.65);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    font-weight: normal;
+    letter-spacing: 2px;
+}
+
+.close {
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid var(--border);
+    background: transparent;
+    color: white;
+
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* =========================
+   FORMULÁRIO
+========================= */
+
+.form-section {
+    margin-bottom: 28px;
+}
+
+.section-title {
+    color: var(--purple-light);
+    letter-spacing: 2px;
+    font-size: 13px;
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(170,100,200,.25);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field.full {
+    grid-column: 1/-1;
+}
+
+.field label {
+    color: #b9adb9;
+    font-size: 12px;
+}
+
+.field input,
+.field textarea,
+.field select {
+    width: 100%;
+    padding: 11px;
+
+    background: rgba(4,2,7,.9);
+    border: 1px solid rgba(170,100,200,.3);
+    border-radius: 5px;
+
+    color: white;
+    font-family: Georgia, serif;
+    outline: none;
+}
+
+.field textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+    border-color: var(--purple-light);
+}
+
+/* =========================
+   IMAGEM
+========================= */
+
+.image-preview {
+    width: 180px;
+    height: 180px;
+    margin: 0 auto 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    background: rgba(0,0,0,.35);
+    color: #777;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* =========================
+   ATRIBUTOS
+========================= */
+
+.points-info {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #bbb;
+}
+
+.points-info strong {
+    color: var(--purple-light);
+    font-size: 20px;
+}
+
+.attributes {
+    display: grid;
+    gap: 12px;
+}
+
+.attribute {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 10px;
+    align-items: center;
+
+    padding: 12px;
+
+    background: rgba(4,2,7,.55);
+    border: 1px solid rgba(170,100,200,.2);
+    border-radius: 5px;
+}
+
+.attribute-name {
+    letter-spacing: 1px;
+}
+
+.attribute-value {
+    min-width: 35px;
+    text-align: center;
+    font-size: 18px;
+    color: var(--purple-light);
+}
+
+.attr-btn {
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid var(--border);
+    background: rgba(130,70,160,.2);
+    color: white;
+
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.attr-btn:hover {
+    background: rgba(160,80,190,.4);
+}
+
+/* =========================
+   LISTAS
+========================= */
+
+.list-editor {
+    display: grid;
+    gap: 10px;
+}
+
+.list-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+}
+
+.list-row input {
+    padding: 10px;
+    background: rgba(4,2,7,.9);
+    border: 1px solid rgba(170,100,200,.3);
+    color: white;
+    border-radius: 5px;
+    font-family: Georgia, serif;
+}
+
+.remove-item {
+    width: 40px;
+    border: 1px solid rgba(190,70,80,.4);
+    background: rgba(130,30,40,.2);
+    color: #e99;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-item {
+    width: fit-content;
+    padding: 8px 13px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* =========================
+   AÇÕES
+========================= */
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.delete-btn {
+    margin-right: auto;
+    border: 1px solid rgba(190,70,80,.5);
+    background: rgba(130,30,40,.2);
+    color: #e99;
+}
+
+/* =========================
+   FICHA
+========================= */
+
+.sheet-image {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 7px;
+    border: 1px solid var(--border);
+    margin-bottom: 20px;
+}
+
+.sheet-title {
+    font-size: 35px;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.sheet-danger {
+    margin-bottom: 25px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
+}
+
+.info-box {
+    padding: 14px;
+    background: rgba(4,2,7,.5);
+    border: 1px solid rgba(170,100,200,.2);
+    border-radius: 5px;
+}
+
+.info-box small {
+    display: block;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.info-box strong {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.sheet-section {
+    margin-top: 28px;
+}
+
+.sheet-section h3 {
+    color: var(--purple-light);
+    letter-spacing: 2px;
+    font-size: 13px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(170,100,200,.25);
+    margin-bottom: 13px;
+}
+
+.sheet-section p {
+    color: #ccc;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+.attribute-bars {
+    display: grid;
+    gap: 10px;
+}
+
+.bar-row {
+    display: grid;
+    grid-template-columns: 130px 1fr 40px;
+    gap: 10px;
+    align-items: center;
+}
+
+.bar {
+    height: 7px;
+    background: rgba(255,255,255,.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--purple);
+    box-shadow: 0 0 10px rgba(180,90,220,.5);
+}
+
+.list-view {
+    display: grid;
+    gap: 9px;
+}
+
+.list-view div {
+    padding: 11px;
+    background: rgba(4,2,7,.45);
+    border-left: 2px solid var(--purple);
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:650px) {
+
+    .toolbar {
+        flex-direction: column;
+    }
+
+    .btn {
+        height: 45px;
+    }
+
+    .form-grid,
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-box {
+        padding: 20px;
+    }
+
+    .sheet-title {
+        font-size: 27px;
+    }
+
+    .bar-row {
+        grid-template-columns: 90px 1fr 30px;
+        font-size: 12px;
+    }
+}
+</style>
 </head>
 
 <body>
 
 <header>
-
-    <div class="subtitle">
-        Registro de Entidades
-    </div>
-
-    <h1>NEXUS</h1>
-
-    <div class="line"></div>
-
-    <p>BESTIÁRIO</p>
-
+    <div class="subtitle">Registro de Entidades</div>
+    <div class="logo">NEXUS</div>
+    <div class="header-line"></div>
+    <div class="header-title">BESTIÁRIO</div>
 </header>
-
 
 <main>
 
-    <div class="search-box">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Pesquisar criatura..."
-        >
-    </div>
+    <div class="toolbar">
 
+        <div class="search">
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Pesquisar criatura..."
+            >
+        </div>
+
+        <button class="btn btn-primary" onclick="abrirEditor()">
+            + NOVA ENTIDADE
+        </button>
+
+    </div>
 
     <div class="filters">
 
@@ -339,192 +760,1475 @@
 
     </div>
 
-
     <div id="monsterGrid"></div>
-
-    <div id="noResults">
-        Nenhuma entidade encontrada.
-    </div>
 
 </main>
 
 
-<script>
+<!-- =========================
+     MODAL EDITOR
+========================= -->
 
-    /*
-    ========================================
-        MONSTROS TEMPORÁRIOS
-    ========================================
-    */
+<div class="modal" id="editorModal">
 
-    const monsters = [
+    <div class="modal-box">
 
-        {
-            nome: "Lobisomem",
-            level: 5,
-            perigo: "alto",
-            imagem: "https://images.unsplash.com/photo-1509248961158-e54f6934749c?auto=format&fit=crop&w=900&q=80"
-        },
+        <div class="modal-header">
+            <h2 id="editorTitle">NOVA ENTIDADE</h2>
 
-        {
-            nome: "Criatura do Abismo",
-            level: 8,
-            perigo: "extremo",
-            imagem: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80"
-        },
-
-        {
-            nome: "Predador",
-            level: 3,
-            perigo: "moderado",
-            imagem: "https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=80"
-        },
-
-        {
-            nome: "Entidade ???",
-            level: 10,
-            perigo: "desconhecido",
-            imagem: "https://images.unsplash.com/photo-1518709594023-6eab9bab7b23?auto=format&fit=crop&w=900&q=80"
-        }
-
-    ];
+            <button class="close" onclick="fecharEditor()">
+                ×
+            </button>
+        </div>
 
 
-    let filtroAtual = "todos";
+        <div class="form-section">
 
+            <div class="section-title">
+                IDENTIFICAÇÃO
+            </div>
 
-    const grid = document.getElementById("monsterGrid");
-    const searchInput = document.getElementById("searchInput");
-    const noResults = document.getElementById("noResults");
+            <div class="image-preview" id="imagePreview">
+                Sem imagem
+            </div>
 
+            <div class="form-grid">
 
-    function mostrarMonstros() {
+                <div class="field full">
+                    <label>URL da imagem</label>
+                    <input
+                        id="image"
+                        type="text"
+                        placeholder="Cole o link da imagem"
+                        oninput="previewImage()"
+                    >
+                </div>
 
-        const pesquisa = searchInput.value
-            .toLowerCase()
-            .trim();
+                <div class="field">
+                    <label>Nome</label>
+                    <input id="name" type="text">
+                </div>
 
+                <div class="field">
+                    <label>Origem</label>
+                    <input
+                        id="origin"
+                        type="text"
+                        placeholder="Ex.: Humano transformado"
+                    >
+                </div>
 
-        const filtrados = monsters.filter(monstro => {
+                <div class="field">
+                    <label>Peso (kg)</label>
+                    <input id="weight" type="number">
+                </div>
 
-            const correspondePesquisa =
-                monstro.nome
-                    .toLowerCase()
-                    .includes(pesquisa);
+                <div class="field">
+                    <label>Altura (m)</label>
+                    <input id="height" type="number" step="0.01">
+                </div>
 
+                <div class="field">
+                    <label>Level</label>
+                    <input id="level" type="number" min="0">
+                </div>
 
-            const correspondeFiltro =
-                filtroAtual === "todos" ||
-                monstro.perigo === filtroAtual;
+                <div class="field">
+                    <label>Vida</label>
+                    <input id="health" type="number" min="0">
+                </div>
 
+                <div class="field">
+                    <label>Nível de ameaça</label>
 
-            return correspondePesquisa && correspondeFiltro;
+                    <select id="danger">
 
-        });
+                        <option value="baixo">
+                            Baixo
+                        </option>
 
+                        <option value="moderado">
+                            Moderado
+                        </option>
 
-        grid.innerHTML = "";
+                        <option value="alto">
+                            Alto
+                        </option>
 
+                        <option value="extremo">
+                            Extremo
+                        </option>
 
-        filtrados.forEach(monstro => {
+                        <option value="desconhecido">
+                            ???
+                        </option>
 
-            const card = document.createElement("div");
-
-            card.className = "monster-card";
-
-            card.innerHTML = `
-
-                <img
-                    class="monster-image"
-                    src="${monstro.imagem}"
-                    alt="${monstro.nome}"
-                >
-
-                <div class="monster-info">
-
-                    <div class="monster-name">
-                        ${monstro.nome}
-                    </div>
-
-                    <div class="monster-level">
-                        LEVEL ${monstro.level}
-                    </div>
-
-                    <span class="danger ${monstro.perigo}">
-                        ${monstro.perigo === "desconhecido"
-                            ? "???"
-                            : monstro.perigo}
-                    </span>
+                    </select>
 
                 </div>
 
-            `;
+            </div>
+
+        </div>
 
 
-            grid.appendChild(card);
+        <div class="form-section">
+
+            <div class="section-title">
+                ATRIBUTOS
+            </div>
+
+            <div class="points-info">
+                Pontos disponíveis:
+                <strong id="pointsLeft">30</strong>
+            </div>
+
+            <div class="attributes">
+
+                <div class="attribute">
+                    <span class="attribute-name">FORÇA</span>
+                    <button class="attr-btn" onclick="alterarAtributo('strength',-1)">−</button>
+                    <span class="attribute-value" id="strengthValue">0</span>
+                    <button class="attr-btn" onclick="alterarAtributo('strength',1)">+</button>
+                </div>
+
+                <div class="attribute">
+                    <span class="attribute-name">DESTREZA</span>
+                    <button class="attr-btn" onclick="alterarAtributo('dexterity',-1)">−</button>
+                    <span class="attribute-value" id="dexterityValue">0</span>
+                    <button class="attr-btn" onclick="alterarAtributo('dexterity',1)">+</button>
+                </div>
+
+                <div class="attribute">
+                    <span class="attribute-name">VIGOR</span>
+                    <button class="attr-btn" onclick="alterarAtributo('vigor',-1)">−</button>
+                    <span class="attribute-value" id="vigorValue">0</span>
+                    <button class="attr-btn" onclick="alterarAtributo('vigor',1)">+</button>
+                </div>
+
+                <div class="attribute">
+                    <span class="attribute-name">INTELIGÊNCIA</span>
+                    <button class="attr-btn" onclick="alterarAtributo('intelligence',-1)">−</button>
+                    <span class="attribute-value" id="intelligenceValue">0</span>
+                    <button class="attr-btn" onclick="alterarAtributo('intelligence',1)">+</button>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <div class="section-title">
+                FRAQUEZAS
+            </div>
+
+            <div class="list-editor" id="weaknessesList"></div>
+
+            <button class="add-item" onclick="adicionarItem('weaknesses')">
+                + Adicionar fraqueza
+            </button>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <div class="section-title">
+                HABILIDADES
+            </div>
+
+            <div class="list-editor" id="abilitiesList"></div>
+
+            <button class="add-item" onclick="adicionarItem('abilities')">
+                + Adicionar habilidade
+            </button>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <div class="section-title">
+                ATAQUES
+            </div>
+
+            <div class="list-editor" id="attacksList"></div>
+
+            <button class="add-item" onclick="adicionarItem('attacks')">
+                + Adicionar ataque
+            </button>
+
+        </div>
+
+
+        <div class="form-section">
+
+            <div class="section-title">
+                OBSERVAÇÕES DO MESTRE
+            </div>
+
+            <div class="field">
+                <textarea
+                    id="notes"
+                    placeholder="Informações secretas sobre a criatura..."
+                ></textarea>
+            </div>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn delete-btn"
+                id="deleteButton"
+                onclick="excluirAtual()"
+                style="display:none;"
+            >
+                EXCLUIR
+            </button>
+
+            <button class="btn" onclick="fecharEditor()">
+                CANCELAR
+            </button>
+
+            <button class="btn btn-primary" onclick="salvarMonstro()">
+                SALVAR ENTIDADE
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     MODAL FICHA
+========================= -->
+
+<div class="modal" id="sheetModal">
+
+    <div class="modal-box">
+
+        <div class="modal-header">
+
+            <h2>REGISTRO DA ENTIDADE</h2>
+
+            <button class="close" onclick="fecharFicha()">
+                ×
+            </button>
+
+        </div>
+
+        <div id="sheetContent"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/* ==========================================
+   DADOS
+========================================== */
+
+let monsters =
+    JSON.parse(localStorage.getItem("nexus_monsters")) || [];
+
+let filtroAtual = "todos";
+let editandoId = null;
+
+let atributos = {
+    strength: 0,
+    dexterity: 0,
+    vigor: 0,
+    intelligence: 0
+};
+
+let listas = {
+    weaknesses: [],
+    abilities: [],
+    attacks: []
+};
+
+const TOTAL_POINTS = 30;
+
+
+/* ==========================================
+   ELEMENTOS
+========================================== */
+
+const grid =
+    document.getElementById("monsterGrid");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+
+/* ==========================================
+   SALVAR LOCALMENTE
+========================================== */
+
+function salvarLocal() {
+
+    localStorage.setItem(
+        "nexus_monsters",
+        JSON.stringify(monsters)
+    );
+
+}
+
+
+/* ==========================================
+   RENDERIZAR MONSTROS
+========================================== */
+
+function renderizar() {
+
+    const pesquisa =
+        searchInput.value
+        .toLowerCase()
+        .trim();
+
+    const encontrados =
+        monsters.filter(monstro => {
+
+            const nome =
+                (monstro.name || "")
+                .toLowerCase()
+                .includes(pesquisa);
+
+            const filtro =
+                filtroAtual === "todos" ||
+                monstro.danger === filtroAtual;
+
+            return nome && filtro;
 
         });
 
+    grid.innerHTML = "";
 
-        noResults.style.display =
-            filtrados.length === 0
-                ? "block"
-                : "none";
+
+    if (!encontrados.length) {
+
+        grid.innerHTML = `
+            <div class="empty">
+                Nenhuma entidade encontrada.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    encontrados.forEach(monstro => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "monster-card";
+
+
+        const perigoTexto =
+            monstro.danger === "desconhecido"
+            ? "???"
+            : monstro.danger;
+
+
+        card.innerHTML = `
+
+            ${
+                monstro.image
+                ?
+                `<img
+                    class="monster-image"
+                    src="${escapeHTML(monstro.image)}"
+                    alt="${escapeHTML(monstro.name)}"
+                >`
+                :
+                `
+                <div
+                    class="monster-image"
+                    style="
+                        display:flex;
+                        align-items:center;
+                        justify-content:center;
+                        background:#120b17;
+                        color:#777;
+                    "
+                >
+                    SEM IMAGEM
+                </div>
+                `
+            }
+
+            <div class="monster-info">
+
+                <div class="monster-name">
+                    ${escapeHTML(monstro.name)}
+                </div>
+
+                <div class="monster-meta">
+                    LEVEL ${monstro.level || 0}
+                    • VIDA ${monstro.health || 0}
+                </div>
+
+                <span class="danger ${monstro.danger}">
+                    ${perigoTexto}
+                </span>
+
+            </div>
+
+        `;
+
+
+        card.onclick = () =>
+            abrirFicha(monstro.id);
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ==========================================
+   SEGURANÇA
+========================================== */
+
+function escapeHTML(text) {
+
+    return String(text ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+/* ==========================================
+   ABRIR EDITOR
+========================================== */
+
+function abrirEditor(id = null) {
+
+    editandoId = id;
+
+    document
+        .getElementById("editorModal")
+        .classList.add("show");
+
+
+    if (id === null) {
+
+        document
+            .getElementById("editorTitle")
+            .textContent = "NOVA ENTIDADE";
+
+        document
+            .getElementById("deleteButton")
+            .style.display = "none";
+
+        limparFormulario();
+
+    }
+
+    else {
+
+        const monstro =
+            monsters.find(m => m.id === id);
+
+        if (!monstro)
+            return;
+
+        document
+            .getElementById("editorTitle")
+            .textContent = "EDITAR ENTIDADE";
+
+        document
+            .getElementById("deleteButton")
+            .style.display = "block";
+
+        preencherFormulario(monstro);
+
+    }
+
+}
+
+
+function fecharEditor() {
+
+    document
+        .getElementById("editorModal")
+        .classList.remove("show");
+
+}
+
+
+/* ==========================================
+   LIMPAR FORMULÁRIO
+========================================== */
+
+function limparFormulario() {
+
+    document.getElementById("image").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("origin").value = "";
+    document.getElementById("weight").value = "";
+    document.getElementById("height").value = "";
+    document.getElementById("level").value = 1;
+    document.getElementById("health").value = 100;
+    document.getElementById("danger").value = "baixo";
+    document.getElementById("notes").value = "";
+
+
+    atributos = {
+        strength: 0,
+        dexterity: 0,
+        vigor: 0,
+        intelligence: 0
+    };
+
+
+    listas = {
+        weaknesses: [],
+        abilities: [],
+        attacks: []
+    };
+
+
+    atualizarAtributos();
+    renderizarListas();
+    previewImage();
+
+}
+
+
+/* ==========================================
+   PREENCHER FORMULÁRIO
+========================================== */
+
+function preencherFormulario(m) {
+
+    document.getElementById("image").value =
+        m.image || "";
+
+    document.getElementById("name").value =
+        m.name || "";
+
+    document.getElementById("origin").value =
+        m.origin || "";
+
+    document.getElementById("weight").value =
+        m.weight || "";
+
+    document.getElementById("height").value =
+        m.height || "";
+
+    document.getElementById("level").value =
+        m.level || 1;
+
+    document.getElementById("health").value =
+        m.health || 100;
+
+    document.getElementById("danger").value =
+        m.danger || "baixo";
+
+    document.getElementById("notes").value =
+        m.notes || "";
+
+
+    atributos = {
+
+        strength:
+            m.attributes?.strength || 0,
+
+        dexterity:
+            m.attributes?.dexterity || 0,
+
+        vigor:
+            m.attributes?.vigor || 0,
+
+        intelligence:
+            m.attributes?.intelligence || 0
+
+    };
+
+
+    listas = {
+
+        weaknesses:
+            [...(m.weaknesses || [])],
+
+        abilities:
+            [...(m.abilities || [])],
+
+        attacks:
+            [...(m.attacks || [])]
+
+    };
+
+
+    atualizarAtributos();
+    renderizarListas();
+    previewImage();
+
+}
+
+
+/* ==========================================
+   ATRIBUTOS
+========================================== */
+
+function alterarAtributo(nome, quantidade) {
+
+    const atual =
+        atributos[nome];
+
+    const total =
+        Object.values(atributos)
+        .reduce((a, b) => a + b, 0);
+
+
+    if (quantidade > 0) {
+
+        if (total >= TOTAL_POINTS)
+            return;
+
+        atributos[nome]++;
+
+    }
+
+    else {
+
+        if (atual <= 0)
+            return;
+
+        atributos[nome]--;
 
     }
 
 
-    /*
-    ========================================
-        FILTROS
-    ========================================
-    */
+    atualizarAtributos();
 
-    document.querySelectorAll(".filter")
-        .forEach(botao => {
+}
 
-            botao.addEventListener("click", () => {
+
+function atualizarAtributos() {
+
+    document
+        .getElementById("strengthValue")
+        .textContent =
+        atributos.strength;
+
+    document
+        .getElementById("dexterityValue")
+        .textContent =
+        atributos.dexterity;
+
+    document
+        .getElementById("vigorValue")
+        .textContent =
+        atributos.vigor;
+
+    document
+        .getElementById("intelligenceValue")
+        .textContent =
+        atributos.intelligence;
+
+
+    const total =
+        Object.values(atributos)
+        .reduce((a, b) => a + b, 0);
+
+
+    document
+        .getElementById("pointsLeft")
+        .textContent =
+        TOTAL_POINTS - total;
+
+}
+
+
+/* ==========================================
+   LISTAS
+========================================== */
+
+function adicionarItem(tipo) {
+
+    listas[tipo].push("");
+
+    renderizarListas();
+
+}
+
+
+function removerItem(tipo, index) {
+
+    listas[tipo].splice(index, 1);
+
+    renderizarListas();
+
+}
+
+
+function atualizarItem(tipo, index, value) {
+
+    listas[tipo][index] = value;
+
+}
+
+
+function renderizarListas() {
+
+    renderLista(
+        "weaknessesList",
+        "weaknesses"
+    );
+
+    renderLista(
+        "abilitiesList",
+        "abilities"
+    );
+
+    renderLista(
+        "attacksList",
+        "attacks"
+    );
+
+}
+
+
+function renderLista(elementId, tipo) {
+
+    const container =
+        document.getElementById(elementId);
+
+    container.innerHTML = "";
+
+
+    listas[tipo].forEach((item, index) => {
+
+        const row =
+            document.createElement("div");
+
+        row.className = "list-row";
+
+
+        row.innerHTML = `
+
+            <input
+                type="text"
+                value="${escapeHTML(item)}"
+                placeholder="Digite aqui..."
+            >
+
+            <button
+                class="remove-item"
+                type="button"
+            >
+                ×
+            </button>
+
+        `;
+
+
+        const input =
+            row.querySelector("input");
+
+
+        input.oninput = () => {
+
+            atualizarItem(
+                tipo,
+                index,
+                input.value
+            );
+
+        };
+
+
+        row
+            .querySelector(".remove-item")
+            .onclick = () =>
+                removerItem(tipo, index);
+
+
+        container.appendChild(row);
+
+    });
+
+}
+
+
+/* ==========================================
+   PREVISUALIZAÇÃO DA IMAGEM
+========================================== */
+
+function previewImage() {
+
+    const url =
+        document
+            .getElementById("image")
+            .value
+            .trim();
+
+    const preview =
+        document.getElementById("imagePreview");
+
+
+    if (!url) {
+
+        preview.innerHTML =
+            "Sem imagem";
+
+        return;
+
+    }
+
+
+    preview.innerHTML = `
+
+        <img
+            src="${escapeHTML(url)}"
+            onerror="this.parentElement.innerHTML='Imagem inválida'"
+        >
+
+    `;
+
+}
+
+
+/* ==========================================
+   SALVAR MONSTRO
+========================================== */
+
+function salvarMonstro() {
+
+    const nome =
+        document
+            .getElementById("name")
+            .value
+            .trim();
+
+
+    if (!nome) {
+
+        alert(
+            "Digite o nome da criatura."
+        );
+
+        return;
+
+    }
+
+
+    const total =
+        Object.values(atributos)
+        .reduce((a, b) => a + b, 0);
+
+
+    if (total > TOTAL_POINTS) {
+
+        alert(
+            "Você distribuiu mais pontos do que o permitido."
+        );
+
+        return;
+
+    }
+
+
+    const dados = {
+
+        id:
+            editandoId ||
+            Date.now().toString(),
+
+        name:
+            nome,
+
+        image:
+            document
+                .getElementById("image")
+                .value
+                .trim(),
+
+        origin:
+            document
+                .getElementById("origin")
+                .value
+                .trim(),
+
+        weight:
+            document
+                .getElementById("weight")
+                .value,
+
+        height:
+            document
+                .getElementById("height")
+                .value,
+
+        level:
+            Number(
+                document
+                    .getElementById("level")
+                    .value
+            ) || 0,
+
+        health:
+            Number(
+                document
+                    .getElementById("health")
+                    .value
+            ) || 0,
+
+        danger:
+            document
+                .getElementById("danger")
+                .value,
+
+        attributes: {
+            ...atributos
+        },
+
+        weaknesses:
+            [...listas.weaknesses],
+
+        abilities:
+            [...listas.abilities],
+
+        attacks:
+            [...listas.attacks],
+
+        notes:
+            document
+                .getElementById("notes")
+                .value
+
+    };
+
+
+    if (editandoId) {
+
+        const index =
+            monsters.findIndex(
+                m => m.id === editandoId
+            );
+
+
+        if (index !== -1)
+            monsters[index] = dados;
+
+    }
+
+    else {
+
+        monsters.push(dados);
+
+    }
+
+
+    salvarLocal();
+
+    renderizar();
+
+    fecharEditor();
+
+}
+
+
+/* ==========================================
+   EXCLUIR
+========================================== */
+
+function excluirAtual() {
+
+    if (!editandoId)
+        return;
+
+
+    const monstro =
+        monsters.find(
+            m => m.id === editandoId
+        );
+
+
+    if (!monstro)
+        return;
+
+
+    const confirmar =
+        confirm(
+            `Excluir "${monstro.name}"?`
+        );
+
+
+    if (!confirmar)
+        return;
+
+
+    monsters =
+        monsters.filter(
+            m => m.id !== editandoId
+        );
+
+
+    salvarLocal();
+
+    renderizar();
+
+    fecharEditor();
+
+}
+
+
+/* ==========================================
+   ABRIR FICHA
+========================================== */
+
+function abrirFicha(id) {
+
+    const m =
+        monsters.find(
+            monster => monster.id === id
+        );
+
+
+    if (!m)
+        return;
+
+
+    const perigoTexto =
+        m.danger === "desconhecido"
+        ? "???"
+        : m.danger;
+
+
+    const attrs = {
+
+        "Força":
+            m.attributes?.strength || 0,
+
+        "Destreza":
+            m.attributes?.dexterity || 0,
+
+        "Vigor":
+            m.attributes?.vigor || 0,
+
+        "Inteligência":
+            m.attributes?.intelligence || 0
+
+    };
+
+
+    document
+        .getElementById("sheetContent")
+        .innerHTML = `
+
+        ${
+            m.image
+            ?
+            `
+            <img
+                class="sheet-image"
+                src="${escapeHTML(m.image)}"
+                alt="${escapeHTML(m.name)}"
+            >
+            `
+            : ""
+        }
+
+
+        <div class="sheet-title">
+            ${escapeHTML(m.name)}
+        </div>
+
+
+        <div class="sheet-danger">
+
+            <span class="danger ${m.danger}">
+                ${perigoTexto}
+            </span>
+
+        </div>
+
+
+        <div class="info-grid">
+
+            <div class="info-box">
+
+                <small>ORIGEM</small>
+
+                <strong>
+                    ${escapeHTML(
+                        m.origin ||
+                        "Não informado"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <small>LEVEL</small>
+
+                <strong>
+                    ${m.level || 0}
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <small>VIDA</small>
+
+                <strong>
+                    ${m.health || 0}
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <small>PESO</small>
+
+                <strong>
+                    ${m.weight || "—"} kg
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <small>ALTURA</small>
+
+                <strong>
+                    ${m.height || "—"} m
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="sheet-section">
+
+            <h3>ATRIBUTOS</h3>
+
+            <div class="attribute-bars">
+
+                ${
+                    Object.entries(attrs)
+                    .map(([nome, valor]) => `
+
+                        <div class="bar-row">
+
+                            <span>
+                                ${nome}
+                            </span>
+
+                            <div class="bar">
+
+                                <div
+                                    class="bar-fill"
+                                    style="
+                                        width:${Math.min(
+                                            valor / TOTAL_POINTS * 100,
+                                            100
+                                        )}%;
+                                    "
+                                ></div>
+
+                            </div>
+
+                            <strong>
+                                ${valor}
+                            </strong>
+
+                        </div>
+
+                    `)
+                    .join("")
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="sheet-section">
+
+            <h3>FRAQUEZAS</h3>
+
+            <div class="list-view">
+
+                ${
+                    criarListaFicha(
+                        m.weaknesses,
+                        "Nenhuma fraqueza registrada."
+                    )
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="sheet-section">
+
+            <h3>HABILIDADES</h3>
+
+            <div class="list-view">
+
+                ${
+                    criarListaFicha(
+                        m.abilities,
+                        "Nenhuma habilidade registrada."
+                    )
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="sheet-section">
+
+            <h3>ATAQUES</h3>
+
+            <div class="list-view">
+
+                ${
+                    criarListaFicha(
+                        m.attacks,
+                        "Nenhum ataque registrado."
+                    )
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="sheet-section">
+
+            <h3>OBSERVAÇÕES DO MESTRE</h3>
+
+            <p>
+                ${escapeHTML(
+                    m.notes ||
+                    "Nenhuma observação registrada."
+                )}
+            </p>
+
+        </div>
+
+
+        <div class="modal-actions">
+
+            <button
+                class="btn"
+                onclick="fecharFicha()"
+            >
+                FECHAR
+            </button>
+
+
+            <button
+                class="btn btn-primary"
+                onclick="
+                    fecharFicha();
+                    abrirEditor('${m.id}')
+                "
+            >
+                EDITAR ENTIDADE
+            </button>
+
+        </div>
+
+    `;
+
+
+    document
+        .getElementById("sheetModal")
+        .classList.add("show");
+
+}
+
+
+function criarListaFicha(lista, vazio) {
+
+    if (
+        !lista ||
+        !lista.length
+    ) {
+
+        return `<div>${vazio}</div>`;
+
+    }
+
+
+    const itens =
+        lista.filter(
+            item =>
+                String(item).trim() !== ""
+        );
+
+
+    if (!itens.length)
+        return `<div>${vazio}</div>`;
+
+
+    return itens
+        .map(
+            item =>
+                `<div>
+                    ${escapeHTML(item)}
+                </div>`
+        )
+        .join("");
+
+}
+
+
+function fecharFicha() {
+
+    document
+        .getElementById("sheetModal")
+        .classList.remove("show");
+
+}
+
+
+/* ==========================================
+   FILTROS
+========================================== */
+
+document
+    .querySelectorAll(".filter")
+    .forEach(button => {
+
+        button.addEventListener(
+            "click",
+            () => {
 
                 document
                     .querySelectorAll(".filter")
-                    .forEach(b => b.classList.remove("active"));
+                    .forEach(
+                        b =>
+                            b.classList
+                                .remove("active")
+                    );
 
 
-                botao.classList.add("active");
+                button
+                    .classLassList
+                    .add("active");
 
 
                 filtroAtual =
-                    botao.dataset.filter;
+                    button.dataset.filter;
 
 
-                mostrarMonstros();
+                renderizar();
 
-            });
+            }
+        );
 
-        });
+    });
 
 
-    /*
-    ========================================
-        PESQUISA
-    ========================================
-    */
+/* ==========================================
+   PESQUISA
+========================================== */
 
-    searchInput.addEventListener(
-        "input",
-        mostrarMonstros
+searchInput.addEventListener(
+    "input",
+    renderizar
+);
+
+
+/* ==========================================
+   FECHAR MODAIS CLICANDO FORA
+========================================== */
+
+document
+    .getElementById("editorModal")
+    .addEventListener(
+        "click",
+        e => {
+
+            if (
+                e.target.id ===
+                "editorModal"
+            ) {
+
+                fecharEditor();
+
+            }
+
+        }
     );
 
 
-    /*
-    ========================================
-        INICIALIZAÇÃO
-    ========================================
-    */
+document
+    .getElementById("sheetModal")
+    .addEventListener(
+        "click",
+        e => {
 
-    mostrarMonstros();
+            if (
+                e.target.id ===
+                "sheetModal"
+            ) {
+
+                fecharFicha();
+
+            }
+
+        }
+    );
+
+
+/* ==========================================
+   TECLA ESC
+========================================== */
+
+document.addEventListener(
+    "keydown",
+    e => {
+
+        if (e.key === "Escape") {
+
+            fecharEditor();
+            fecharFicha();
+
+        }
+
+    }
+);
+
+
+/* ==========================================
+   INICIALIZAÇÃO
+========================================== */
+
+renderizar();
 
 </script>
 
 </body>
-  </html>
+</html>
