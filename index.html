@@ -1,44 +1,33 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>NEXUS — BESTIÁRIO</title>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
-
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&display=swap');
-
-:root{
-    --roxo:#9b4dff;
-    --roxo2:#6d20c9;
-    --fundo:#08040d;
-
-    --painel:rgba(15,8,24,.94);
-    --painel2:rgba(25,12,40,.96);
-
-    --texto:#eee8f7;
-    --muted:#a99eb5;
-
-    --borda:rgba(155,77,255,.35);
-
-    --baixo:#48d17b;
-    --moderado:#ffd447;
-    --alto:#ff8b35;
-    --extremo:#ff3e5e;
-    --desconhecido:#a56cff;
-}
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
+}
+
+:root{
+    --bg:#09050f;
+    --bg2:#12091c;
+    --panel:#160d22;
+    --panel2:#1d112b;
+    --border:#392052;
+    --purple:#a96cff;
+    --purple2:#6d32c9;
+    --text:#f4edff;
+    --muted:#9d91ad;
+    --green:#38d47b;
+    --yellow:#e8c54f;
+    --orange:#e8873d;
+    --red:#e94b62;
+    --darkred:#851d31;
 }
 
 html{
@@ -47,681 +36,323 @@ html{
 
 body{
     min-height:100vh;
-
     background:
-        linear-gradient(
-            rgba(8,4,13,.72),
-            rgba(8,4,13,.92)
-        ),
-        url("https://cdn.discordapp.com/attachments/1540826842020192348/1544493761202094203/844f7e76c6e1eeb8266be6b17362b385.gif?ex=6a995e27&is=6a980ca7&hm=dc167678a10c5de168b4e6e7e941457fc03cfa6d71aa4553068d4d608264452d&")
-        center / cover fixed;
-
-    color:var(--texto);
-
-    font-family:Georgia,serif;
+        radial-gradient(circle at 50% -10%, #32124e 0%, transparent 38%),
+        radial-gradient(circle at 100% 100%, #170c27 0%, transparent 35%),
+        var(--bg);
+    color:var(--text);
+    font-family:Georgia, "Times New Roman", serif;
 }
 
-/* =====================================================
-   BOTÕES
-===================================================== */
+button,
+input,
+textarea,
+select{
+    font:inherit;
+}
 
 button{
-    border:0;
     cursor:pointer;
-    font-family:Georgia,serif;
-}
-
-.btn{
-    padding:12px 18px;
-
-    border-radius:9px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--roxo2),
-            var(--roxo)
-        );
-
-    color:white;
-
-    box-shadow:
-        0 0 15px rgba(155,77,255,.2);
-
-    transition:.2s;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 0 25px rgba(155,77,255,.45);
-}
-
-.btn.secondary{
-    background:rgba(255,255,255,.07);
-}
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-#authScreen{
-    position:fixed;
-    inset:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:
-        linear-gradient(
-            rgba(8,4,13,.68),
-            rgba(8,4,13,.94)
-        ),
-        url("https://cdn.discordapp.com/attachments/1540826842020192348/1544493761202094203/844f7e76c6e1eeb8266be6b17362b385.gif?ex=6a995e27&is=6a980ca7&hm=dc167678a10c5de168b4e6e7e941457fc03cfa6d71aa4553068d4d608264452d&")
-        center / cover;
-
-    z-index:9999;
-}
-
-.auth-box{
-    width:min(430px,92%);
-
-    padding:40px 35px;
-
-    background:rgba(10,5,17,.93);
-
-    border:1px solid var(--borda);
-
-    border-radius:18px;
-
-    box-shadow:
-        0 0 30px rgba(155,77,255,.18),
-        inset 0 0 30px rgba(155,77,255,.03);
-
-    backdrop-filter:blur(10px);
-
-    text-align:center;
-}
-
-.auth-logo{
-    font-family:'Cinzel',serif;
-
-    font-size:42px;
-
-    font-weight:600;
-
-    letter-spacing:8px;
-
-    color:#fff;
-
-    text-shadow:
-        0 0 10px var(--roxo),
-        0 0 25px var(--roxo),
-        0 0 45px rgba(155,77,255,.4);
-
-    margin-bottom:8px;
-}
-
-.auth-sub{
-    color:var(--muted);
-
-    margin-bottom:30px;
-
-    font-size:14px;
-}
-
-.auth-box input{
-    width:100%;
-
-    padding:14px 15px;
-
-    margin-bottom:12px;
-
-    border-radius:10px;
-
-    border:1px solid rgba(155,77,255,.3);
-
-    background:rgba(255,255,255,.04);
-
-    color:white;
-
-    outline:none;
-
-    font-family:Georgia,serif;
-}
-
-.auth-box input:focus{
-    border-color:var(--roxo);
-
-    box-shadow:
-        0 0 12px rgba(155,77,255,.25);
-}
-
-.auth-buttons{
-    display:flex;
-    gap:10px;
-    margin-top:8px;
-}
-
-.auth-buttons button{
-    flex:1;
-}
-
-.auth-message{
-    min-height:20px;
-
-    margin-top:15px;
-
-    color:#ff7389;
-
-    font-size:13px;
-}
-
-/* =====================================================
-   APP
-===================================================== */
-
-#app{
-    display:none;
-    min-height:100vh;
 }
 
 header{
     position:sticky;
     top:0;
-    z-index:100;
+    z-index:50;
 
     display:flex;
     align-items:center;
     justify-content:space-between;
 
-    padding:14px 28px;
+    min-height:76px;
+    padding:15px 5%;
 
-    background:rgba(7,3,11,.9);
+    background:rgba(9,5,15,.88);
+    backdrop-filter:blur(16px);
 
-    border-bottom:1px solid var(--borda);
-
-    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
 }
 
 .logo{
-    font-family:'Cinzel',serif;
-
-    margin-top:4px;
-
+    color:white;
     font-size:30px;
-
-    font-weight:600;
-
-    letter-spacing:7px;
-
-    color:#fff;
+    font-weight:bold;
+    letter-spacing:8px;
 
     text-shadow:
-        0 0 15px rgba(155,77,255,.8),
-        0 0 30px rgba(155,77,255,.35);
+        0 0 10px rgba(169,108,255,.8),
+        0 0 30px rgba(169,108,255,.35);
 }
 
-.header-right{
+.header-actions{
     display:flex;
-    align-items:center;
     gap:10px;
+    align-items:center;
 }
 
-.profile-button{
-    display:flex;
-    align-items:center;
-    gap:9px;
-
-    padding:6px 10px;
-
+.header-btn{
+    padding:10px 15px;
+    border:1px solid var(--border);
     border-radius:10px;
 
-    background:rgba(255,255,255,.05);
-
-    color:white;
-
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.profile-button:hover{
-    border-color:rgba(155,77,255,.5);
-    background:rgba(155,77,255,.1);
-}
-
-.header-avatar{
-    width:32px;
-    height:32px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:1px solid rgba(155,77,255,.5);
-
-    background:#160c20;
-}
-
-.header-avatar-placeholder{
-    width:32px;
-    height:32px;
-
-    border-radius:50%;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(155,77,255,.15);
-
-    border:1px solid rgba(155,77,255,.4);
-
-    font-size:15px;
-}
-
-.user-name-header{
-    max-width:150px;
-
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-
-    font-size:13px;
-}
-
-.user-email{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.logout{
-    padding:8px 12px;
-
-    border-radius:8px;
-
-    background:rgba(255,255,255,.06);
-
-    color:#ddd;
-
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.logout:hover{
-    background:rgba(255,255,255,.12);
-}
-
-/* =====================================================
-   CONTEÚDO
-===================================================== */
-
-.container{
-    width:min(1400px,94%);
-
-    margin:30px auto 60px;
-}
-
-.topbar{
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:20px;
-
-    margin-bottom:25px;
-}
-
-.title-area h1{
-    font-family:'Cinzel',serif;
-
-    font-size:25px;
-
-    letter-spacing:2px;
-
-    color:#fff;
-}
-
-.title-area p{
-    color:var(--muted);
-
-    font-size:14px;
-
-    margin-top:5px;
-}
-
-.add-btn{
-    padding:13px 20px;
-
-    border-radius:10px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--roxo2),
-            var(--roxo)
-        );
-
-    color:white;
-
-    box-shadow:
-        0 0 20px rgba(155,77,255,.25);
+    color:var(--text);
+    background:#140b1d;
 
     transition:.2s;
 }
 
-.add-btn:hover{
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 0 30px rgba(155,77,255,.45);
+.header-btn:hover{
+    border-color:var(--purple);
+    box-shadow:0 0 15px rgba(169,108,255,.2);
 }
 
-/* =====================================================
-   BUSCA
-===================================================== */
+.container{
+    width:min(1200px,92%);
+    margin:0 auto;
+    padding:50px 0 80px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.title-area h1{
+    font-size:clamp(35px,6vw,58px);
+    letter-spacing:4px;
+}
+
+.title-area p{
+    margin-top:8px;
+    color:var(--muted);
+}
+
+.primary-btn{
+    border:1px solid #9b5df4;
+    border-radius:12px;
+    padding:13px 19px;
+
+    color:white;
+    background:linear-gradient(
+        135deg,
+        #7838c6,
+        #4c2182
+    );
+
+    box-shadow:0 0 22px rgba(135,66,211,.25);
+}
+
+.primary-btn:hover{
+    transform:translateY(-1px);
+    box-shadow:0 0 30px rgba(169,108,255,.35);
+}
 
 .search-box{
-    width:100%;
-    margin-bottom:20px;
+    margin-bottom:18px;
 }
 
 .search-box input{
     width:100%;
-
-    padding:13px 15px;
-
-    border-radius:10px;
-
-    border:1px solid rgba(155,77,255,.25);
-
-    background:rgba(255,255,255,.04);
+    padding:15px 18px;
 
     color:white;
+    background:rgba(20,11,30,.85);
+
+    border:1px solid var(--border);
+    border-radius:12px;
 
     outline:none;
-
-    font-family:Georgia,serif;
 }
 
 .search-box input:focus{
-    border-color:var(--roxo);
-
-    box-shadow:
-        0 0 12px rgba(155,77,255,.18);
+    border-color:var(--purple);
+    box-shadow:0 0 20px rgba(169,108,255,.12);
 }
-
-/* =====================================================
-   FILTROS
-===================================================== */
 
 .filters{
     display:flex;
     flex-wrap:wrap;
-
-    gap:8px;
-
-    margin-bottom:25px;
+    gap:9px;
+    margin-bottom:30px;
 }
 
 .filter{
-    padding:8px 13px;
+    padding:9px 14px;
 
-    border-radius:20px;
+    color:var(--muted);
+    background:#12091a;
 
-    background:rgba(255,255,255,.05);
-
-    color:#cfc5d8;
-
-    border:1px solid rgba(255,255,255,.07);
-
-    font-size:13px;
+    border:1px solid var(--border);
+    border-radius:999px;
 
     transition:.2s;
 }
 
 .filter:hover,
 .filter.active{
-    background:rgba(155,77,255,.18);
-
     color:white;
-
-    border-color:rgba(155,77,255,.5);
+    border-color:var(--purple);
+    background:#28123c;
 }
-
-/* =====================================================
-   GRID
-===================================================== */
 
 .grid{
     display:grid;
-
-    grid-template-columns:
-        repeat(auto-fill,minmax(270px,1fr));
-
+    grid-template-columns:repeat(auto-fill,minmax(245px,1fr));
     gap:20px;
 }
 
 .card{
-    position:relative;
-
     overflow:hidden;
 
-    background:
-        linear-gradient(
-            145deg,
-            rgba(25,12,40,.95),
-            rgba(9,5,14,.96)
-        );
+    background:linear-gradient(
+        145deg,
+        rgba(29,17,43,.97),
+        rgba(15,8,23,.97)
+    );
 
-    border:1px solid rgba(155,77,255,.22);
-
+    border:1px solid var(--border);
     border-radius:16px;
 
-    min-height:360px;
-
-    cursor:pointer;
-
     transition:.25s;
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,.25);
 }
 
 .card:hover{
     transform:translateY(-5px);
-
-    border-color:
-        rgba(155,77,255,.65);
-
-    box-shadow:
-        0 15px 45px rgba(155,77,255,.18);
+    border-color:#71429a;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
 }
 
 .card-image{
-    height:170px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(155,77,255,.18),
-            transparent 70%
-        );
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
+    height:260px;
+    background:#0b0710;
     overflow:hidden;
 }
 
 .card-image img{
     width:100%;
     height:100%;
-
     object-fit:cover;
+    display:block;
 }
 
 .no-image{
-    font-family:'Cinzel',serif;
+    width:100%;
+    height:100%;
 
-    color:#8c7a9b;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-    font-size:12px;
-
+    color:#64566e;
     letter-spacing:2px;
 }
 
 .card-content{
-    padding:16px;
+    padding:17px;
 }
 
 .card-name{
-    font-family:'Cinzel',serif;
-
-    font-size:19px;
-
-    font-weight:700;
-
-    margin-bottom:7px;
-
-    color:white;
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:8px;
 }
 
 .card-info{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+
     color:var(--muted);
-
-    font-size:13px;
-
-    line-height:1.6;
+    font-size:14px;
 }
 
 .card-footer{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
+    gap:10px;
 
-    gap:8px;
-
-    margin-top:13px;
+    margin-top:16px;
 }
 
 .badge{
-    padding:5px 9px;
-
-    border-radius:6px;
+    padding:6px 10px;
+    border-radius:999px;
 
     font-size:11px;
-
     font-weight:bold;
-
-    text-transform:uppercase;
+    letter-spacing:1px;
 }
 
 .badge.baixo{
-    background:rgba(72,209,123,.12);
-    color:var(--baixo);
+    color:#65e995;
+    background:rgba(56,212,123,.12);
 }
 
 .badge.moderado{
-    background:rgba(255,212,71,.12);
-    color:var(--moderado);
+    color:#e8d65d;
+    background:rgba(232,197,79,.12);
 }
 
 .badge.alto{
-    background:rgba(255,139,53,.12);
-    color:var(--alto);
+    color:#f09a55;
+    background:rgba(232,135,61,.12);
 }
 
 .badge.extremo{
-    background:rgba(255,62,94,.12);
-    color:var(--extremo);
+    color:#ff647b;
+    background:rgba(233,75,98,.12);
 }
 
 .badge.desconhecido{
-    background:rgba(165,108,255,.12);
-    color:var(--desconhecido);
+    color:#c4a8e7;
+    background:rgba(169,108,255,.12);
 }
 
-.public-label{
-    font-size:11px;
-    color:#8f83a0;
+.level-label{
+    color:#c9b6dc;
+    font-size:13px;
 }
 
-.card-author{
-    display:flex;
+.empty{
+    grid-column:1/-1;
 
-    align-items:center;
+    padding:60px 20px;
+    text-align:center;
 
-    gap:8px;
+    border:1px dashed var(--border);
+    border-radius:16px;
 
-    margin-top:13px;
-
-    padding-top:10px;
-
-    border-top:1px solid rgba(255,255,255,.06);
-
-    color:#aaa0b3;
-
-    font-size:11px;
+    color:var(--muted);
 }
 
-.card-author img{
-    width:25px;
-    height:25px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    border:1px solid rgba(155,77,255,.35);
+.empty strong{
+    display:block;
+    color:white;
+    font-size:20px;
+    margin-bottom:8px;
 }
 
-.card-author-placeholder{
-    width:25px;
-    height:25px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(155,77,255,.13);
-
-    border:1px solid rgba(155,77,255,.3);
-
-    font-size:11px;
-}
-
-/* =====================================================
-   MODAIS
-===================================================== */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
     position:fixed;
-
     inset:0;
+    z-index:100;
 
     display:none;
-
     align-items:center;
-
     justify-content:center;
 
     padding:20px;
 
     background:rgba(0,0,0,.78);
-
     backdrop-filter:blur(8px);
-
-    z-index:5000;
 }
 
 .modal.show{
@@ -729,83 +360,81 @@ header{
 }
 
 .modal-box{
-    width:min(900px,100%);
-
+    width:min(850px,100%);
     max-height:92vh;
-
     overflow:auto;
+
+    padding:25px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(24,11,38,.98),
-            rgba(8,4,13,.98)
+            #1a0d27,
+            #0e0715
         );
 
-    border:1px solid var(--borda);
-
+    border:1px solid var(--border);
     border-radius:18px;
 
     box-shadow:
-        0 0 50px rgba(155,77,255,.2);
-
-    padding:25px;
+        0 30px 100px rgba(0,0,0,.65),
+        0 0 40px rgba(117,51,178,.12);
 }
 
 .modal-header{
     display:flex;
-
+    align-items:center;
     justify-content:space-between;
 
-    align-items:center;
-
-    margin-bottom:20px;
+    margin-bottom:25px;
 }
 
 .modal-header h2{
-    font-family:'Cinzel',serif;
-
-    font-size:23px;
-
-    letter-spacing:1px;
+    font-size:26px;
+    letter-spacing:2px;
 }
 
 .close{
-    width:35px;
-    height:35px;
+    width:40px;
+    height:40px;
 
-    border-radius:8px;
-
-    background:rgba(255,255,255,.06);
+    border:1px solid var(--border);
+    border-radius:10px;
 
     color:white;
+    background:#160b20;
 
-    font-size:18px;
+    font-size:27px;
 }
 
 .close:hover{
-    background:rgba(255,255,255,.12);
+    border-color:var(--purple);
 }
-
-/* =====================================================
-   FORMULÁRIO
-===================================================== */
 
 .form-grid{
     display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
 
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
+.section-title{
+    grid-column:1/-1;
 
-    gap:13px;
+    padding:13px 0 8px;
+    margin-top:10px;
+
+    color:#c79bff;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:3px;
+
+    border-bottom:1px solid var(--border);
 }
 
 .field{
     display:flex;
-
     flex-direction:column;
-
-    gap:6px;
+    gap:7px;
 }
 
 .field.full{
@@ -813,8 +442,8 @@ header{
 }
 
 .field label{
-    font-size:12px;
-    color:#b9aec3;
+    color:#cbbbd6;
+    font-size:14px;
 }
 
 .field input,
@@ -822,507 +451,359 @@ header{
 .field select{
     width:100%;
 
-    padding:11px 12px;
+    padding:12px 13px;
 
+    color:white;
+    background:#0d0713;
+
+    border:1px solid var(--border);
     border-radius:9px;
 
-    border:1px solid rgba(155,77,255,.25);
-
-    background:rgba(255,255,255,.04);
-
-    color:white;
-
     outline:none;
-
-    font-family:Georgia,serif;
-}
-
-.field textarea{
-    min-height:90px;
-    resize:vertical;
-}
-
-.field select option{
-    background:#150b20;
-    color:white;
 }
 
 .field input:focus,
 .field textarea:focus,
 .field select:focus{
-    border-color:var(--roxo);
-
-    box-shadow:
-        0 0 12px rgba(155,77,255,.18);
+    border-color:var(--purple);
+    box-shadow:0 0 15px rgba(169,108,255,.1);
 }
 
-.field input[type="file"]{
-    padding:9px;
-    cursor:pointer;
-}
-
-.field input[type="file"]::file-selector-button{
-    padding:7px 10px;
-
-    margin-right:8px;
-
-    border:0;
-
-    border-radius:6px;
-
-    background:var(--roxo2);
-
-    color:white;
-
-    cursor:pointer;
-
-    font-family:Georgia,serif;
+.field textarea{
+    min-height:130px;
+    resize:vertical;
 }
 
 .image-preview{
     width:100%;
+    min-height:150px;
 
-    height:180px;
-
-    margin-top:5px;
-
-    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
     overflow:hidden;
 
-    border:1px solid rgba(155,77,255,.2);
-
-    background:rgba(255,255,255,.025);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-}
-
-.image-preview.show{
-    display:flex;
+    background:#0a060e;
+    border:1px dashed var(--border);
+    border-radius:12px;
 }
 
 .image-preview img{
+    display:block;
     width:100%;
-    height:100%;
-    object-fit:cover;
+    max-height:350px;
+    object-fit:contain;
 }
 
 .remove-image-btn{
     display:none;
 
-    margin-top:5px;
+    padding:9px;
 
-    padding:8px;
+    color:#ff778a;
+    background:#24101a;
 
+    border:1px solid #632432;
     border-radius:8px;
-
-    background:rgba(255,62,94,.1);
-
-    color:#ff7188;
-
-    border:1px solid rgba(255,62,94,.2);
-}
-
-.remove-image-btn.show{
-    display:block;
-}
-
-.section-title{
-    grid-column:1/-1;
-
-    margin-top:10px;
-
-    padding-bottom:7px;
-
-    border-bottom:1px solid rgba(155,77,255,.18);
-
-    color:#c8a9e8;
-
-    font-family:'Cinzel',serif;
-
-    font-size:14px;
-
-    letter-spacing:1px;
-}
-
-.checkbox-row{
-    display:flex;
-
-    align-items:center;
-
-    gap:9px;
-
-    padding:12px;
-
-    border-radius:9px;
-
-    background:rgba(255,255,255,.035);
-}
-
-.checkbox-row input{
-    accent-color:var(--roxo);
 }
 
 .modal-actions{
     display:flex;
-
     justify-content:flex-end;
-
     gap:10px;
 
-    margin-top:22px;
+    margin-top:25px;
+}
+
+.secondary{
+    color:#d7c9df;
+    background:#160b20;
+    border:1px solid var(--border);
 }
 
 .delete-btn{
     margin-right:auto;
 
-    padding:11px 15px;
+    padding:11px 16px;
 
+    color:#ff6c80;
+    background:#260e17;
+
+    border:1px solid #652431;
     border-radius:9px;
-
-    background:rgba(255,62,94,.12);
-
-    color:#ff6e85;
-
-    border:1px solid rgba(255,62,94,.2);
-
-    cursor:pointer;
 }
 
-.delete-btn:hover{
-    background:rgba(255,62,94,.2);
-}
-
-/* =====================================================
-   PERFIL
-===================================================== */
-
-.profile-box{
-    width:min(520px,100%);
-}
-
-.profile-avatar-area{
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    margin-bottom:20px;
-}
-
-.profile-avatar-preview{
-    width:120px;
-    height:120px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    background:rgba(155,77,255,.1);
-
-    border:2px solid rgba(155,77,255,.5);
-
-    box-shadow:
-        0 0 25px rgba(155,77,255,.2);
-}
-
-.profile-avatar-placeholder{
-    width:120px;
-    height:120px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(155,77,255,.1);
-
-    border:2px solid rgba(155,77,255,.5);
-
-    font-size:35px;
-}
-
-/* =====================================================
+/* =========================
    FICHA
-===================================================== */
+========================= */
 
 .sheet{
-    display:grid;
-
-    grid-template-columns:
-        280px 1fr;
-
+    display:flex;
+    flex-direction:column;
     gap:25px;
 }
 
-.sheet-image{
-    min-height:330px;
-
-    border-radius:14px;
+.sheet-main-image{
+    width:100%;
+    height:min(500px,55vh);
 
     overflow:hidden;
 
-    border:1px solid rgba(155,77,255,.2);
+    border-radius:15px;
+    border:1px solid var(--border);
 
-    background:rgba(255,255,255,.03);
+    background:#09050d;
 }
 
-.sheet-image img{
+.sheet-main-image img{
     width:100%;
     height:100%;
-
-    object-fit:cover;
+    object-fit:contain;
 }
 
 .sheet-placeholder{
+    width:100%;
     height:100%;
 
-    min-height:330px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
 
-    color:#776980;
-
-    font-family:'Cinzel',serif;
-
-    font-size:12px;
-
-    letter-spacing:2px;
+    color:#65556f;
 }
 
-.sheet-name{
-    font-family:'Cinzel',serif;
-
-    font-size:31px;
-
-    font-weight:700;
-
-    margin-bottom:8px;
-
-    color:white;
+.sheet-title{
+    font-size:42px;
+    font-weight:bold;
+    line-height:1.1;
 }
 
 .sheet-origin{
-    color:#a99eb5;
-    margin-bottom:18px;
+    margin-top:6px;
+    color:#aa9ab7;
+    font-size:16px;
 }
 
-.stats{
+.sheet-stats{
     display:grid;
-
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
-
+    grid-template-columns:repeat(3,1fr);
     gap:10px;
-
-    margin-bottom:20px;
 }
 
 .stat{
-    padding:12px;
+    padding:14px;
 
+    background:#100817;
+    border:1px solid var(--border);
     border-radius:10px;
-
-    background:rgba(255,255,255,.035);
-
-    border:1px solid rgba(255,255,255,.05);
 }
 
-.stat span{
+.stat-label{
     display:block;
+    margin-bottom:5px;
 
-    color:#91849b;
-
+    color:#887793;
     font-size:11px;
-
-    margin-bottom:4px;
+    text-transform:uppercase;
+    letter-spacing:1px;
 }
 
-.stat strong{
+.stat-value{
     color:white;
+    font-size:16px;
 }
 
-.sheet-section{
-    margin-top:18px;
-}
+/* =========================
+   VIDA / RESISTÊNCIA
+========================= */
 
-.sheet-section h3{
-    font-family:'Cinzel',serif;
+.resource-box{
+    position:relative;
 
-    color:#c8a9e8;
-
-    font-size:15px;
-
-    margin-bottom:8px;
-}
-
-.sheet-section p,
-.sheet-section li{
-    color:#c3bacb;
-
-    font-size:14px;
-
-    line-height:1.6;
-}
-
-.sheet-section ul{
-    padding-left:20px;
-}
-
-.author-box{
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin-top:20px;
-
-    padding:12px;
-
-    border-radius:10px;
-
-    background:rgba(155,77,255,.06);
-
-    border:1px solid rgba(155,77,255,.14);
-}
-
-.author-box img{
-    width:42px;
-    height:42px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-}
-
-.author-placeholder{
-    width:42px;
-    height:42px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    background:rgba(155,77,255,.15);
-
-    border:1px solid rgba(155,77,255,.3);
-}
-
-/* =====================================================
-   BARRAS
-===================================================== */
-
-.bar{
-    height:9px;
-
-    background:rgba(255,255,255,.08);
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    margin-top:6px;
-}
-
-.bar-fill{
-    height:100%;
+    padding:19px;
 
     background:
         linear-gradient(
-            90deg,
-            #6d20c9,
-            #b66cff
+            145deg,
+            rgba(31,16,44,.95),
+            rgba(13,7,18,.95)
         );
 
-    transition:.3s;
+    border:1px solid var(--border);
+    border-radius:14px;
+
+    overflow:hidden;
 }
 
-/* =====================================================
-   MÚSICA
-===================================================== */
+.resource-header{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
 
-.music-btn{
-    position:fixed;
+    margin-bottom:12px;
+}
 
-    right:20px;
-    bottom:20px;
+.resource-name{
+    font-size:15px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
 
-    z-index:8000;
+.resource-number{
+    font-size:25px;
+    font-weight:bold;
 
-    padding:12px 16px;
+    letter-spacing:1px;
+}
 
-    border-radius:30px;
+.resource-bar{
+    width:100%;
+    height:18px;
 
-    background:rgba(18,8,28,.92);
+    overflow:hidden;
+
+    background:#09050d;
+
+    border:1px solid #3c254c;
+    border-radius:999px;
+}
+
+.resource-fill{
+    height:100%;
+    width:100%;
+
+    border-radius:999px;
+
+    transition:
+        width .35s ease,
+        background .35s ease,
+        box-shadow .35s ease;
+}
+
+.resource-status{
+    margin-top:9px;
+
+    color:#a99aaa;
+    font-size:13px;
+    font-style:italic;
+}
+
+.resource-edit{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+
+    margin-top:15px;
+}
+
+.resource-edit label{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+
+    color:#8d7d97;
+    font-size:11px;
+    text-transform:uppercase;
+}
+
+.resource-edit input{
+    width:100%;
+
+    padding:9px;
 
     color:white;
+    background:#0a060e;
 
-    border:1px solid rgba(155,77,255,.4);
-
-    box-shadow:
-        0 0 20px rgba(155,77,255,.18);
-
-    backdrop-filter:blur(8px);
-
-    cursor:pointer;
-
-    transition:.2s;
+    border:1px solid var(--border);
+    border-radius:7px;
 }
 
-.music-btn:hover{
-    border-color:var(--roxo);
+/* =========================
+   ATRIBUTOS
+========================= */
 
-    box-shadow:
-        0 0 25px rgba(155,77,255,.4);
+.attributes{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
-/* =====================================================
-   VAZIO
-===================================================== */
+.attribute{
+    padding:14px 16px;
 
-.empty{
-    grid-column:1/-1;
+    background:#100817;
+    border:1px solid var(--border);
+    border-radius:10px;
+}
 
-    padding:70px 20px;
+.attribute-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
 
+.attribute-name{
+    font-weight:bold;
+}
+
+.attribute-controls{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.attribute-value{
+    min-width:40px;
     text-align:center;
 
-    color:#8e8199;
+    font-weight:bold;
+    font-size:19px;
 }
 
-.empty strong{
-    display:block;
+.attr-btn{
+    width:30px;
+    height:30px;
 
-    font-family:'Cinzel',serif;
+    border:1px solid var(--border);
+    border-radius:7px;
 
-    color:#b9a9c4;
-
-    margin-bottom:8px;
+    color:white;
+    background:#1a0c25;
 }
 
-/* =====================================================
+.attr-btn:hover{
+    border-color:var(--purple);
+}
+
+.notes{
+    padding:18px;
+
+    white-space:pre-wrap;
+
+    line-height:1.7;
+
+    color:#d3c7db;
+
+    background:#0e0714;
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+
+.sheet-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+/* =========================
    RESPONSIVO
-===================================================== */
+========================= */
 
 @media(max-width:700px){
 
     header{
-        padding:13px 15px;
+        padding:12px 4%;
     }
 
     .logo{
@@ -1330,284 +811,197 @@ header{
         letter-spacing:5px;
     }
 
-    .user-email{
-        display:none;
+    .header-actions{
+        gap:5px;
     }
 
-    .user-name-header{
-        max-width:90px;
+    .header-btn{
+        padding:8px 9px;
+        font-size:12px;
     }
 
     .topbar{
         flex-direction:column;
-        align-items:flex-start;
+        align-items:stretch;
     }
 
     .form-grid{
         grid-template-columns:1fr;
     }
 
-    .sheet{
-        grid-template-columns:1fr;
+    .field.full,
+    .section-title{
+        grid-column:auto;
     }
 
-    .sheet-image{
-        height:300px;
-        min-height:0;
+    .sheet-stats{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    .sheet-placeholder{
-        min-height:300px;
+    .sheet-title{
+        font-size:32px;
     }
 
-    .stats{
-        grid-template-columns:1fr;
+    .resource-number{
+        font-size:21px;
     }
 
-    .auth-box{
-        padding:30px 22px;
+    .modal-box{
+        padding:18px;
     }
 
-    .auth-logo{
-        font-size:35px;
+    .modal-actions{
+        flex-wrap:wrap;
     }
 
-    .auth-buttons{
-        flex-direction:column;
+    .delete-btn{
+        width:100%;
+        margin-right:0;
     }
 }
 
-</style>
+@media(max-width:430px){
 
+    .sheet-stats{
+        grid-template-columns:1fr;
+    }
+
+    .resource-edit{
+        grid-template-columns:1fr;
+    }
+}
+</style>
 </head>
 
 <body>
 
+<header>
 
-<!-- =====================================================
-     LOGIN
-===================================================== -->
+    <div class="logo">NEXUS</div>
 
-<section id="authScreen">
+    <div class="header-actions">
 
-    <div class="auth-box">
+        <button
+            class="header-btn"
+            onclick="exportBestiary()"
+        >
+            ↓ EXPORTAR
+        </button>
 
-        <div class="auth-logo">
-            NEXUS
-        </div>
-
-        <div class="auth-sub">
-            BESTIÁRIO DIGITAL
-        </div>
+        <button
+            class="header-btn"
+            onclick="document.getElementById('importFile').click()"
+        >
+            ↑ IMPORTAR
+        </button>
 
         <input
-            id="email"
-                      type="email"
-            placeholder="E-mail"
-            autocomplete="email"
+            id="importFile"
+            type="file"
+            accept=".json,application/json"
+            style="display:none"
+            onchange="importBestiary(event)"
         >
-
-        <input
-            id="password"
-            type="password"
-            placeholder="Senha"
-            autocomplete="current-password"
-        >
-
-        <div class="auth-buttons">
-
-            <button
-                class="btn"
-                type="button"
-                onclick="login()"
-            >
-                ENTRAR
-            </button>
-
-            <button
-                class="btn secondary"
-                type="button"
-                onclick="register()"
-            >
-                CRIAR CONTA
-            </button>
-
-        </div>
-
-        <div
-            id="authMessage"
-            class="auth-message"
-        ></div>
 
     </div>
 
-</section>
+</header>
 
 
-<!-- =====================================================
-     APP
-===================================================== -->
+<main class="container">
 
-<div id="app">
+    <div class="topbar">
 
-    <header>
+        <div class="title-area">
 
-        <div class="logo">
-            NEXUS
-        </div>
+            <h1>BESTIÁRIO</h1>
 
-        <div class="header-right">
-
-            <button
-                class="profile-button"
-                type="button"
-                onclick="openProfile()"
-            >
-
-                <div id="headerAvatar"></div>
-
-                <div>
-
-                    <div
-                        id="headerUserName"
-                        class="user-name-header"
-                    >
-                        Usuário
-                    </div>
-
-                    <div
-                        id="headerEmail"
-                        class="user-email"
-                    ></div>
-
-                </div>
-
-            </button>
-
-            <button
-                class="logout"
-                type="button"
-                onclick="logout()"
-            >
-                Sair
-            </button>
+            <p>
+                Registre, descubra e catalogue criaturas.
+            </p>
 
         </div>
 
-    </header>
+        <button
+            class="primary-btn"
+            onclick="openCreateModal()"
+        >
+            + NOVA CRIATURA
+        </button>
+
+    </div>
 
 
-    <main class="container">
+    <div class="search-box">
 
-        <div class="topbar">
+        <input
+            id="searchInput"
+            type="text"
+            placeholder="Pesquisar criatura..."
+            oninput="renderCreatures()"
+        >
 
-            <div class="title-area">
-
-                <h1>
-                    BESTIÁRIO
-                </h1>
-
-                <p>
-                    Registre, descubra e catalogue criaturas.
-                </p>
-
-            </div>
-
-            <button
-                class="add-btn"
-                type="button"
-                onclick="openCreateModal()"
-            >
-                + NOVA CRIATURA
-            </button>
-
-        </div>
+    </div>
 
 
-        <div class="search-box">
+    <div class="filters">
 
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="Pesquisar criatura..."
-                oninput="renderCreatures()"
-            >
+        <button
+            class="filter active"
+            onclick="setFilter('todos',this)"
+        >
+            TODOS
+        </button>
 
-        </div>
+        <button
+            class="filter"
+            onclick="setFilter('baixo',this)"
+        >
+            BAIXO
+        </button>
 
+        <button
+            class="filter"
+            onclick="setFilter('moderado',this)"
+        >
+            MODERADO
+        </button>
 
-        <div class="filters">
+        <button
+            class="filter"
+            onclick="setFilter('alto',this)"
+        >
+            ALTO
+        </button>
 
-            <button
-                class="filter active"
-                type="button"
-                data-danger="todos"
-                onclick="setDangerFilter('todos', this)"
-            >
-                TODOS
-            </button>
+        <button
+            class="filter"
+            onclick="setFilter('extremo',this)"
+        >
+            EXTREMO
+        </button>
 
-            <button
-                class="filter"
-                type="button"
-                data-danger="baixo"
-                onclick="setDangerFilter('baixo', this)"
-            >
-                BAIXO
-            </button>
+        <button
+            class="filter"
+            onclick="setFilter('desconhecido',this)"
+        >
+            ???
+        </button>
 
-            <button
-                class="filter"
-                type="button"
-                data-danger="moderado"
-                onclick="setDangerFilter('moderado', this)"
-            >
-                MODERADO
-            </button>
-
-            <button
-                class="filter"
-                type="button"
-                data-danger="alto"
-                onclick="setDangerFilter('alto', this)"
-            >
-                ALTO
-            </button>
-
-            <button
-                class="filter"
-                type="button"
-                data-danger="extremo"
-                onclick="setDangerFilter('extremo', this)"
-            >
-                EXTREMO
-            </button>
-
-            <button
-                class="filter"
-                type="button"
-                data-danger="desconhecido"
-                onclick="setDangerFilter('desconhecido', this)"
-            >
-                DESCONHECIDO
-            </button>
-
-        </div>
+    </div>
 
 
-        <div
-            id="creatureGrid"
-            class="grid"
-        ></div>
+    <div
+        id="creatureGrid"
+        class="grid"
+    ></div>
 
-    </main>
-
-</div>
+</main>
 
 
-<!-- =====================================================
-     MODAL — EDITOR
-===================================================== -->
+<!-- =========================
+     MODAL EDITOR
+========================= -->
 
 <div
     id="editorModal"
@@ -1619,12 +1013,11 @@ header{
         <div class="modal-header">
 
             <h2 id="editorTitle">
-                Nova Criatura
+                NOVA CRIATURA
             </h2>
 
             <button
                 class="close"
-                type="button"
                 onclick="closeEditor()"
             >
                 ×
@@ -1636,9 +1029,10 @@ header{
         <form id="creatureForm">
 
             <input
-                type="hidden"
                 id="creatureId"
+                type="hidden"
             >
+
 
             <div class="form-grid">
 
@@ -1647,15 +1041,45 @@ header{
                 </div>
 
 
-                <div class="field">
+                <div class="field full">
 
                     <label>
-                        Nome
+                        Imagem
                     </label>
 
                     <input
+                        id="creatureImage"
+                        type="file"
+                        accept="image/*"
+                    >
+
+                    <div
+                        id="imagePreview"
+                        class="image-preview"
+                    >
+                        <span style="color:#62536d">
+                            Nenhuma imagem selecionada
+                        </span>
+                    </div>
+
+                    <button
+                        id="removeImageBtn"
+                        type="button"
+                        class="remove-image-btn"
+                        onclick="removeImage()"
+                    >
+                        Remover imagem
+                    </button>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Nome</label>
+
+                    <input
                         id="creatureName"
-                        type="text"
                         required
                     >
 
@@ -1664,9 +1088,7 @@ header{
 
                 <div class="field">
 
-                    <label>
-                        Nível
-                    </label>
+                    <label>Level</label>
 
                     <input
                         id="creatureLevel"
@@ -1680,55 +1102,20 @@ header{
 
                 <div class="field">
 
-                    <label>
-                        Idade
-                    </label>
+                    <label>Origem</label>
 
-                    <input
-                        id="creatureAge"
-                        type="text"
-                    >
+                    <input id="creatureOrigin">
 
                 </div>
 
 
                 <div class="field">
 
-                    <label>
-                        Gênero
-                    </label>
-
-                    <input
-                        id="creatureGender"
-                        type="text"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Peso
-                    </label>
-
-                    <input
-                        id="creatureWeight"
-                        type="text"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Altura
-                    </label>
+                    <label>Altura</label>
 
                     <input
                         id="creatureHeight"
-                        type="text"
+                        placeholder="Ex.: 1,85 m"
                     >
 
                 </div>
@@ -1736,13 +1123,11 @@ header{
 
                 <div class="field">
 
-                    <label>
-                        Cargo
-                    </label>
+                    <label>Peso</label>
 
                     <input
-                        id="creatureRole"
-                        type="text"
+                        id="creatureWeight"
+                        placeholder="Ex.: 80 kg"
                     >
 
                 </div>
@@ -1750,37 +1135,7 @@ header{
 
                 <div class="field">
 
-                    <label>
-                        Origem
-                    </label>
-
-                    <input
-                        id="creatureOrigin"
-                        type="text"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Organização
-                    </label>
-
-                    <input
-                        id="creatureOrganization"
-                        type="text"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Periculosidade
-                    </label>
+                    <label>Periculosidade</label>
 
                     <select id="creatureDanger">
 
@@ -1801,372 +1156,149 @@ header{
                         </option>
 
                         <option value="desconhecido">
-                            Desconhecido
+                            ???
                         </option>
 
                     </select>
 
+                </div>
+
+
+                <div class="section-title">
+                    VIDA E RESISTÊNCIA
+                </div>
+
+
+                <div class="field">
+
+                    <label>Vida atual</label>
+
+                    <input
+                        id="creatureHealth"
+                        type="number"
+                        min="0"
+                        value="100"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Vida máxima</label>
+
+                    <input
+                        id="creatureHealthMax"
+                        type="number"
+                        min="1"
+                        value="100"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Resistência atual</label>
+
+                    <input
+                        id="creatureResistance"
+                        type="number"
+                        min="0"
+                        value="100"
+                    >
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>Resistência máxima</label>
+
+                    <input
+                        id="creatureResistanceMax"
+                        type="number"
+                        min="1"
+                        value="100"
+                    >
+
+                </div>
+
+
+                <div class="section-title">
+                    ATRIBUTOS
+                </div>
+
+
+                <div class="field full">
+
+                                   <div class="field full">
+
+                    <div id="attributesEditor"></div>
+
+                </div>
+
+
+                <div class="section-title">
+                    ANOTAÇÕES IMPORTANTES
                 </div>
 
 
                 <div class="field full">
 
                     <label>
-                        Imagem da criatura
+                        Anotações
                     </label>
 
-                    <input
-                        id="creatureImage"
-                        type="file"
-                        accept="image/*"
-                    >
-
-                    <div
-                        id="creatureImagePreview"
-                        class="image-preview"
-                    ></div>
-
-                    <button
-                        id="removeCreatureImageBtn"
-                        class="remove-image-btn"
-                        type="button"
-                        onclick="removeCreatureImage()"
-                    >
-                        Remover imagem
-                    </button>
+                    <textarea
+                        id="creatureNotes"
+                        placeholder="Escreva informações importantes sobre esta criatura..."
+                    ></textarea>
 
                 </div>
 
-
-                <div class="section-title">
-                    NEXO ✨
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Nome do Nexo
-                    </label>
-
-                    <input
-                        id="creatureNexoName"
-                        type="text"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Estado do Nexo
-                    </label>
-
-                    <select id="creatureNexoState">
-
-                        <option value="desativado">
-                            Desativado
-                        </option>
-
-                        <option value="ativado">
-                            Ativado
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Nível do Nexo
-                    </label>
-
-                    <input
-                        id="creatureNexoLevel"
-                        type="number"
-                        min="1"
-                        max="5"
-                        value="1"
-                    >
-
-                </div>
-
-
-                <div class="field">
-
-                    <label>
-                        Controle                        <input
-                            id="creatureNexoControl"
-                            type="number"
-                            min="0"
-                            max="5"
-                            value="0"
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label>
-                            Vida do Núcleo
-                        </label>
-
-                        <input
-                            id="creatureCoreHealth"
-                            type="number"
-                            min="0"
-                            max="100"
-                            value="100"
-                        >
-
-                    </div>
-
-
-                    <div class="field full">
-
-                        <label>
-                            Descrição do Nexo
-                        </label>
-
-                        <textarea
-                            id="creatureNexoDescription"
-                            placeholder="Descreva o Nexo..."
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="section-title">
-                        PROGRESSÃO
-                    </div>
-
-
-                    <div class="field">
-
-                        <label>
-                            Nível Atual
-                        </label>
-
-                        <input
-                            id="creatureProgressLevel"
-                            type="number"
-                            min="1"
-                            value="1"
-                        >
-
-                    </div>
-
-
-                    <div class="field">
-
-                        <label>
-                            XP
-                        </label>
-
-                        <input
-                            id="creatureXP"
-                            type="number"
-                            min="0"
-                            value="0"
-                        >
-
-                    </div>
-
-
-                    <div class="section-title">
-                        DESCRIÇÃO
-                    </div>
-
-
-                    <div class="field full">
-
-                        <label>
-                            Descrição da criatura
-                        </label>
-
-                        <textarea
-                            id="creatureDescription"
-                            placeholder="Descreva a criatura..."
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="field full">
-
-                        <label>
-                            Habilidades
-                        </label>
-
-                        <textarea
-                            id="creatureAbilities"
-                            placeholder="Uma habilidade por linha..."
-                        ></textarea>
-
-                    </div>
-
-
-                    <div class="field full">
-
-                        <div class="checkbox-row">
-
-                            <input
-                                id="creaturePublic"
-                                type="checkbox"
-                            >
-
-                            <label for="creaturePublic">
-                                Tornar esta criatura pública
-                            </label>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <div class="modal-actions">
-
-                    <button
-                        id="deleteCreatureBtn"
-                        class="delete-btn"
-                        type="button"
-                        onclick="deleteCreature()"
-                        style="display:none;"
-                    >
-                        EXCLUIR
-                    </button>
-
-                    <button
-                        class="btn secondary"
-                        type="button"
-                        onclick="closeEditor()"
-                    >
-                        CANCELAR
-                    </button>
-
-                    <button
-                        class="btn"
-                        type="submit"
-                    >
-                        SALVAR
-                    </button>
-
-                </div>
-
-            </form>
-
-        </div>
-
-    </div>
-
-
-<!-- =====================================================
-     MODAL — PERFIL
-===================================================== -->
-
-<div
-    id="profileModal"
-    class="modal"
->
-
-    <div class="modal-box profile-box">
-
-        <div class="modal-header">
-
-            <h2>
-                MEU PERFIL
-            </h2>
-
-            <button
-                class="close"
-                type="button"
-                onclick="closeProfile()"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <div class="profile-avatar-area">
-
-            <div id="profileAvatarContainer">
-                <div class="profile-avatar-placeholder">
-                    👤
-                </div>
             </div>
 
-        </div>
 
+            <div class="modal-actions">
 
-        <div class="form-grid">
-
-            <div class="field full">
-
-                <label>
-                    Nome de usuário
-                </label>
-
-                <input
-                    id="profileName"
-                    type="text"
-                    placeholder="Seu nome"
+                <button
+                    type="button"
+                    id="deleteButton"
+                    class="delete-btn"
+                    onclick="deleteCreature()"
+                    style="display:none"
                 >
+                    EXCLUIR CRIATURA
+                </button>
 
-            </div>
-
-
-            <div class="field full">
-
-                <label>
-                    Foto de perfil
-                </label>
-
-                <input
-                    id="profileAvatar"
-                    type="file"
-                    accept="image/*"
+                <button
+                    type="button"
+                    class="header-btn secondary"
+                    onclick="closeEditor()"
                 >
+                    CANCELAR
+                </button>
+
+                <button
+                    type="submit"
+                    class="primary-btn"
+                >
+                    SALVAR CRIATURA
+                </button>
 
             </div>
 
-        </div>
-
-
-        <div class="modal-actions">
-
-            <button
-                class="btn secondary"
-                type="button"
-                onclick="closeProfile()"
-            >
-                CANCELAR
-            </button>
-
-            <button
-                class="btn"
-                type="button"
-                onclick="saveProfile()"
-            >
-                SALVAR
-            </button>
-
-        </div>
+        </form>
 
     </div>
 
 </div>
 
 
-<!-- =====================================================
-     MODAL — FICHA
-===================================================== -->
+<!-- =========================
+     MODAL FICHA
+========================= -->
 
 <div
     id="sheetModal"
@@ -2178,12 +1310,11 @@ header{
         <div class="modal-header">
 
             <h2>
-                FICHA
+                FICHA DA CRIATURA
             </h2>
 
             <button
                 class="close"
-                type="button"
                 onclick="closeSheet()"
             >
                 ×
@@ -2202,407 +1333,131 @@ header{
 </div>
 
 
-<!-- =====================================================
-     ÁUDIO
-===================================================== -->
-
-<audio
-    id="backgroundMusic"
-    loop
-    preload="auto"
->
-    <source
-        src="The Paladin's Underworld Royalty Free Fantasy Music - Silverman Sound Studios (youtube).mp3"
-        type="audio/mpeg"
-    >
-</audio>
-
-
-<button
-    id="musicButton"
-    class="music-btn"
-    type="button"
-    onclick="toggleMusic()"
->
-    🎵 Música: OFF
-</button>
-
-
 <script>
 
-/* =====================================================
-   SUPABASE
-===================================================== */
+/* =========================================================
+   CONFIGURAÇÃO
+========================================================= */
 
-const SUPABASE_URL =
-    "https://lyynxzzdcagchyitfwuq.supabase.co";
-
-const SUPABASE_ANON_KEY =
-    "sb_publishable_7crR8UUTz5ezFa0lHOQt7A_BRfzHvmf";
-
-const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
-
-
-/* =====================================================
-   ESTADO
-===================================================== */
-
-let currentUser = null;
+const STORAGE_KEY = "nexus_bestiario_creatures_v3";
 
 let creatures = [];
+let currentFilter = "todos";
+let currentEditingId = null;
 
-let currentDangerFilter = "todos";
-
-let currentEditingCreature = null;
-
-let currentCreatureImage = null;
-
-let currentProfileAvatar = null;
+let currentImageData = "";
 
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
+/* =========================================================
+   ATRIBUTOS
+========================================================= */
 
-const authScreen =
-    document.getElementById("authScreen");
+const ATTRIBUTE_CONFIG = {
 
-const app =
-    document.getElementById("app");
+    forca: {
+        name: "Força"
+    },
 
-const authMessage =
-    document.getElementById("authMessage");
+    destreza: {
+        name: "Destreza"
+    },
 
-const creatureGrid =
-    document.getElementById("creatureGrid");
+    determinacao: {
+        name: "Determinação"
+    },
 
-const editorModal =
-    document.getElementById("editorModal");
+    inteligencia: {
+        name: "Inteligência"
+    },
 
-const profileModal =
-    document.getElementById("profileModal");
+    reflexos: {
+        name: "Reflexos"
+    }
 
-const sheetModal =
-    document.getElementById("sheetModal");
-
-const creatureForm =
-    document.getElementById("creatureForm");
-
-const music =
-    document.getElementById("backgroundMusic");
-
-const musicButton =
-    document.getElementById("musicButton");
+};
 
 
-/* =====================================================
+/* =========================================================
    INICIALIZAÇÃO
-===================================================== */
+========================================================= */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    async () => {
+document.addEventListener("DOMContentLoaded", () => {
 
-        try {
+    loadBestiary();
 
-            const {
-                data,
-                error
-            } =
-                await supabaseClient.auth.getSession();
+    renderCreatures();
 
-            if(error){
-                console.error(error);
-                showAuth();
-                return;
-            }
+    createAttributeEditors();
 
-            if(data.session){
-
-                currentUser =
-                    data.session.user;
-
-                await startApp();
-
-            }else{
-
-                showAuth();
-
-            }
-
-        }catch(error){
-
-            console.error(
-                "Erro ao iniciar:",
-                error
-            );
-
-            showAuth();
-
-        }
-
-    }
-);
+});
 
 
-/* =====================================================
-   OBSERVAR LOGIN
-===================================================== */
+/* =========================================================
+   STORAGE
+========================================================= */
 
-supabaseClient.auth.onAuthStateChange(
-    async (event, session) => {
-
-        if(session){
-
-            currentUser =
-                session.user;
-
-            if(
-                event === "SIGNED_IN" ||
-                event === "INITIAL_SESSION"
-            ){
-
-                await startApp();
-
-            }
-
-        }else{
-
-            currentUser = null;
-
-            showAuth();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   TELA DE LOGIN
-===================================================== */
-
-function showAuth(){
-
-    authScreen.style.display =
-        "flex";
-
-    app.style.display =
-        "none";
-
-}
-
-
-/* =====================================================
-   INICIAR APP
-===================================================== */
-
-async function startApp(){
-
-    authScreen.style.display =
-        "none";
-
-    app.style.display =
-        "block";
-
-    await loadProfile();
-
-    await loadCreatures();
-
-}
-
-
-/* =====================================================
-   MENSAGEM DE LOGIN
-===================================================== */
-
-function setAuthMessage(
-    message,
-    success = false
-){
-
-    authMessage.textContent =
-        message;
-
-    authMessage.style.color =
-        success
-            ? "#48d17b"
-            : "#ff7389";
-
-}
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-async function login(){
-
-    const email =
-        document
-            .getElementById("email")
-            .value
-            .trim();
-
-    const password =
-        document
-            .getElementById("password")
-            .value;
-
-    if(!email || !password){
-
-        setAuthMessage(
-            "Preencha o e-mail e a senha."
-        );
-
-        return;
-
-    }
-
-    setAuthMessage(
-        "Entrando...",
-        true
-    );
-
+function loadBestiary(){
 
     try{
 
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth.signInWithPassword({
-                email,
-                password
-            });
+        const saved = localStorage.getItem(STORAGE_KEY);
 
+        if(!saved){
 
-        if(error){
-
-            setAuthMessage(
-                traduzirErroAuth(error.message)
-            );
+            creatures = [];
 
             return;
 
         }
 
+        const parsed = JSON.parse(saved);
 
-        currentUser =
-            data.user;
+        if(Array.isArray(parsed)){
 
-        await startApp();
+            creatures = parsed;
 
+        }else if(
+            parsed &&
+            Array.isArray(parsed.creatures)
+        ){
 
-    }catch(error){
-
-        console.error(error);
-
-        setAuthMessage(
-            "Não foi possível entrar."
-        );
-
-    }
-
-}
-
-
-/* =====================================================
-   CRIAR CONTA
-===================================================== */
-
-async function register(){
-
-    const email =
-        document
-            .getElementById("email")
-            .value
-            .trim();
-
-    const password =
-        document
-            .getElementById("password")
-            .value;
-
-
-    if(!email || !password){
-
-        setAuthMessage(
-            "Preencha o e-mail e a senha."
-        );
-
-        return;
-
-    }
-
-
-    if(password.length < 6){
-
-        setAuthMessage(
-            "A senha precisa ter pelo menos 6 caracteres."
-        );
-
-        return;
-
-    }
-
-
-    setAuthMessage(
-        "Criando conta...",
-        true
-    );
-
-
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient.auth.signUp({
-                email,
-                password
-            });
-
-
-        if(error){
-
-            setAuthMessage(
-                traduzirErroAuth(error.message)
-            );
-
-            return;
-
-        }
-
-
-        if(data.session){
-
-            currentUser =
-                data.user;
-
-            await startApp();
+            creatures = parsed.creatures;
 
         }else{
 
-            setAuthMessage(
-                "Conta criada! Verifique seu e-mail para confirmar o cadastro.",
-                true
-            );
+            creatures = [];
 
         }
 
+        creatures = creatures.map(normalizeCreature);
 
     }catch(error){
 
         console.error(error);
 
-        setAuthMessage(
-            "Não foi possível criar a conta."
+        creatures = [];
+
+    }
+
+}
+
+
+function saveBestiary(){
+
+    try{
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(creatures)
+        );
+
+    }catch(error){
+
+        console.error(error);
+
+        alert(
+            "Não foi possível salvar no navegador.\n\n" +
+            "A imagem pode ser grande demais para o armazenamento local."
         );
 
     }
@@ -2610,518 +1465,443 @@ async function register(){
 }
 
 
-/* =====================================================
-   TRADUZIR ERROS
-===================================================== */
+/* =========================================================
+   NORMALIZAR CRIATURA
+========================================================= */
 
-function traduzirErroAuth(message){
+function normalizeCreature(creature){
 
-    if(!message)
-        return "Ocorreu um erro.";
+    const c = creature || {};
 
-    if(
-        message
-            .toLowerCase()
-            .includes("invalid login credentials")
-    ){
+    const attributes = {};
 
-        return "E-mail ou senha incorretos.";
+    Object.keys(ATTRIBUTE_CONFIG).forEach(key => {
 
-    }
+        let values =
+            c.attributes &&
+            Array.isArray(c.attributes[key])
+                ? c.attributes[key]
+                : [];
 
-    if(
-        message
-            .toLowerCase()
-            .includes("user already registered")
-    ){
+        attributes[key] = values.map(item => {
 
-        return "Este e-mail já possui uma conta.";
+            if(typeof item === "number"){
 
-    }
+                return {
+                    label: "",
+                    value: Number(item) || 0
+                };
 
-    if(
-        message
-            .toLowerCase()
-            .includes("email not confirmed")
-    ){
+            }
 
-        return "Confirme seu e-mail antes de entrar.";
+            return {
 
-    }
+                label:
+                    typeof item.label === "string"
+                        ? item.label
+                        : "",
 
-    return message;
+                value:
+                    Number(item.value) || 0
 
-}
+            };
 
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-async function logout(){
-
-    await supabaseClient.auth.signOut();
-
-    currentUser = null;
-
-    showAuth();
-
-}
-
-
-/* =====================================================
-   PERFIL
-===================================================== */
-
-async function loadProfile(){
-
-    if(!currentUser)
-        return;
-
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("profiles")
-            .select("*")
-            .eq("id", currentUser.id)
-            .maybeSingle();
-
-
-    if(error){
-
-        console.error(
-            "Erro ao carregar perfil:",
-            error
-        );
-
-        updateHeader(
-            null
-        );
-
-        return;
-
-    }
-
-
-    if(data){
-
-        updateHeader(data);
-
-    }else{
-
-        updateHeader({
-            username:
-                currentUser.email
-                    ?.split("@")[0]
         });
 
-    }
-
-}
+    });
 
 
-/* =====================================================
-   HEADER
-===================================================== */
+    const healthMax =
+        Math.max(
+            1,
+            Number(c.healthMax) || 100
+        );
 
-function updateHeader(profile){
-
-    const name =
-        profile?.username ||
-        currentUser?.email
-            ?.split("@")[0] ||
-        "Usuário";
-
-
-    document.getElementById(
-        "headerUserName"
-    ).textContent =
-        name;
-
-
-    document.getElementById(
-        "headerEmail"
-    ).textContent =
-        currentUser?.email || "";
-
-
-    const container =
-        document.getElementById(
-            "headerAvatar"
+    const resistanceMax =
+        Math.max(
+            1,
+            Number(c.resistanceMax) || 100
         );
 
 
-    if(profile?.avatar_url){
+    return {
 
-        container.innerHTML = `
-            <img
-                class="header-avatar"
-                src="${escapeAttribute(profile.avatar_url)}"
-                alt="Avatar"
-            >
-        `;
+        id:
+            c.id ||
+            crypto.randomUUID(),
 
-    }else{
+        image:
+            typeof c.image === "string"
+                ? c.image
+                : "",
 
-        container.innerHTML = `
-            <div class="header-avatar-placeholder">
-                👤
-            </div>
-        `;
+        name:
+            c.name ||
+            "Criatura sem nome",
 
-    }
+        level:
+            Math.max(
+                0,
+                Number(c.level) || 0
+            ),
+
+        origin:
+            c.origin || "",
+
+        height:
+            c.height || "",
+
+        weight:
+            c.weight || "",
+
+        danger:
+            ATTRIBUTE_DANGER(c.danger),
+
+        health:
+            clamp(
+                Number(c.health) || 0,
+                0,
+                healthMax
+            ),
+
+        healthMax,
+
+        resistance:
+            clamp(
+                Number(c.resistance) || 0,
+                0,
+                resistanceMax
+            ),
+
+        resistanceMax,
+
+        attributes,
+
+        notes:
+            c.notes || "",
+
+        createdAt:
+            c.createdAt ||
+            Date.now()
+
+    };
 
 }
 
 
-/* =====================================================
-   ABRIR PERFIL
-===================================================== */
+function ATTRIBUTE_DANGER(value){
 
-async function openProfile(){
+    const allowed = [
+        "baixo",
+        "moderado",
+        "alto",
+        "extremo",
+        "desconhecido"
+    ];
 
-    await loadProfileData();
+    return allowed.includes(value)
+        ? value
+        : "baixo";
 
-    profileModal.classList.add(
-        "show"
+}
+
+
+function clamp(value,min,max){
+
+    return Math.min(
+        Math.max(value,min),
+        max
     );
 
 }
 
 
-/* =====================================================
-   FECHAR PERFIL
-===================================================== */
+/* =========================================================
+   ID
+========================================================= */
 
-function closeProfile(){
+function newId(){
 
-    profileModal.classList.remove(
-        "show"
+    if(window.crypto && crypto.randomUUID){
+
+        return crypto.randomUUID();
+
+       }
+
+    return (
+        Date.now().toString(36) +
+        Math.random().toString(36).slice(2)
     );
 
 }
 
 
-/* =====================================================
-   CARREGAR DADOS DO PERFIL
-===================================================== */
+/* =========================================================
+   EDITOR DE ATRIBUTOS
+========================================================= */
 
-async function loadProfileData(){
-
-    if(!currentUser)
-        return;
-
-
-    const {
-        data
-    } =
-        await supabaseClient
-            .from("profiles")
-            .select("*")
-            .eq("id", currentUser.id)
-            .maybeSingle();
-
-
-    document.getElementById(
-        "profileName"
-    ).value =
-        data?.username || "";
-
+function createAttributeEditors(values = null){
 
     const container =
-        document.getElementById(
-            "profileAvatarContainer"
-        );
+        document.getElementById("attributesEditor");
 
-
-    if(data?.avatar_url){
-
-        container.innerHTML = `
-            <img
-                class="profile-avatar-preview"
-                src="${escapeAttribute(data.avatar_url)}"
-                alt="Avatar"
-            >
-        `;
-
-    }else{
-
-        container.innerHTML = `
-            <div class="profile-avatar-placeholder">
-                👤
-            </div>
-        `;
-
-    }
-
-}
-
-
-/* =====================================================
-   SALVAR PERFIL
-===================================================== */
-
-async function saveProfile(){
-
-    if(!currentUser)
+    if(!container)
         return;
 
+    container.innerHTML = "";
 
-    const username =
-        document
-            .getElementById("profileName")
-            .value
-            .trim();
+    Object.entries(ATTRIBUTE_CONFIG).forEach(
+        ([key, config]) => {
 
+            const section =
+                document.createElement("div");
 
-    let avatarUrl = null;
+            section.className =
+                "attribute-editor-section";
 
+            section.innerHTML = `
+                <div class="attribute-editor-header">
+                    <strong>${config.name}</strong>
 
-    const file =
-        document
-            .getElementById("profileAvatar")
-            .files[0];
+                    <button
+                        type="button"
+                        class="add-attribute-btn"
+                        onclick="addAttribute('${key}')"
+                    >
+                        + ADICIONAR
+                    </button>
+                </div>
 
+                <div
+                    id="attribute-list-${key}"
+                    class="attribute-editor-list"
+                ></div>
+            `;
 
-    try{
+            container.appendChild(section);
 
-        const {
-            data:oldProfile
-        } =
-            await supabaseClient
-                .from("profiles")
-                .select("avatar_url")
-                .eq("id", currentUser.id)
-                .maybeSingle();
+            const list =
+                section.querySelector(
+                    `#attribute-list-${key}`
+                );
 
+            const attributeValues =
+                values?.[key] || [];
 
-        avatarUrl =
-            oldProfile?.avatar_url ||
-            null;
+            if(attributeValues.length){
 
-
-        if(file){
-
-            const fileName =
-                `${currentUser.id}/${Date.now()}-${sanitizeFileName(file.name)}`;
-
-
-            const {
-                error:uploadError
-            } =
-                await supabaseClient.storage
-                    .from("avatars")
-                    .upload(
-                        fileName,
-                        file,
-                        {
-                            upsert:true
-                        }
-                    );
-
-
-            if(uploadError)
-                throw uploadError;
-
-
-            const {
-                data:urlData
-            } =
-                supabaseClient.storage
-                    .from("avatars")
-                    .getPublicUrl(fileName);
-
-
-            avatarUrl =
-                urlData.publicUrl;
-
-        }
-
-
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("profiles")
-                .upsert(
-                    {
-                        id:
-                            currentUser.id,
-
-                        username:
-                            username ||
-                            currentUser.email
-                                ?.split("@")[0],
-
-                        avatar_url:
-                            avatarUrl,
-
-                        updated_at:
-                            new Date()
-                                .toISOString()
-                    },
-                                   {
-                        onConflict:
-                            "id"
+                attributeValues.forEach(
+                    item => {
+                        addAttribute(
+                            key,
+                            item.label,
+                            item.value
+                        );
                     }
                 );
 
+            }else{
 
-        if(error)
-            throw error;
+                addAttribute(
+                    key,
+                    "",
+                    0
+                );
 
+            }
 
-        await loadProfile();
-
-        await loadProfileData();
-
-        closeProfile();
-
-
-        document.getElementById(
-            "profileAvatar"
-        ).value = "";
-
-
-        alert(
-            "Perfil salvo com sucesso!"
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "Erro ao salvar perfil:",
-            error
-        );
-
-        alert(
-            "Não foi possível salvar o perfil: " +
-            (error.message || error)
-        );
-
-    }
+        }
+    );
 
 }
 
 
-/* =====================================================
-   UPLOAD DE IMAGEM — PREVIEW DA CRIATURA
-===================================================== */
+/* =========================================================
+   ADICIONAR ATRIBUTO
+========================================================= */
 
-document
-    .getElementById("creatureImage")
-    ?.addEventListener(
-        "change",
-        function(){
+function addAttribute(
+    key,
+    label = "",
+    value = 0
+){
 
-            const file =
-                this.files[0];
+    const list =
+        document.getElementById(
+            `attribute-list-${key}`
+        );
 
-            if(!file)
-                return;
+    if(!list)
+        return;
 
 
-            if(!file.type.startsWith("image/")){
+    const row =
+        document.createElement("div");
 
-                alert(
-                    "Selecione uma imagem válida."
+    row.className =
+        "attribute-editor-row";
+
+
+    row.innerHTML = `
+        <input
+            type="text"
+            class="attribute-label"
+            placeholder="Nome / descrição"
+            value="${escapeAttribute(label)}"
+        >
+
+        <div class="attribute-number-control">
+
+            <button
+                type="button"
+                onclick="changeEditorAttributeValue(this,-1)"
+            >
+                −
+            </button>
+
+            <input
+                type="number"
+                class="attribute-value-input"
+                value="${Number(value) || 0}"
+            >
+
+            <button
+                type="button"
+                onclick="changeEditorAttributeValue(this,1)"
+            >
+                +
+            </button>
+
+        </div>
+
+        <button
+            type="button"
+            class="remove-attribute-btn"
+            onclick="this.parentElement.remove()"
+        >
+            ×
+        </button>
+    `;
+
+
+    list.appendChild(row);
+
+}
+
+
+/* =========================================================
+   ALTERAR VALOR DO ATRIBUTO NO EDITOR
+========================================================= */
+
+function changeEditorAttributeValue(
+    button,
+    amount
+){
+
+    const input =
+        button
+            .parentElement
+            .querySelector(
+                ".attribute-value-input"
+            );
+
+    if(!input)
+        return;
+
+
+    let value =
+        Number(input.value) || 0;
+
+
+    value += amount;
+
+
+    input.value = value;
+
+}
+
+
+/* =========================================================
+   LER ATRIBUTOS DO EDITOR
+========================================================= */
+
+function getAttributesFromEditor(){
+
+    const attributes = {};
+
+
+    Object.keys(ATTRIBUTE_CONFIG).forEach(
+        key => {
+
+            const list =
+                document.getElementById(
+                    `attribute-list-${key}`
                 );
 
-                this.value = "";
 
+            attributes[key] = [];
+
+
+            if(!list)
                 return;
 
-            }
+
+            list
+                .querySelectorAll(
+                    ".attribute-editor-row"
+                )
+                .forEach(row => {
+
+                    const label =
+                        row
+                            .querySelector(
+                                ".attribute-label"
+                            )
+                            ?.value
+                            .trim() || "";
 
 
-            currentCreatureImage =
-                file;
+                    const value =
+                        Number(
+                            row
+                                .querySelector(
+                                    ".attribute-value-input"
+                                )
+                                ?.value
+                        ) || 0;
 
 
-            const reader =
-                new FileReader();
+                    attributes[key].push({
+                        label,
+                        value
+                    });
 
-
-            reader.onload =
-                function(event){
-
-                    const preview =
-                        document.getElementById(
-                            "creatureImagePreview"
-                        );
-
-
-                    preview.innerHTML = `
-                        <img
-                            src="${event.target.result}"
-                            alt="Preview"
-                        >
-                    `;
-
-                    document.getElementById(
-                        "removeCreatureImageBtn"
-                    ).style.display =
-                        "block";
-
-                };
-
-
-            reader.readAsDataURL(file);
+                });
 
         }
     );
 
 
-/* =====================================================
-   REMOVER IMAGEM DA CRIATURA
-===================================================== */
-
-function removeCreatureImage(){
-
-    currentCreatureImage = null;
-
-
-    const input =
-        document.getElementById(
-            "creatureImage"
-        );
-
-
-    input.value = "";
-
-
-    document.getElementById(
-        "creatureImagePreview"
-    ).innerHTML = "";
-
-
-    document.getElementById(
-        "removeCreatureImageBtn"
-    ).style.display =
-        "none";
+    return attributes;
 
 }
 
 
-/* =====================================================
-   CRIAR / EDITAR CRIATURA
-===================================================== */
+/* =========================================================
+   ABRIR NOVA CRIATURA
+========================================================= */
 
 function openCreateModal(){
 
-    currentEditingCreature = null;
+    currentEditingId = null;
 
-    currentCreatureImage = null;
+    currentImageData = "";
 
 
     document.getElementById(
         "editorTitle"
     ).textContent =
-        "Nova Criatura";
+        "NOVA CRIATURA";
 
 
     document.getElementById(
@@ -3140,78 +1920,92 @@ function openCreateModal(){
 
 
     document.getElementById(
-        "creatureNexoLevel"
-    ).value = 1;
-
-
-    document.getElementById(
-        "creatureNexoControl"
-    ).value = 0;
-
-
-    document.getElementById(
-        "creatureCoreHealth"
+        "creatureHealth"
     ).value = 100;
 
 
     document.getElementById(
-        "creatureProgressLevel"
-    ).value = 1;
+        "creatureHealthMax"
+    ).value = 100;
 
 
     document.getElementById(
-        "creatureXP"
-    ).value = 0;
+        "creatureResistance"
+    ).value = 100;
 
 
     document.getElementById(
-        "creatureImagePreview"
-    ).innerHTML = "";
+        "creatureResistanceMax"
+    ).value = 100;
 
 
     document.getElementById(
-        "removeCreatureImageBtn"
+        "imagePreview"
+    ).innerHTML = `
+        <span style="color:#62536d">
+            Nenhuma imagem selecionada
+        </span>
+    `;
+
+
+    document.getElementById(
+        "removeImageBtn"
     ).style.display =
         "none";
 
 
     document.getElementById(
-        "deleteCreatureBtn"
+        "deleteButton"
     ).style.display =
         "none";
 
 
-    editorModal.classList.add(
-        "show"
-    );
+    createAttributeEditors();
+
+
+    document.getElementById(
+        "editorModal"
+    ).classList.add("show");
 
 }
 
 
-/* =====================================================
-   ABRIR EDIÇÃO
-===================================================== */
+/* =========================================================
+   EDITAR CRIATURA
+========================================================= */
 
-function openEditModal(creature){
+function openEditModal(id){
 
-    currentEditingCreature =
-        creature;
+    const creature =
+        creatures.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
 
 
-    currentCreatureImage =
-        null;
+    if(!creature)
+        return;
+
+
+    currentEditingId =
+        creature.id;
+
+
+    currentImageData =
+        creature.image || "";
 
 
     document.getElementById(
         "editorTitle"
     ).textContent =
-        "Editar Criatura";
+        "EDITAR CRIATURA";
 
 
     document.getElementById(
         "creatureId"
     ).value =
-        creature.id || "";
+        creature.id;
 
 
     document.getElementById(
@@ -3223,37 +2017,7 @@ function openEditModal(creature){
     document.getElementById(
         "creatureLevel"
     ).value =
-        creature.level ?? 1;
-
-
-    document.getElementById(
-        "creatureAge"
-    ).value =
-        creature.age || "";
-
-
-    document.getElementById(
-        "creatureGender"
-    ).value =
-        creature.gender || "";
-
-
-    document.getElementById(
-        "creatureWeight"
-    ).value =
-        creature.weight || "";
-
-
-    document.getElementById(
-        "creatureHeight"
-    ).value =
-        creature.height || "";
-
-
-    document.getElementById(
-        "creatureRole"
-    ).value =
-        creature.role || "";
+        creature.level ?? 0;
 
 
     document.getElementById(
@@ -3263,111 +2027,92 @@ function openEditModal(creature){
 
 
     document.getElementById(
-        "creatureOrganization"
+        "creatureHeight"
     ).value =
-        creature.organization || "";
+        creature.height || "";
+
+
+    document.getElementById(
+        "creatureWeight"
+    ).value =
+        creature.weight || "";
 
 
     document.getElementById(
         "creatureDanger"
     ).value =
-        creature.danger || "desconhecido";
+        creature.danger || "baixo";
 
 
     document.getElementById(
-        "creatureNexoName"
+        "creatureHealth"
     ).value =
-        creature.nexo_name || "";
+        creature.health;
 
 
     document.getElementById(
-        "creatureNexoState"
+        "creatureHealthMax"
     ).value =
-        creature.nexo_state || "desativado";
+        creature.healthMax;
 
 
     document.getElementById(
-        "creatureNexoLevel"
+        "creatureResistance"
     ).value =
-        creature.nexo_level ?? 1;
+        creature.resistance;
 
 
     document.getElementById(
-        "creatureNexoControl"
+        "creatureResistanceMax"
     ).value =
-        creature.nexo_control ?? 0;
+        creature.resistanceMax;
 
 
     document.getElementById(
-        "creatureCoreHealth"
+        "creatureNotes"
     ).value =
-        creature.nexo_core ?? 100;
+        creature.notes || "";
 
 
-    document.getElementById(
-        "creatureNexoDescription"
-    ).value =
-        creature.nexo_description || "";
-
-
-    document.getElementById(
-        "creatureProgressLevel"
-    ).value =
-        creature.progress_level ?? 1;
-
-
-    document.getElementById(
-        "creatureXP"
-    ).value =
-        creature.xp ?? 0;
-
-
-    document.getElementById(
-        "creatureDescription"
-    ).value =
-        creature.description || "";
-
-
-    document.getElementById(
-        "creatureAbilities"
-    ).value =
-        creature.abilities || "";
-
-
-    document.getElementById(
-        "creaturePublic"
-    ).checked =
-        creature.public === true;
+    createAttributeEditors(
+        creature.attributes
+    );
 
 
     const preview =
         document.getElementById(
-            "creatureImagePreview"
+            "imagePreview"
         );
 
 
-    if(creature.image_url){
+    if(currentImageData){
 
         preview.innerHTML = `
             <img
-                src="${escapeAttribute(creature.image_url)}"
+                src="${escapeAttribute(
+                    currentImageData
+                )}"
                 alt="Imagem da criatura"
             >
         `;
 
 
         document.getElementById(
-            "removeCreatureImageBtn"
+            "removeImageBtn"
         ).style.display =
             "block";
 
     }else{
 
-        preview.innerHTML = "";
+        preview.innerHTML = `
+            <span style="color:#62536d">
+                Nenhuma imagem selecionada
+            </span>
+        `;
 
 
         document.getElementById(
-            "removeCreatureImageBtn"
+            "removeImageBtn"
         ).style.display =
             "none";
 
@@ -3375,489 +2120,381 @@ function openEditModal(creature){
 
 
     document.getElementById(
-        "deleteCreatureBtn"
+        "deleteButton"
     ).style.display =
         "block";
 
 
-    editorModal.classList.add(
-        "show"
-    );
+    document.getElementById(
+        "editorModal"
+    ).classList.add("show");
 
 }
 
 
-/* =====================================================
+/* =========================================================
    FECHAR EDITOR
-===================================================== */
+========================================================= */
 
 function closeEditor(){
 
-    editorModal.classList.remove(
-        "show"
-    );
+    document.getElementById(
+        "editorModal"
+    ).classList.remove("show");
 
-    currentEditingCreature = null;
+    currentEditingId = null;
 
-    currentCreatureImage = null;
+    currentImageData = "";
 
 }
 
 
-/* =====================================================
-   SALVAR CRIATURA
-===================================================== */
+/* =========================================================
+   IMAGEM
+========================================================= */
 
-creatureForm.addEventListener(
-    "submit",
-    async function(event){
+document
+    .getElementById("creatureImage")
+    .addEventListener(
+        "change",
+        function(){
 
-        event.preventDefault();
-
-
-        if(!currentUser){
-
-            alert(
-                "Você precisa estar logado."
-            );
-
-            return;
-
-        }
+            const file =
+                this.files[0];
 
 
-        const id =
-            document
-                .getElementById("creatureId")
-                .value;
+            if(!file)
+                return;
 
 
-        const name =
-            document
-                .getElementById("creatureName")
-                .value
-                .trim();
+            if(!file.type.startsWith("image/")){
 
+                alert(
+                    "Selecione uma imagem válida."
+                );
 
-        if(!name){
+                this.value = "";
 
-            alert(
-                "Digite o nome da criatura."
-            );
-
-            return;
-
-        }
-
-
-        const saveButton =
-            creatureForm.querySelector(
-                'button[type="submit"]'
-            );
-
-
-        saveButton.disabled =
-            true;
-
-        saveButton.textContent =
-            "SALVANDO...";
-
-
-        try{
-
-            let imageUrl =
-                currentEditingCreature?.image_url ||
-                null;
-
-
-            /* =========================================
-               UPLOAD DA IMAGEM
-            ========================================= */
-
-            if(currentCreatureImage){
-
-                const extension =
-                    currentCreatureImage.name
-                        .split(".")
-                        .pop()
-                        .toLowerCase();
-
-
-                const fileName =
-                    `${currentUser.id}/${Date.now()}-${crypto.randomUUID()}.${extension}`;
-
-
-                const {
-                    error:uploadError
-                } =
-                    await supabaseClient.storage
-                        .from("creatures")
-                        .upload(
-                            fileName,
-                            currentCreatureImage,
-                            {
-                                upsert:false
-                            }
-                        );
-
-
-                if(uploadError)
-                    throw uploadError;
-
-
-                const {
-                    data:urlData
-                } =
-                    supabaseClient.storage
-                        .from("creatures")
-                        .getPublicUrl(
-                            fileName
-                        );
-
-
-                imageUrl =
-                    urlData.publicUrl;
+                return;
 
             }
 
 
-            /* =========================================
-               DADOS
-            ========================================= */
+            const reader =
+                new FileReader();
 
-            const creatureData = {
 
-                name:
+            reader.onload =
+                event => {
 
-                    name,
+                    currentImageData =
+                        event.target.result;
 
+
+                    document.getElementById(
+                        "imagePreview"
+                    ).innerHTML = `
+                        <img
+                            src="${escapeAttribute(
+                                currentImageData
+                            )}"
+                            alt="Preview"
+                        >
+                    `;
+
+
+                    document.getElementById(
+                        "removeImageBtn"
+                    ).style.display =
+                        "block";
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+function removeImage(){
+
+    currentImageData = "";
+
+
+    document.getElementById(
+        "creatureImage"
+    ).value = "";
+
+
+    document.getElementById(
+        "imagePreview"
+    ).innerHTML = `
+        <span style="color:#62536d">
+            Nenhuma imagem selecionada
+        </span>
+    `;
+
+
+    document.getElementById(
+        "removeImageBtn"
+    ).style.display =
+        "none";
+
+}
+
+
+/* =========================================================
+   SALVAR CRIATURA
+========================================================= */
+
+document
+    .getElementById("creatureForm")
+    .addEventListener(
+        "submit",
+        function(event){
+
+            event.preventDefault();
+
+
+            const name =
+                document
+                    .getElementById(
+                        "creatureName"
+                    )
+                    .value
+                    .trim();
+
+
+            if(!name){
+
+                alert(
+                    "Digite o nome da criatura."
+                );
+
+                return;
+
+            }
+
+
+            let healthMax =
+                Math.max(
+                    1,
+                    Number(
+                        document.getElementById(
+                            "creatureHealthMax"
+                        ).value
+                    ) || 100
+                );
+
+
+            let health =
+                clamp(
+                    Number(
+                        document.getElementById(
+                            "creatureHealth"
+                        ).value
+                    ) || 0,
+                    0,
+                    healthMax
+                );
+
+
+            let resistanceMax =
+                Math.max(
+                    1,
+                    Number(
+                        document.getElementById(
+                            "creatureResistanceMax"
+                        ).value
+                    ) || 100
+                );
+
+
+            let resistance =
+                clamp(
+                    Number(
+                        document.getElementById(
+                            "creatureResistance"
+                        ).value
+                    ) || 0,
+                    0,
+                    resistanceMax
+                );
+
+
+            const creature = normalizeCreature({
+
+                id:
+                    currentEditingId ||
+                    newId(),
+
+                image:
+                    currentImageData,
+
+                name,
 
                 level:
-
                     Number(
                         document.getElementById(
                             "creatureLevel"
                         ).value
-                    ) || 1,
-
-
-                age:
-
-                    document.getElementById(
-                        "creatureAge"
-                    ).value.trim(),
-
-
-                gender:
-
-                    document.getElementById(
-                        "creatureGender"
-                    ).value.trim(),
-
-
-                weight:
-
-                    document.getElementById(
-                        "creatureWeight"
-                    ).value.trim(),
-
-
-                height:
-
-                    document.getElementById(
-                        "creatureHeight"
-                    ).value.trim(),
-
-
-                                role:
-
-                    document.getElementById(
-                        "creatureRole"
-                    ).value.trim(),
-
+                    ) || 0,
 
                 origin:
-
                     document.getElementById(
                         "creatureOrigin"
                     ).value.trim(),
 
-
-                organization:
-
+                height:
                     document.getElementById(
-                        "creatureOrganization"
+                        "creatureHeight"
                     ).value.trim(),
 
+                weight:
+                    document.getElementById(
+                        "creatureWeight"
+                    ).value.trim(),
 
                 danger:
-
                     document.getElementById(
                         "creatureDanger"
                     ).value,
 
+                health,
 
-                image_url:
+                healthMax,
 
-                    imageUrl,
+                resistance,
 
+                resistanceMax,
 
-                nexo_name:
+                attributes:
+                    getAttributesFromEditor(),
 
+                notes:
                     document.getElementById(
-                        "creatureNexoName"
+                        "creatureNotes"
                     ).value.trim(),
 
-
-                nexo_state:
-
-                    document.getElementById(
-                        "creatureNexoState"
-                    ).value,
-
-
-                nexo_level:
-
-                    Number(
-                        document.getElementById(
-                            "creatureNexoLevel"
-                        ).value
-                    ) || 1,
-
-
-                nexo_control:
-
-                    Number(
-                        document.getElementById(
-                            "creatureNexoControl"
-                        ).value
-                    ) || 0,
-
-
-                nexo_core:
-
-                    Math.max(
-                        0,
-                        Math.min(
-                            100,
-                            Number(
-                                document.getElementById(
-                                    "creatureCoreHealth"
-                                ).value
-                            ) || 0
+                createdAt:
+                    currentEditingId
+                        ? (
+                            creatures.find(
+                                c =>
+                                    c.id ===
+                                    currentEditingId
+                            )?.createdAt ||
+                            Date.now()
                         )
-                    ),
+                        : Date.now()
+
+            });
 
 
-                nexo_description:
+            if(currentEditingId){
 
-                    document.getElementById(
-                        "creatureNexoDescription"
-                    ).value.trim(),
-
-
-                progress_level:
-
-                    Number(
-                        document.getElementById(
-                            "creatureProgressLevel"
-                        ).value
-                    ) || 1,
+                const index =
+                    creatures.findIndex(
+                        c =>
+                            c.id ===
+                            currentEditingId
+                    );
 
 
-                xp:
+                if(index !== -1){
 
-                    Number(
-                        document.getElementById(
-                            "creatureXP"
-                        ).value
-                    ) || 0,
+                    creatures[index] =
+                        creature;
 
-
-                description:
-
-                    document.getElementById(
-                        "creatureDescription"
-                    ).value.trim(),
-
-
-                abilities:
-
-                    document.getElementById(
-                        "creatureAbilities"
-                    ).value.trim(),
-
-
-                public:
-
-                    document.getElementById(
-                        "creaturePublic"
-                    ).checked
-
-            };
-
-
-            /* =========================================
-               INSERIR OU ATUALIZAR
-            ========================================= */
-
-            let result;
-
-
-            if(id){
-
-                result =
-                    await supabaseClient
-                        .from("creatures")
-                        .update(creatureData)
-                        .eq("id", id)
-                        .eq("user_id", currentUser.id)
-                        .select()
-                        .single();
+                }
 
             }else{
 
-                result =
-                    await supabaseClient
-                        .from("creatures")
-                        .insert({
-                            ...creatureData,
-
-                            user_id:
-                                currentUser.id
-                        })
-                        .select()
-                        .single();
+                creatures.unshift(
+                    creature
+                );
 
             }
 
 
-            if(result.error)
-                throw result.error;
+            saveBestiary();
 
+            renderCreatures();
 
             closeEditor();
 
-            await loadCreatures();
-
 
             alert(
-                id
-                    ? "Criatura atualizada com sucesso!"
-                    : "Criatura criada com sucesso!"
+                currentEditingId
+                    ? "Criatura atualizada!"
+                    : "Criatura criada!"
             );
-
-
-        }catch(error){
-
-            console.error(
-                "Erro ao salvar criatura:",
-                error
-            );
-
-
-            alert(
-                "Não foi possível salvar a criatura: " +
-                (error.message || error)
-            );
-
-
-        }finally{
-
-            saveButton.disabled =
-                false;
-
-            saveButton.textContent =
-                "SALVAR";
 
         }
-
-    }
-);
+    );
 
 
-/* =====================================================
-   CARREGAR CRIATURAS
-===================================================== */
+/* =========================================================
+   EXCLUIR
+========================================================= */
 
-async function loadCreatures(){
+function deleteCreature(){
 
-    if(!currentUser)
+    if(!currentEditingId)
         return;
 
 
-    try{
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("creatures")
-                .select("*")
-                .or(
-                    `user_id.eq.${currentUser.id},public.eq.true`
-                )
-                .order(
-                    "created_at",
-                    {
-                        ascending:false
-                    }
-                );
-
-
-        if(error)
-            throw error;
-
-
-        creatures =
-            data || [];
-
-
-        renderCreatures();
-
-
-    }catch(error){
-
-        console.error(
-            "Erro ao carregar criaturas:",
-            error
+    const creature =
+        creatures.find(
+            c =>
+                c.id ===
+                currentEditingId
         );
 
 
-        creatureGrid.innerHTML = `
-            <div class="empty">
+    if(!creature)
+        return;
 
-                <strong>
-                    Erro ao carregar o bestiário
-                </strong>
 
-                <span>
-                    ${escapeHTML(
-                        error.message ||
-                        "Erro desconhecido."
-                    )}
-                </span>
+    const confirmed =
+        confirm(
+            `Deseja realmente excluir "${creature.name}"?`
+        );
 
-            </div>
-        `;
 
-    }
+    if(!confirmed)
+        return;
+
+
+    creatures =
+        creatures.filter(
+            c =>
+                c.id !==
+                currentEditingId
+        );
+
+
+    saveBestiary();
+
+    renderCreatures();
+
+    closeEditor();
 
 }
 
 
-/* =====================================================
-   FILTRO DE PERICULOSIDADE
-===================================================== */
+/* =========================================================
+   FILTRO
+========================================================= */
 
-function setDangerFilter(
-    danger,
+function setFilter(
+    filter,
     button
 ){
 
-    currentDangerFilter =
-        danger;
+    currentFilter =
+        filter;
 
 
     document
@@ -3884,22 +2521,29 @@ function setDangerFilter(
 }
 
 
-/* =====================================================
-   RENDERIZAR CRIATURAS
-===================================================== */
+/* =========================================================
+   RENDER
+========================================================= */
 
 function renderCreatures(){
 
-    if(!creatureGrid)
+    const grid =
+        document.getElementById(
+            "creatureGrid"
+        );
+
+
+    if(!grid)
         return;
 
 
     const search =
-        document
-            .getElementById("searchInput")
-            ?.value
-            .trim()
-            .toLowerCase() || "";
+        document.getElementById(
+            "searchInput"
+        )
+        ?.value
+        .trim()
+        .toLowerCase() || "";
 
 
     const filtered =
@@ -3911,29 +2555,29 @@ function renderCreatures(){
                     [
                         creature.name,
                         creature.origin,
-                        creature.organization,
-                        creature.role,
-                        creature.nexo_name
+                        creature.height,
+                        creature.weight
                     ]
-                    .filter(Boolean)
                     .some(
                         value =>
-                            String(value)
-                                .toLowerCase()
-                                .includes(search)
+                            String(
+                                value || ""
+                            )
+                            .toLowerCase()
+                            .includes(search)
                     );
 
 
-                const matchesDanger =
-                    currentDangerFilter ===
+                const matchesFilter =
+                    currentFilter ===
                         "todos" ||
                     creature.danger ===
-                        currentDangerFilter;
+                        currentFilter;
 
 
                 return (
                     matchesSearch &&
-                    matchesDanger
+                    matchesFilter
                 );
 
             }
@@ -3942,7 +2586,7 @@ function renderCreatures(){
 
     if(!filtered.length){
 
-        creatureGrid.innerHTML = `
+        grid.innerHTML = `
             <div class="empty">
 
                 <strong>
@@ -3950,7 +2594,7 @@ function renderCreatures(){
                 </strong>
 
                 <span>
-                    Tente outra pesquisa ou crie uma nova criatura.
+                    Crie uma criatura para começar o bestiário.
                 </span>
 
             </div>
@@ -3961,31 +2605,23 @@ function renderCreatures(){
     }
 
 
-    creatureGrid.innerHTML =
+    grid.innerHTML =
         filtered
             .map(
-                creature =>
-                    createCreatureCard(
-                        creature
-                    )
+                createCreatureCard
             )
             .join("");
 
 }
 
 
-/* =====================================================
-   CARD DA CRIATURA
-===================================================== */
+/* =========================================================
+   CARD
+========================================================= */
 
 function createCreatureCard(
     creature
 ){
-
-    const danger =
-        creature.danger ||
-        "desconhecido";
-
 
     const dangerName =
         {
@@ -3993,40 +2629,22 @@ function createCreatureCard(
             moderado:"Moderado",
             alto:"Alto",
             extremo:"Extremo",
-            desconhecido:"Desconhecido"
-        }[danger] ||
-        "Desconhecido";
-
-
-    const isOwner =
-        currentUser &&
-        creature.user_id ===
-            currentUser.id;
-
-
-    const authorName =
-        creature.author_username ||
-        creature.username ||
-        "Usuário";
-
-
-    const authorAvatar =
-        creature.author_avatar ||
-        creature.avatar_url ||
-        null;
+            desconhecido:"???"
+        }[
+            creature.danger
+        ] || "???";
 
 
     const image =
-        creature.image_url
+        creature.image
             ? `
                 <img
                     src="${escapeAttribute(
-                        creature.image_url
+                        creature.image
                     )}"
                     alt="${escapeAttribute(
-                        creature.name || "Criatura"
+                        creature.name
                     )}"
-                    loading="lazy"
                 >
             `
             : `
@@ -4036,29 +2654,27 @@ function createCreatureCard(
             `;
 
 
-    const author =
-        authorAvatar
-            ? `
-                <img
-                    src="${escapeAttribute(
-                        authorAvatar
-                    )}"
-                    alt="Avatar"
-                >
-            `
-            : `
-                <div class="card-author-placeholder">
-                    👤
-                </div>
-            `;
+    const healthPercent =
+        percentage(
+            creature.health,
+            creature.healthMax
+            const healthPercent =
+        percentage(
+            creature.health,
+            creature.healthMax
+        );
+
+    const resistancePercent =
+        percentage(
+            creature.resistance,
+            creature.resistanceMax
+        );
 
 
     return `
         <article
             class="card"
-            onclick="openSheet('${escapeAttribute(
-                creature.id
-            )}')"
+            onclick="openSheet('${escapeAttribute(creature.id)}')"
         >
 
             <div class="card-image">
@@ -4070,13 +2686,19 @@ function createCreatureCard(
 
                 <div class="card-name">
                     ${escapeHTML(
-                        creature.name ||
-                        "Sem nome"
+                        creature.name
                     )}
                 </div>
 
 
                 <div class="card-info">
+
+                    <div>
+                        Level:
+                        ${escapeHTML(
+                            creature.level
+                        )}
+                    </div>
 
                     ${
                         creature.origin
@@ -4091,33 +2713,97 @@ function createCreatureCard(
                             : ""
                     }
 
-
                     ${
-                        creature.role
+                        creature.height
                             ? `
                                 <div>
-                                    Cargo:
+                                    Altura:
                                     ${escapeHTML(
-                                        creature.role
+                                        creature.height
                                     )}
                                 </div>
                             `
                             : ""
                     }
 
-
                     ${
-                        creature.level != null
+                        creature.weight
                             ? `
                                 <div>
-                                    Nível:
+                                    Peso:
                                     ${escapeHTML(
-                                        creature.level
+                                        creature.weight
                                     )}
                                 </div>
                             `
                             : ""
                     }
+
+                </div>
+
+
+                <div class="card-resources">
+
+                    <div class="mini-resource">
+
+                        <div class="mini-resource-top">
+
+                            <span>
+                                VIDA
+                            </span>
+
+                            <strong>
+                                ${creature.health}/${creature.healthMax}
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-bar">
+
+                            <div
+                                class="mini-fill health-fill"
+                                style="
+                                    width:${healthPercent}%;
+                                    ${resourceColorStyle(
+                                        healthPercent
+                                    )}
+                                "
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="mini-resource">
+
+                        <div class="mini-resource-top">
+
+                            <span>
+                                RESISTÊNCIA
+                            </span>
+
+                            <strong>
+                                ${creature.resistance}/${creature.resistanceMax}
+                            </strong>
+
+                        </div>
+
+                        <div class="mini-bar">
+
+                            <div
+                                class="mini-fill resistance-fill"
+                                style="
+                                    width:${resistancePercent}%;
+                                    ${resourceColorStyle(
+                                        resistancePercent
+                                    )}
+                                "
+                            ></div>
+
+                        </div>
+
+                    </div>
 
                 </div>
 
@@ -4126,7 +2812,7 @@ function createCreatureCard(
 
                     <span
                         class="badge ${escapeAttribute(
-                            danger
+                            creature.danger
                         )}"
                     >
                         ${escapeHTML(
@@ -4134,31 +2820,9 @@ function createCreatureCard(
                         )}
                     </span>
 
-
-                    ${
-                        creature.public
-                            ? `
-                                <span class="public-label">
-                                    PÚBLICA
-                                </span>
-                            `
-                            : `
-                                <span class="public-label">
-                                    PRIVADA
-                                </span>
-                            `
-                    }
-
-                </div>
-
-
-                <div class="card-author">
-
-                    ${author}
-
-                    <span>
-                        ${escapeHTML(
-                            authorName
+                    <span class="level-label">
+                        LV. ${escapeHTML(
+                            creature.level
                         )}
                     </span>
 
@@ -4172,19 +2836,17 @@ function createCreatureCard(
 }
 
 
-/* =====================================================
-   ABRIR FICHA
-===================================================== */
+/* =========================================================
+   FICHA
+========================================================= */
 
-function openSheet(
-    creatureId
-){
+function openSheet(id){
 
     const creature =
         creatures.find(
             item =>
                 String(item.id) ===
-                String(creatureId)
+                String(id)
         );
 
 
@@ -4192,74 +2854,21 @@ function openSheet(
         return;
 
 
-    const danger =
-        creature.danger ||
-        "desconhecido";
-
-
-    const dangerName =
-        {
-            baixo:"Baixo",
-            moderado:"Moderado",
-            alto:"Alto",
-            extremo:"Extremo",
-            desconhecido:"Desconhecido"
-        }[danger] ||
-        "Desconhecido";
-
-
-    const core =
-        Math.max(
-            0,
-            Math.min(
-                100,
-                Number(
-                    creature.nexo_core
-                ) || 0
-            )
+    const sheet =
+        document.getElementById(
+            "sheetContent"
         );
 
 
-    let coreColorMessage;
-
-
-    if(core >= 70){
-
-        coreColorMessage =
-            "Ótimas condições, seu núcleo está perfeito!";
-
-    }else if(core >= 50){
-
-        coreColorMessage =
-            "Atenção: o núcleo apresenta sinais de desgaste.";
-
-    }else if(core >= 30){
-
-        coreColorMessage =
-            "Estado preocupante. O núcleo está bastante danificado.";
-
-    }else if(core > 0){
-
-        coreColorMessage =
-            "Estado crítico. O núcleo está próximo da ruptura.";
-
-    }else{
-
-        coreColorMessage =
-            "Núcleo destruído.";
-
-    }
-
-
     const image =
-        creature.image_url
+        creature.image
             ? `
                 <img
                     src="${escapeAttribute(
-                        creature.image_url
+                        creature.image
                     )}"
                     alt="${escapeAttribute(
-                        creature.name || "Criatura"
+                        creature.name
                     )}"
                 >
             `
@@ -4270,594 +2879,574 @@ function openSheet(
             `;
 
 
-    const abilities =
-        String(
-            creature.abilities || ""
-        )
-        .split("\n")
-        .map(
-            item =>
-                item.trim()
-        )
-        .filter(Boolean);
+    sheet.innerHTML = `
 
-
-    const authorName =
-        creature.author_username ||
-        creature.username ||
-        "Usuário";
-
-
-    const authorAvatar =
-        creature.author_avatar ||
-        creature.avatar_url ||
-        null;
-
-
-    const authorAvatarHTML =
-        authorAvatar
-            ? `
-                <img
-                    src="${escapeAttribute(
-                        authorAvatar
-                    )}"
-                    alt="Avatar"
-                >
-            `
-            : `
-                <div class="author-placeholder">
-                    👤
-                </div>
-            `;
-
-
-    const sheetContent =
-        document.getElementById(
-            "sheetContent"
-        );
-
-
-    sheetContent.innerHTML = `
-
-        <div>
-
-            <div class="sheet-image">
-                ${image}
-            </div>
-
+        <div class="sheet-main-image">
+            ${image}
         </div>
 
 
         <div>
 
-            <div class="sheet-name">
+            <div class="sheet-title">
                 ${escapeHTML(
-                    creature.name ||
-                    "Sem nome"
+                    creature.name
                 )}
             </div>
 
 
-            ${
-                creature.origin
-                    ? `
-                        <div class="sheet-origin">
+            <div class="sheet-origin">
+
+                ${creature.origin
+                    ? escapeHTML(
+                        creature.origin
+                    )
+                    : "Origem desconhecida"
+                }
+
+            </div>
+
+        </div>
+
+
+        <div class="sheet-stats">
+
+            ${sheetStat(
+                "LEVEL",
+                creature.level
+            )}
+
+            ${sheetStat(
+                "ALTURA",
+                creature.height || "—"
+            )}
+
+            ${sheetStat(
+                "PESO",
+                creature.weight || "—"
+            )}
+
+            ${sheetStat(
+                "PERICULOSIDADE",
+                dangerName(
+                    creature.danger
+                )
+            )}
+
+        </div>
+
+
+        <div class="resources">
+
+            ${resourceHTML(
+                "VIDA",
+                creature.health,
+                creature.healthMax,
+                "health"
+            )}
+
+            ${resourceHTML(
+                "RESISTÊNCIA",
+                creature.resistance,
+                creature.resistanceMax,
+                "resistance"
+            )}
+
+        </div>
+
+
+        <div class="sheet-section">
+
+            <div class="section-title">
+                ATRIBUTOS
+            </div>
+
+
+            <div class="attributes">
+
+                ${renderSheetAttributes(
+                    creature.attributes
+                )}
+
+            </div>
+
+        </div>
+
+
+        ${
+            creature.notes
+                ? `
+                    <div class="sheet-section">
+
+                        <div class="section-title">
+                            ANOTAÇÕES IMPORTANTES
+                        </div>
+
+                        <div class="notes">
                             ${escapeHTML(
-                                creature.origin
+                                creature.notes
                             )}
                         </div>
-                    `
-                    : ""
-            }
 
-
-            <div class="stats">
-
-                ${statHTML(
-                    "Nível",
-                    creature.level
-                )}
-
-                ${statHTML(
-                    "Idade",
-                    creature.age
-                )}
-
-                ${statHTML(
-                    "Gênero",
-                    creature.gender
-                )}
-
-                ${statHTML(
-                    "Peso",
-                    creature.weight
-                )}
-
-                ${statHTML(
-                    "Altura",
-                    creature.height
-                )}
-
-                ${statHTML(
-                    "Cargo",
-                    creature.role
-                )}
-
-                ${statHTML(
-                    "Organização",
-                    creature.organization
-                )}
-
-                ${statHTML(
-                    "Periculosidade",
-                    dangerName
-                )}
-
-            </div>
-
-
-            ${
-                creature.nexo_name ||
-                creature.nexo_description
-                    ? `
-
-                        <div class="sheet-section">
-
-                            <h3>
-                                NEXO ✨
-                            </h3>
-
-
-                            ${
-                                creature.nexo_name
-                                    ? `
-                                        <p>
-                                            <strong>
-                                                Nome:
-                                            </strong>
-                                            ${escapeHTML(
-                                                creature.nexo_name
-                                            )}
-                                        </p>
-                                    `
-                                    : ""
-                            }
-
-
-                            <p>
-                                <strong>
-                                    Estado:
-                                </strong>
-
-                                ${escapeHTML(
-                                    creature.nexo_state ===
-                                        "ativado"
-                                        ? "Ativado"
-                                        : "Desativado"
-                                )}
-                            </p>
-
-
-                            <p>
-                                <strong>
-                                    Nível:
-                                </strong>
-
-                                ${escapeHTML(
-                                    creature.nexo_level ??
-                                    1
-                                )}
-                            </p>
-
-
-                            <p>
-                                <strong>
-                                    Controle:
-                                </strong>
-
-                                ${escapeHTML(
-                                    creature.nexo_control ??
-                                    0
-                                )}
-                                / 5
-                            </p>
-
-
-                            <p>
-                                <strong>
-                                    Vida do Núcleo:
-                                </strong>
-
-                                ${core}/100
-                                   </p>
-
-
-                            <div class="bar">
-
-                                <div
-                                    class="bar-fill"
-                                    style="width:${core}%"
-                                ></div>
-
-                            </div>
-
-
-                            <p
-                                style="
-                                    margin-top:8px;
-                                    color:${
-                                        core >= 70
-                                            ? "#48d17b"
-                                            : core >= 50
-                                                ? "#ffd447"
-                                                : core >= 30
-                                                    ? "#ff8b35"
-                                                    : "#ff3e5e"
-                                    };
-                                "
-                            >
-                                ${escapeHTML(
-                                    coreColorMessage
-                                )}
-                            </p>
-
-
-                            ${
-                                creature.nexo_description
-                                    ? `
-                                        <p
-                                            style="
-                                                margin-top:10px;
-                                            "
-                                        >
-                                            ${escapeHTML(
-                                                creature.nexo_description
-                                            )}
-                                        </p>
-                                    `
-                                    : ""
-                            }
-
-                        </div>
-
-                    `
-                    : ""
-            }
-
-
-            ${
-                creature.description
-                    ? `
-
-                        <div class="sheet-section">
-
-                            <h3>
-                                DESCRIÇÃO
-                            </h3>
-
-                            <p>
-                                ${escapeHTML(
-                                    creature.description
-                                )}
-                            </p>
-
-                        </div>
-
-                    `
-                    : ""
-            }
-
-
-            ${
-                abilities.length
-                    ? `
-
-                        <div class="sheet-section">
-
-                            <h3>
-                                HABILIDADES
-                            </h3>
-
-                            <ul>
-
-                                ${abilities
-                                    .map(
-                                        ability =>
-                                            `
-                                                <li>
-                                                    ${escapeHTML(
-                                                        ability
-                                                    )}
-                                                </li>
-                                            `
-                                    )
-                                    .join("")}
-
-                            </ul>
-
-                        </div>
-
-                    `
-                    : ""
-            }
-
-
-            <div class="sheet-section">
-
-                <h3>
-                    PROGRESSÃO
-                </h3>
-
-                <p>
-                    <strong>
-                        Nível atual:
-                    </strong>
-
-                    ${escapeHTML(
-                        creature.progress_level ??
-                        1
-                    )}
-                </p>
-
-                <p>
-                    <strong>
-                        XP:
-                    </strong>
-
-                    ${escapeHTML(
-                        creature.xp ??
-                        0
-                    )}
-                </p>
-
-            </div>
-
-
-            <div class="author-box">
-
-                ${authorAvatarHTML}
-
-                <div>
-
-                    <div
-                        style="
-                            color:white;
-                            font-size:13px;
-                        "
-                    >
-                        ${escapeHTML(
-                            authorName
-                        )}
                     </div>
-
-                    <div
-                        style="
-                            color:#8f83a0;
-                            font-size:11px;
-                            margin-top:3px;
-                        "
-                    >
-                        Autor da criatura
-                    </div>
-
-                </div>
-
-            </div>
+                `
+                : ""
+        }
 
 
-            ${
-                currentUser &&
-                creature.user_id === currentUser.id
-                    ? `
+        <div class="sheet-actions">
 
-                        <div
-                            style="
-                                display:flex;
-                                gap:10px;
-                                margin-top:15px;
-                            "
-                        >
+            <button
+                class="header-btn"
+                onclick="openEditModal('${escapeAttribute(
+                    creature.id
+                )}'); closeSheet();"
+            >
+                EDITAR
+            </button>
 
-                            <button
-                                class="btn"
-                                type="button"
-                                onclick="editFromSheet('${escapeAttribute(
-                                    creature.id
-                                )}')"
-                            >
-                                EDITAR
-                            </button>
-
-                        </div>
-
-                    `
-                    : ""
-            }
+            <button
+                class="primary-btn"
+                onclick="closeSheet()"
+            >
+                FECHAR
+            </button>
 
         </div>
 
     `;
 
 
-    sheetModal.classList.add(
-        "show"
-    );
+    document
+        .getElementById("sheetModal")
+        .classList.add("show");
 
 }
 
-
-/* =====================================================
-   EDITAR A PARTIR DA FICHA
-===================================================== */
-
-function editFromSheet(
-    creatureId
-){
-
-    const creature =
-        creatures.find(
-            item =>
-                String(item.id) ===
-                String(creatureId)
-        );
-
-
-    if(!creature)
-        return;
-
-
-    closeSheet();
-
-    openEditModal(
-        creature
-    );
-
-}
-
-
-/* =====================================================
-   FECHAR FICHA
-===================================================== */
 
 function closeSheet(){
 
-    sheetModal.classList.remove(
-        "show"
-    );
+    document
+        .getElementById("sheetModal")
+        .classList.remove("show");
 
 }
 
 
-/* =====================================================
-   EXCLUIR CRIATURA
-===================================================== */
+/* =========================================================
+   STATUS DOS RECURSOS
+========================================================= */
 
-async function deleteCreature(){
+function resourceHTML(
+    name,
+    current,
+    max,
+    type
+){
 
-    if(!currentUser)
-        return;
-
-
-    const id =
-        document
-            .getElementById("creatureId")
-            .value;
-
-
-    if(!id)
-        return;
-
-
-    const confirmed =
-        confirm(
-            "Tem certeza que deseja excluir esta criatura?"
+    const percent =
+        percentage(
+            current,
+            max
         );
 
 
-    if(!confirmed)
-        return;
-
-
-    const deleteButton =
-        document.getElementById(
-            "deleteCreatureBtn"
+    const message =
+        resourceMessage(
+            percent,
+            type
         );
 
 
-    deleteButton.disabled =
-        true;
+    return `
 
-    deleteButton.textContent =
-        "EXCLUINDO...";
+        <div class="resource-box">
 
+            <div class="resource-header">
 
-    try{
+                <span class="resource-name">
+                    ${name}
+                </span>
 
-        const {
-            error
-        } =
-            await supabaseClient
-                .from("creatures")
-                .delete()
-                .eq("id", id)
-                .eq(
-                    "user_id",
-                    currentUser.id
-                );
+                <span
+                    class="resource-number"
+                    style="${resourceTextStyle(
+                        percent
+                    )}"
+                >
+                    ${current}/${max}
+                </span>
 
-
-        if(error)
-            throw error;
+            </div>
 
 
-        closeEditor();
+            <div class="resource-bar">
 
-        await loadCreatures();
+                <div
+                    class="resource-fill"
+                    style="
+                        width:${percent}%;
+                        ${resourceColorStyle(
+                            percent
+                        )}
+                    "
+                ></div>
 
-
-        alert(
-            "Criatura excluída com sucesso!"
-        );
-
-
-    }catch(error){
-
-        console.error(
-            "Erro ao excluir criatura:",
-            error
-        );
+            </div>
 
 
-        alert(
-            "Não foi possível excluir a criatura: " +
-            (error.message || error)
-        );
+            <div
+                class="resource-status"
+                style="${resourceTextStyle(
+                    percent
+                )}"
+            >
+                ${message}
+            </div>
+
+        </div>
+
+    `;
+
+}
 
 
-    }finally{
+function resourceMessage(
+    percent,
+    type
+){
 
-        deleteButton.disabled =
-            false;
+    if(percent >= 90){
 
-        deleteButton.textContent =
-            "EXCLUIR";
+        return type === "health"
+            ? "Perfeitamente saudável. O corpo está em ótimas condições."
+            : "Resistência praticamente intacta. Pronto para continuar.";
 
     }
 
+
+    if(percent >= 70){
+
+        return type === "health"
+            ? "Boas condições. Pequenos danos não comprometem o combate."
+            : "Boa resistência. Ainda possui bastante energia.";
+
+    }
+
+
+    if(percent >= 50){
+
+        return type === "health"
+            ? "Ferimentos moderados. É preciso ter cuidado."
+            : "A resistência começa a mostrar sinais de desgaste.";
+
+    }
+
+
+    if(percent >= 30){
+
+        return type === "health"
+            ? "Estado preocupante. Os ferimentos já são significativos."
+            : "Resistência baixa. O corpo começa a perder desempenho.";
+
+    }
+
+
+    if(percent > 0){
+
+        return type === "health"
+            ? "ESTADO CRÍTICO. A vida está perigosamente baixa."
+            : "ESTADO CRÍTICO. A resistência está quase esgotada.";
+
+    }
+
+
+    return type === "health"
+        ? "VIDA ESGOTADA."
+        : "RESISTÊNCIA ESGOTADA.";
+
 }
 
 
-/* =====================================================
-   FUNÇÕES AUXILIARES
-===================================================== */
+/* =========================================================
+   CORES DINÂMICAS
+========================================================= */
 
-function statHTML(
-    label,
-    value
+function resourceColorStyle(
+    percent
 ){
 
-    if(
-        value === null ||
-        value === undefined ||
-        value === ""
-    ){
+    if(percent >= 70){
 
-        return "";
+        return `
+            background:linear-gradient(
+                90deg,
+                #24b866,
+                #58ed91
+            );
+
+            box-shadow:
+                0 0 12px rgba(
+                    56,
+                    212,
+                    123,
+                    .55
+                );
+        `;
+
+    }
+
+
+    if(percent >= 50){
+
+        return `
+            background:linear-gradient(
+                90deg,
+                #d5a928,
+                #f0d75d
+            );
+
+            box-shadow:
+                0 0 12px rgba(
+                    232,
+                    197,
+                    79,
+                    .45
+                );
+        `;
+
+    }
+
+
+    if(percent >= 30){
+
+        return `
+            background:linear-gradient(
+                90deg,
+                #d65c45,
+                #f08a67
+            );
+
+            box-shadow:
+                0 0 12px rgba(
+                    232,
+                    135,
+                    61,
+                    .45
+                );
+        `;
 
     }
 
 
     return `
+        background:linear-gradient(
+            90deg,
+            #8d182e,
+            #e93450
+        );
+
+        box-shadow:
+            0 0 14px rgba(
+                233,
+                75,
+                98,
+                .6
+            );
+    `;
+
+}
+
+
+function resourceTextStyle(
+    percent
+){
+
+    if(percent >= 70){
+
+        return "color:#58ed91;";
+
+    }
+
+
+    if(percent >= 50){
+
+        return "color:#f0d75d;";
+
+    }
+
+
+    if(percent >= 30){
+
+        return "color:#f08a67;";
+
+    }
+
+
+    return "color:#ff536c;";
+
+}
+
+
+/* =========================================================
+   PORCENTAGEM
+========================================================= */
+
+function percentage(
+    value,
+    max
+){
+
+    if(!max || max <= 0)
+        return 0;
+
+
+    return Math.round(
+        clamp(
+            (Number(value) / Number(max)) * 100,
+            0,
+            100
+        )
+    );
+
+}
+
+
+/* =========================================================
+   ATRIBUTOS NA FICHA
+========================================================= */
+
+function renderSheetAttributes(
+    attributes
+){
+
+    let html = "";
+
+
+    Object.entries(
+        ATTRIBUTE_CONFIG
+    ).forEach(
+        ([key, config]) => {
+
+            const list =
+                attributes?.[key] || [];
+
+
+            html += `
+
+                <div class="attribute">
+
+                    <div class="attribute-head">
+
+                        <span class="attribute-name">
+                            ${escapeHTML(
+                                config.name
+                            )}
+                        </span>
+
+                    </div>
+
+            `;
+
+
+            if(!list.length){
+
+                html += `
+                    <div
+                        style="
+                            color:#81738b;
+                            margin-top:8px;
+                            font-size:13px;
+                        "
+                    >
+                        Nenhum valor registrado.
+                    </div>
+                `;
+
+            }else{
+
+                list.forEach(
+                    item => {
+
+                        html += `
+
+                            <div
+                                style="
+                                    display:flex;
+                                    justify-content:space-between;
+                                    align-items:center;
+                                    gap:15px;
+                                    margin-top:9px;
+                                    padding-top:9px;
+                                    border-top:1px solid #2a1837;
+                                "
+                            >
+
+                                <span
+                                    style="
+                                        color:#cfc1d7;
+                                    "
+                                >
+                                    ${escapeHTML(
+                                        item.label ||
+                                        config.name
+                                    )}
+                                </span>
+
+                                <strong
+                                    style="
+                                        color:#c79bff;
+                                        font-size:19px;
+                                    "
+                                >
+                                    ${escapeHTML(
+                                        item.value
+                                    )}
+                                </strong>
+
+                            </div>
+
+                        `;
+
+                    }
+                );
+
+            }
+
+
+            html += `
+                </div>
+            `;
+
+        }
+    );
+
+
+    return html;
+
+}
+
+
+/* =========================================================
+   STAT
+========================================================= */
+
+function sheetStat(
+    label,
+    value
+){
+
+    return `
 
         <div class="stat">
 
-            <span>
+            <span class="stat-label">
                 ${escapeHTML(label)}
             </span>
 
-            <strong>
+            <span class="stat-value">
                 ${escapeHTML(value)}
-            </strong>
+            </span>
 
         </div>
 
@@ -4866,9 +3455,188 @@ function statHTML(
 }
 
 
-/* =====================================================
-   ESCAPAR HTML
-===================================================== */
+/* =========================================================
+   PERICULOSIDADE
+========================================================= */
+
+function dangerName(
+    danger
+){
+
+    return {
+        baixo:"Baixo",
+        moderado:"Moderado",
+        alto:"Alto",
+        extremo:"Extremo",
+        desconhecido:"???"
+    }[
+        danger
+    ] || "???";
+
+}
+
+
+/* =========================================================
+   EXPORTAR BESTIÁRIO
+========================================================= */
+
+function exportBestiary(){
+
+    const data = {
+
+        version:3,
+
+        exportedAt:
+            new Date().toISOString(),
+
+        creatures
+
+    };
+
+
+    const blob =
+        new Blob(
+            [
+                JSON.stringify(
+                    data,
+                    null,
+                    2
+                )
+            ],
+            {
+                type:"application/json"
+            }
+        );
+
+
+    const url =
+        URL.createObjectURL(blob);
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.href = url;
+
+    link.download =
+        "nexus-bestiario.json";
+
+
+    document.body.appendChild(
+        link
+    );
+
+
+    link.click();
+
+
+    link.remove();
+
+
+    URL.revokeObjectURL(
+        url
+    );
+
+}
+
+
+/* =========================================================
+   IMPORTAR BESTIÁRIO
+========================================================= */
+
+function importBestiary(event){
+
+    const file =
+        event.target.files[0];
+
+
+    if(!file)
+        return;
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function(){
+
+            try{
+
+                const parsed =
+                    JSON.parse(
+                        reader.result
+                    );
+
+
+                let imported;
+
+
+                if(Array.isArray(parsed)){
+
+                    imported =
+                        parsed;
+
+                }else if(
+                    parsed &&
+                    Array.isArray(
+                        parsed.creatures
+                    )
+                ){
+
+                    imported =
+                        parsed.creatures;
+
+                }else{
+
+                    throw new Error(
+                        "Arquivo JSON inválido."
+                    );
+
+                }
+
+
+                creatures =
+                    imported.map(
+                        normalizeCreature
+                    );
+
+
+                saveBestiary();
+
+                renderCreatures();
+
+
+                alert(
+                    `${creatures.length} criatura(s) importada(s) com sucesso!`
+                );
+
+
+            }catch(error){
+
+                console.error(error);
+
+                alert(
+                    "Não foi possível importar o arquivo."
+                );
+
+            }
+
+
+            event.target.value = "";
+
+        };
+
+
+    reader.readAsText(file);
+
+}
+
+
+/* =========================================================
+   UTILITÁRIOS DE SEGURANÇA
+========================================================= */
 
 function escapeHTML(
     value
@@ -4887,6 +3655,8 @@ function escapeHTML(
     )
     .replace(
         />/g,
+        .replace(
+        />/g,
         "&gt;"
     )
     .replace(
@@ -4901,62 +3671,492 @@ function escapeHTML(
 }
 
 
-/* =====================================================
-   ESCAPAR ATRIBUTO
-===================================================== */
-
 function escapeAttribute(
     value
 ){
 
-    return escapeHTML(
-        value
-    );
+    return escapeHTML(value);
 
 }
 
 
-/* =====================================================
-   SANITIZAR NOME DE ARQUIVO
-===================================================== */
-
-function sanitizeFileName(
-    name
-){
-
-    return String(
-        name || "arquivo"
-    )
-    .replace(
-        /[^a-zA-Z0-9._-]/g,
-        "_"
-    );
-
-}
-
-
-/* =====================================================
-   PREVIEW DO AVATAR
-===================================================== */
+/* =========================================================
+   FECHAR MODAIS AO CLICAR FORA
+========================================================= */
 
 document
-    .getElementById("profileAvatar")
-    ?.addEventListener(
-        "change",
+    .getElementById("editorModal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(event.target === this){
+
+                closeEditor();
+
+            }
+
+        }
+    );
+
+
+document
+    .getElementById("sheetModal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(event.target === this){
+
+                closeSheet();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   TECLA ESC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key !== "Escape")
+            return;
+
+
+        const editor =
+            document.getElementById(
+                "editorModal"
+            );
+
+        const sheet =
+            document.getElementById(
+                "sheetModal"
+            );
+
+
+        if(editor.classList.contains("show")){
+
+            closeEditor();
+
+        }
+
+
+        if(sheet.classList.contains("show")){
+
+            closeSheet();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ATUALIZAÇÃO AUTOMÁTICA DOS CAMPOS DE VIDA
+========================================================= */
+
+function updateResourceEditorPreview(){
+
+    const health =
+        Number(
+            document.getElementById(
+                "creatureHealth"
+            )?.value
+        ) || 0;
+
+    const healthMax =
+        Math.max(
+            1,
+            Number(
+                document.getElementById(
+                    "creatureHealthMax"
+                )?.value
+            ) || 100
+        );
+
+
+    const resistance =
+        Number(
+            document.getElementById(
+                "creatureResistance"
+            )?.value
+        ) || 0;
+
+    const resistanceMax =
+        Math.max(
+            1,
+            Number(
+                document.getElementById(
+                    "creatureResistanceMax"
+                )?.value
+            ) || 100
+        );
+
+
+    const healthPercent =
+        percentage(
+            health,
+            healthMax
+        );
+
+    const resistancePercent =
+        percentage(
+            resistance,
+            resistanceMax
+        );
+
+
+    const healthInput =
+        document.getElementById(
+            "creatureHealth"
+        );
+
+    const resistanceInput =
+        document.getElementById(
+            "creatureResistance"
+        );
+
+
+    if(healthInput){
+
+        healthInput.max =
+            healthMax;
+
+    }
+
+
+    if(resistanceInput){
+
+        resistanceInput.max =
+            resistanceMax;
+
+    }
+
+}
+
+
+/* =========================================================
+   LIMITAR VIDA / RESISTÊNCIA
+========================================================= */
+
+document
+    .getElementById("creatureHealth")
+    .addEventListener(
+        "input",
         function(){
+
+            const max =
+                Math.max(
+                    1,
+                    Number(
+                        document.getElementById(
+                            "creatureHealthMax"
+                        ).value
+                    ) || 100
+                );
+
+
+            let value =
+                Number(this.value) || 0;
+
+
+            value =
+                clamp(
+                    value,
+                    0,
+                    max
+                );
+
+
+            this.value =
+                value;
+
+
+            updateResourceEditorPreview();
+
+        }
+    );
+
+
+document
+    .getElementById("creatureHealthMax")
+    .addEventListener(
+        "input",
+        function(){
+
+            let max =
+                Math.max(
+                    1,
+                    Number(this.value) || 1
+                );
+
+
+            this.value =
+                max;
+
+
+            const health =
+                document.getElementById(
+                    "creatureHealth"
+                );
+
+
+            if(health){
+
+                health.max =
+                    max;
+
+
+                health.value =
+                    clamp(
+                        Number(
+                            health.value
+                        ) || 0,
+                        0,
+                        max
+                    );
+
+            }
+
+
+            updateResourceEditorPreview();
+
+        }
+    );
+
+
+document
+    .getElementById("creatureResistance")
+    .addEventListener(
+        "input",
+        function(){
+
+            const max =
+                Math.max(
+                    1,
+                    Number(
+                        document.getElementById(
+                            "creatureResistanceMax"
+                        ).value
+                    ) || 100
+                );
+
+
+            let value =
+                Number(this.value) || 0;
+
+
+            value =
+                clamp(
+                    value,
+                    0,
+                    max
+                );
+
+
+            this.value =
+                value;
+
+
+            updateResourceEditorPreview();
+
+        }
+    );
+
+
+document
+    .getElementById("creatureResistanceMax")
+    .addEventListener(
+        "input",
+        function(){
+
+            let max =
+                Math.max(
+                    1,
+                    Number(this.value) || 1
+                );
+
+
+            this.value =
+                max;
+
+
+            const resistance =
+                document.getElementById(
+                    "creatureResistance"
+                );
+
+
+            if(resistance){
+
+                resistance.max =
+                    max;
+
+
+                resistance.value =
+                    clamp(
+                        Number(
+                            resistance.value
+                        ) || 0,
+                        0,
+                        max
+                    );
+
+            }
+
+
+            updateResourceEditorPreview();
+
+        }
+    );
+
+
+/* =========================================================
+   PROTEÇÃO CONTRA ERROS DE IMAGEM MUITO GRANDE
+========================================================= */
+
+async function compressImage(
+    file,
+    maxWidth = 1400,
+    maxHeight = 1400,
+    quality = 0.82
+){
+
+    return new Promise(
+        (resolve,reject) => {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event){
+
+                    const img =
+                        new Image();
+
+
+                    img.onload =
+                        function(){
+
+                            let width =
+                                img.width;
+
+                            let height =
+                                img.height;
+
+
+                            const ratio =
+                                Math.min(
+                                    maxWidth / width,
+                                    maxHeight / height,
+                                    1
+                                );
+
+
+                            width =
+                                Math.round(
+                                    width * ratio
+                                );
+
+                            height =
+                                Math.round(
+                                    height * ratio
+                                );
+
+
+                            const canvas =
+                                document.createElement(
+                                    "canvas"
+                                );
+
+
+                            canvas.width =
+                                width;
+
+                            canvas.height =
+                                height;
+
+
+                            const ctx =
+                                canvas.getContext(
+                                    "2d"
+                                );
+
+
+                            ctx.drawImage(
+                                img,
+                                0,
+                                0,
+                                width,
+                                height
+                            );
+
+
+                            resolve(
+                                canvas.toDataURL(
+                                    "image/jpeg",
+                                    quality
+                                )
+                            );
+
+                        };
+
+
+                    img.onerror =
+                        () => reject(
+                            new Error(
+                                "Não foi possível carregar a imagem."
+                            )
+                        );
+
+
+                    img.src =
+                        event.target.result;
+
+                };
+
+
+            reader.onerror =
+                () => reject(
+                    new Error(
+                        "Não foi possível ler a imagem."
+                    )
+                );
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   IMAGEM — VERSÃO COMPACTADA
+========================================================= */
+
+document
+    .getElementById("creatureImage")
+    .addEventListener(
+        "change",
+        async function(){
 
             const file =
                 this.files[0];
+
 
             if(!file)
                 return;
 
 
-            if(
-                !file.type.startsWith(
-                    "image/"
-                )
-            ){
+            if(!file.type.startsWith("image/")){
 
                 alert(
                     "Selecione uma imagem válida."
@@ -4969,294 +4169,66 @@ document
             }
 
 
-            currentProfileAvatar =
-                file;
+            try{
+
+                currentImageData =
+                    await compressImage(
+                        file
+                    );
 
 
-            const reader =
-                new FileReader();
+                document.getElementById(
+                    "imagePreview"
+                ).innerHTML = `
+                    <img
+                        src="${escapeAttribute(
+                            currentImageData
+                        )}"
+                        alt="Preview"
+                    >
+                `;
 
 
-            reader.onload =
-                function(event){
-
-                    const container =
-                        document.getElementById(
-                            "profileAvatarContainer"
-                        );
+                document.getElementById(
+                    "removeImageBtn"
+                ).style.display =
+                    "block";
 
 
-                    container.innerHTML = `
+            }catch(error){
 
-                        <img
-                            class="profile-avatar-preview"
-                            src="${event.target.result}"
-                            alt="Preview do avatar"
-                        >
+                console.error(error);
 
-                    `;
+                alert(
+                    "Não foi possível carregar essa imagem."
+                );
 
-                };
-
-
-            reader.readAsDataURL(
-                file
-            );
+            }
 
         }
     );
 
 
-/* =====================================================
-   MÚSICA
-===================================================== */
+/* =========================================================
+   CORREÇÃO DO BOTÃO DE SALVAR
+========================================================= */
 
-let musicStarted = false;
+function forceSave(){
 
+    saveBestiary();
 
-function toggleMusic(){
-
-    if(
-        music.paused
-    ){
-
-        music.play()
-            .then(
-                () => {
-
-                    musicStarted =
-                        true;
-
-                    musicButton.textContent =
-                        "🎵 Música: ON";
-
-                }
-            )
-            .catch(
-                error => {
-
-                    console.error(
-                        "Erro ao tocar música:",
-                        error
-                    );
-
-                    alert(
-                        "Não foi possível iniciar a música. Verifique se o arquivo MP3 está na mesma pasta do HTML."
-                    );
-
-                }
-            );
-
-    }else{
-
-        music.pause();
-
-        musicButton.textContent =
-            "🎵 Música: OFF";
-
-    }
+    renderCreatures();
 
 }
 
 
-/* =====================================================
-   FECHAR MODAIS AO CLICAR FORA
-===================================================== */
+/* =========================================================
+   INICIALIZAÇÃO FINAL
+========================================================= */
 
-editorModal.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target ===
-            editorModal
-        ){
-
-            closeEditor();
-
-        }
-
-    }
-);
-
-
-profileModal.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target ===
-            profileModal
-        ){
-
-            closeProfile();
-
-        }
-
-    }
-);
-
-
-sheetModal.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target ===
-            sheetModal
-        ){
-
-            closeSheet();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   ESC — FECHAR MODAIS
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(
-            event.key !== "Escape"
-        )
-            return;
-
-
-        if(
-            editorModal.classList.contains(
-                "show"
-            )
-        ){
-
-            closeEditor();
-
-        }
-
-
-        if(
-            profileModal.classList.contains(
-                "show"
-            )
-        ){
-
-            closeProfile();
-
-        }
-
-
-        if(
-            sheetModal.classList.contains(
-                "show"
-            )
-        ){
-
-            closeSheet();
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   LIMITE DOS CAMPOS NUMÉRICOS
-===================================================== */
-
-document
-    .getElementById("creatureNexoLevel")
-    ?.addEventListener(
-        "input",
-        function(){
-
-            let value =
-                Number(this.value) || 1;
-
-            value =
-                Math.max(
-                    1,
-                    Math.min(
-                        5,
-                        value
-                    )
-                );
-
-            this.value =
-                value;
-
-        }
-    );
-
-
-document
-    .getElementById("creatureNexoControl")
-    ?.addEventListener(
-        "input",
-        function(){
-
-            let value =
-                Number(this.value) || 0;
-
-            value =
-                Math.max(
-                    0,
-                    Math.min(
-                        5,
-                        value
-                    )
-                );
-
-            this.value =
-                value;
-
-        }
-    );
-
-
-document
-    .getElementById("creatureCoreHealth")
-    ?.addEventListener(
-        "input",
-        function(){
-
-            let value =
-                Number(this.value);
-
-            if(
-                Number.isNaN(value)
-            ){
-
-                value = 0;
-
-            }
-
-            value =
-                Math.max(
-                    0,
-                    Math.min(
-                        100,
-                        value
-                    )
-                );
-
-            this.value =
-                value;
-
-        }
-    );
-
-
-/* =====================================================
-   FIM
-===================================================== */
+updateResourceEditorPreview();
 
 </script>
 
 </body>
-
 </html>
